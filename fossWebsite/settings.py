@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'register',
     'project',
+    'alerts',
 )
 
 MIDDLEWARE_CLASSES = (
