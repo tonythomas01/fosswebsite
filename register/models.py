@@ -15,6 +15,6 @@ class User_info(models.Model):
 	email = models.EmailField() 
 	contact = models.CharField(max_length=11)
 	interest = models.CharField(max_length=200)
-	achievement = models.CharField(max_length=200)
+	achieve = models.CharField(max_length=200)
 	expertise = models.CharField(max_length=200)
 	goal =	models.CharField(max_length=15, choices=GOAL_CHOICES)
