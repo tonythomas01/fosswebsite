@@ -40,7 +40,8 @@ INSTALLED_APPS = (
     'project',
     'alerts',
     'achievement',
-    'document',	
+    'document',
+    'apply',	
 )
 
 MIDDLEWARE_CLASSES = (
