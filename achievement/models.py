@@ -15,7 +15,7 @@ class Achievement(models.Model):
 	username = models.ForeignKey(User_info, blank=False, null=False)
 
 #contribution class: type = contribution
-class contribution(models.Model):
+class Contribution(models.Model):
 	achievement_id = models.ForeignKey(Achievement, blank=False, null=False)
 	bug_id = models.IntegerField(max_length=100, primary_key=True, blank=False, unique=True)
 	username = models.ForeignKey(User_info, blank=False, null=False)
@@ -88,10 +88,14 @@ class Contest_won(models.Model):
 	contest_url = models.URLField(max_length=200)
 	description = models.CharField(max_length=200)
 
-#Contest_won_participant class type=contest
+#Contest_won_participant class: type=contest
 class Contest_won_participants(models.Model):
 	contest_id = models.ForeignKey(Contest_won, blank=False, null=False)
 	name = models.CharField(max_length = 25, blank=False, null=False)
 
-
-
+#Miscellaneous class: type=other
+class Miscellaneous(models.Model):
+	achievement_id = models.ForeignKey(Achievement, blank=False, null=False)
+	username = models.ForeignKey(User_info, blank=False, null=False)
+	miscellaneous_id = models.IntegerField(max_length=100, primary_key=True, blank=False, null=False)
+	description = models.CharField(max_length=200, blank=False, null=False)
