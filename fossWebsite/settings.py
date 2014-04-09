@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'achievement',
     'document',
     'apply',	
+    'images',
 )
 
 MIDDLEWARE_CLASSES = (
