@@ -66,7 +66,7 @@ class Speaker(models.Model):
 	year = models.IntegerField(max_length=4, blank=False, null=False)
 
 #ACM_ICPC_details class: type = acm
-class ACM_ICPC_details(models.Model):
+class ACM_ICPC_detail(models.Model):
 	achievement_id = models.ForeignKey(Achievement, blank=False, null=False)
         team_name = models.CharField(max_length=25, primary_key=True, blank=False, unique=True)
         username = models.ForeignKey(User_info, blank=False, null=False)
@@ -74,11 +74,10 @@ class ACM_ICPC_details(models.Model):
 	level = models.CharField(max_length=100, choices=LEVEL_CHOICE, blank=False, null=False)
 	ranking = models.IntegerField(max_length=4, blank=False, null=False)
 
-#ACM_ICPC_Participants class; type = acm
-class ACM_ICPC_Participants(models.Model):
-	team_name = models.ForeignKey(ACM_ICPC_details, blank=False, null=False)
+#ACM_ICPC_Participant class; type = acm
+class ACM_ICPC_Participant(models.Model):
+	team_name = models.ForeignKey(ACM_ICPC_detail, blank=False, null=False)
 	name = models.CharField(max_length=25, blank=False, null=False)
-
 
 #Contest_won class: type = contest
 class Contest_won(models.Model):
@@ -89,7 +88,7 @@ class Contest_won(models.Model):
 	description = models.CharField(max_length=200)
 
 #Contest_won_participant class: type=contest
-class Contest_won_participants(models.Model):
+class Contest_won_participant(models.Model):
 	contest_id = models.ForeignKey(Contest_won, blank=False, null=False)
 	name = models.CharField(max_length = 25, blank=False, null=False)
 
