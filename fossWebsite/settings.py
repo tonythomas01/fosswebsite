@@ -41,7 +41,7 @@ INSTALLED_APPS = (
     'alerts',
     'achievement',
     'document',
-    'apply',	
+    'event',	
     'images',
 )
 

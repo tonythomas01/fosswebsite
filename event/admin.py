@@ -1,4 +1,5 @@
 from django.contrib import admin
-from apply.models import Apply
+from event.models import Event
 # Register your models here.
-admin.site.register(Apply)
+
+admin.site.register(Event)
