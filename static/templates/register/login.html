@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}
+Login page
+{% endblock %}
+
+{% block style %}
+body
+{
+margin-left:20px;
+background:#5d9ab2;
+}
+
+.container
+{
+text-align:center;
+}
+
+.center_div
+{
+border:1px solid gray;
+margin-left:auto;
+margin-right:auto;
+margin-top:auto;
+width:28%;
+height:35%;
+background-color:#d0f0f6;
+text-align:left;
+padding:38px;
+position:relative;
+left:-2%;
+}
+{% endblock %}
+{% block body_content %}
+        <div class='container'>
+        <div class='center_div'>
+        <h3>Login here :</h3>
+        <form action ="" method ='POST'>
+                {% csrf_token %}
+                        {% if error %}
+                        <ul>
+                                {% for e in error %}
+                                        <li>{{ e }}</li>
+                                {% endfor %}
+                        </ul>
+                        {% endif %}
+                        {{ form.as_table }}
+        <input type='submit' value='login'style="size:25px;">
+        </form>
+        </div>
+        </div>
+
+{% endblock %}
+
