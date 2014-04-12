@@ -33,3 +33,13 @@ def login(request):
                 form=LoginForm()
 	return render_to_response('register/login.html',{'form':form,'error':error},RequestContext(request))
 
+
+def logout(request):
+        try:
+                del request.session['is_loggedin']
+                del request.session['username']
+                request.session.flush()
+        except KeyError:
+                pass
+        return render_to_response('register/logout.html')
+
