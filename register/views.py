@@ -29,8 +29,10 @@ def login(request):
                 else:
                         error.append('incomplete form')
         else:
-		#return HttpResponse("in else part")
-                form=LoginForm()
+		if 'is_loggedin' in request.session and request.session['is_loggedin']:
+			return HttpResponseRedirect('/')
+		else:
+                	form=LoginForm()
 	return render_to_response('register/login.html',{'form':form,'error':error},RequestContext(request))
 
 
