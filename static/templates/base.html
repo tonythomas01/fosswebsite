@@ -1,0 +1,29 @@
+<html>
+<head>
+<title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+<div>
+{% comment %}
+{% load staticfiles %}
+<img src="{% static 'images/fosslogo.jpg' %}" alt="FOSS Logo"/>
+{% endcomment %}
+<a href="/achievement/"><button type="button">Achievement</button></a>
+<a href="/project/"><button type="button">Projects</button></a>
+<a href="/alert/"><button type="button">Alerts</button></a>
+<a href="/apply/"><button type="button">Apply</button></a>
+{% if not is_loggedin %}
+<a href="/login/"><button type="button">Login</button></a>
+{% else %}
+<a href="/profile/"><button type="button">My Profile</button></a>
+<a href="/logout/"><button type="button">Logout</button></a>
+{% endif %}
+</div>
+
+{% block body_content %} {% endblock %}
+{% include 'footer.html' %}
+
+</body>
+</html>
+
