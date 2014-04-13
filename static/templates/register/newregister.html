@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %} Logout {% endblock %}
+{% block style %}
+body
+{
+margin-left:20px;
+background:#5d9ab2;
+}
+
+.container
+{
+text-align:center;
+}
+{% endblock %}
+{% block body_content %}
+<div class='container'>
+<h3>Create a new user</h3>
+<form action ="" method ='POST'>
+	{% csrf_token %}
+  	{% comment %}
+	{% if error %}
+                        <ul>
+                                {% for e in error %}
+                                        <li>{{ e }}</li>
+                                {% endfor %}
+                        </ul>
+                        {% endif %}
+        {% endcomment %}
+	{{ form.as_table }}
+        <input type='submit' value='login'style="size:25px;">
+        </form>
+
+</div>
+{% endblock %}
+

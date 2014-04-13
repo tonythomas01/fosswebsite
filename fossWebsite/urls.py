@@ -17,4 +17,5 @@ urlpatterns += patterns('fossWebsite.views',
 urlpatterns += patterns('register.views',
     url(r'^register/login$', 'login'),
     url(r'^register/logout$','logout'),
+    url(r'^register/new','newregister'),
 )
