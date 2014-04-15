@@ -65,7 +65,7 @@ def newregister(request):
 	return render_to_response('register/newregister.html', {'form':form}, RequestContext(request))
 
 def profile(request, user_name):
-	if not request.session['username'] == user_name:
+	if 'username' not in request.session or not request.session['username'] == user_name:
 		is_loggedin=False
 		user_object = get_object_or_404(User_info, username=user_name)
                 user_details = user_object.__dict__
