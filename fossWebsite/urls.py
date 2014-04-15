@@ -18,4 +18,5 @@ urlpatterns += patterns('register.views',
     url(r'^register/login$', 'login'),
     url(r'^register/logout$','logout'),
     url(r'^register/new','newregister'),
+    url(r'^register/(?P<user_name>\w+)/profile','profile'),
 )

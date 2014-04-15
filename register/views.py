@@ -62,4 +62,19 @@ def newregister(request):
 			return HttpResponseRedirect('/')
 	else:
 		form = NewRegisterForm()
-	return render_to_response('register/newregister.html',{'form':form},RequestContext(request))
+	return render_to_response('register/newregister.html', {'form':form}, RequestContext(request))
+
+def profile(request, user_name):
+	if not request.session['username'] == user_name:
+		is_loggedin=False
+		user_object = get_object_or_404(User_info, username=user_name)
+                user_details = user_object.__dict__
+                user_form = OtherProfileForm(user_details)
+		if 'is_loggedin' in request.session and request.session['is_loggedin']:	
+			if_loggedin = True
+		return render_to_response('register/other_profile.html',{'is_loggedin':is_loggedin, 'user_form':user_form}, RequestContext(request))
+	else:
+		user_object = get_object_or_404(User_info, username=user_name)
+		user_details = user_object.__dict__
+		user_form = ProfileForm(user_details)
+		return render_to_response('register/my_profile.html', {'is_loggedin':True, 'username':user_name, 'user_form':user_form}, RequestContext(request))

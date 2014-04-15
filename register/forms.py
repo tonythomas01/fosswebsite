@@ -10,3 +10,11 @@ class LoginForm(forms.Form):
 class NewRegisterForm(ModelForm):
 	class Meta:
 		model = User_info
+
+class ProfileForm(ModelForm):
+	class Meta:
+		model = User_info
+class OtherProfileForm(ModelForm):
+	class Meta:
+		model = User_info
+		exclude = ['username', 'password', 'contact']
