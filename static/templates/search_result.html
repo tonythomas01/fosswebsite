@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}
+Login page
+{% endblock %}
+
+{% block style %}
+body
+{
+margin-left:20px;
+background:#5d9ab2;
+}
+
+.container
+{
+text-align:center;
+}
+{% endblock %}
+
+{% block body_content %}
+	<div class='container'>
+	{% if is_empty %}
+		<h4>Sorry, no result matched :(</h4>
+	{% else %}
+		{{value.as_table}}
+		{% for value in person %}
+			<li>{{value}}</li></br>
+		{% endfor %}
+	{% endif %}
+	</div>
+{% endblock %}
+	

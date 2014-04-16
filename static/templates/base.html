@@ -25,6 +25,10 @@
 <a href="/register/{{username}}/profile"><button type="button">My Profile</button></a>
 <a href="/register/logout"><button type="button">Logout</button></a>
 {% endif %}
+<form action="/search/">
+  <input type="text" name="search_field" placeholder="Search for a foss member">
+  <input type="submit" value="Search">
+</form>  
 </div>
 
 {% block body_content %} {% endblock %}

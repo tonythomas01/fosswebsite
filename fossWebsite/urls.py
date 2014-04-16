@@ -13,6 +13,7 @@ urlpatterns = patterns('',
 urlpatterns += patterns('fossWebsite.views',
     url(r'^home/$', 'home'),
     url(r'^$','homeredirect'),
+    url(r'^search/','search'),
 )
 urlpatterns += patterns('register.views',
     url(r'^register/login$', 'login'),
