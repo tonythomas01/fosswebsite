@@ -26,6 +26,7 @@
 <a href="/register/logout"><button type="button">Logout</button></a>
 {% endif %}
 <form action="/search/">
+  {% csrf_token %}
   <input type="text" name="search_field" placeholder="Search for a foss member">
   <input type="submit" value="Search">
 </form>  

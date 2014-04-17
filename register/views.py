@@ -3,7 +3,8 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
 from register.forms import *
-
+from django.core.context_processors import csrf
+from django.contrib.auth.hashers import *
 # Create your views here.
 def login(request):
         error = []
@@ -20,7 +21,7 @@ def login(request):
                         user_tuple = User_info.objects.all().filter(username = inp_username)
                         if user_tuple:
                                 actual_pwd = user_tuple[0].password
-                                if inp_password ==actual_pwd:
+                                if check_password(inp_password,actual_pwd):
                                         request.session['is_loggedin'] = True
                                         request.session['username'] = inp_username
                                         return HttpResponseRedirect('/home')
@@ -55,7 +56,10 @@ def newregister(request):
                         return HttpResponse("Please enable cookies and try again")
                 form = NewRegisterForm(request.POST)
 		if form.is_valid():
+			inp_password = form.cleaned_data['password']
 			new_register = form.save(commit=False)
+			hashed_password = make_password(inp_password)
+			new_register.password = hashed_password
 			new_register.save()	
 			request.session['username'] = form.cleaned_data['username']
 			request.session['is_loggedin'] = True
