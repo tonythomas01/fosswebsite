@@ -82,3 +82,39 @@ def profile(request, user_name):
 		user_details = user_object.__dict__
 		user_form = ProfileForm(user_details)
 		return render_to_response('register/my_profile.html', {'is_loggedin':True, 'username':user_name, 'user_form':user_form}, RequestContext(request))
+
+def change_password(request, user_name):
+        error = []
+        if 'username' not in request.session or not request.session['username'] == user_name:
+               return HttpResponseRedirect('/register/login')
+
+        else:
+        	if request.method=='POST':
+                	request.session.set_test_cookie()
+                	if request.session.test_cookie_worked():
+                        	request.session.delete_test_cookie()
+               		else:
+                        	return HttpResponse("Please enable cookies and try again")
+                	form = ChangePasswordForm(request.POST)
+                	if form.is_valid():
+               		        old_password=request.POST['old_password']
+				user_data = User_info.objects.get(username = user_name)
+	                        if not user_data:
+					return HttpResponseRedirect('/')
+				else:
+                                	actual_password = user_data.password
+                               		if not check_password(old_password,actual_password):
+						error.append('Your currect password is not correct')
+					else:
+                        			new_password=request.POST['new_password']
+						confirm_new_password = request.POST['confirm_new_password']
+						if not new_password == confirm_new_password:
+							error.append('password_do not match')
+						else:
+							new_hashed_password = make_password(new_password)
+							user_data.password = new_hashed_password
+							user_data.save()
+							return render_to_response('register/success.html')
+		else:
+			form=ChangePasswordForm()
+		return render_to_response('register/change_password.html', {'form':form, 'username':user_name, 'error':error, 'is_loggedin':True}, RequestContext(request))

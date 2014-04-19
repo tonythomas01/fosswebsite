@@ -14,8 +14,14 @@ class NewRegisterForm(ModelForm):
 class ProfileForm(ModelForm):
 	class Meta:
 		model = User_info
-		exclue = ['password']
+		exclude = ['password']
+
 class OtherProfileForm(ModelForm):
 	class Meta:
 		model = User_info
 		exclude = ['username', 'password', 'contact']
+
+class ChangePasswordForm(forms.Form):
+	old_password = forms.CharField(max_length=20, widget=forms.PasswordInput)
+	new_password = forms.CharField(max_length=20, widget=forms.PasswordInput)
+	confirm_new_password = forms.CharField(max_length=20, widget=forms.PasswordInput)

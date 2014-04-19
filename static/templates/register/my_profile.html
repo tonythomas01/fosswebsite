@@ -16,7 +16,7 @@ background:#5d9ab2;
 {{ user_form.as_table }}
 {% endcomment %}
 
-
+<a href='/register/{{username}}/change_password'><button type='button'>Change Password</button></a>
 <tbody>
  <tr class="table_row">
     {% for field in user_form %}
