@@ -14,6 +14,7 @@ class NewRegisterForm(ModelForm):
 class ProfileForm(ModelForm):
 	class Meta:
 		model = User_info
+		exclue = ['password']
 class OtherProfileForm(ModelForm):
 	class Meta:
 		model = User_info
