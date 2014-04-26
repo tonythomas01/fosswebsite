@@ -22,7 +22,7 @@
 {% if not is_loggedin %}
 <a href="/register/login"><button type="button">Login</button></a>
 {% else %}
-<a href="/register/{{username}}/profile"><button type="button">My Profile</button></a>
+<a href="/register/{{username}}/mypages"><button type="button">My Pages</button></a>
 <a href="/register/logout"><button type="button">Logout</button></a>
 {% endif %}
 <form action="/search/">

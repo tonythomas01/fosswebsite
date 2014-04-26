@@ -118,3 +118,11 @@ def change_password(request, user_name):
 		else:
 			form=ChangePasswordForm()
 		return render_to_response('register/change_password.html', {'form':form, 'username':user_name, 'error':error, 'is_loggedin':True}, RequestContext(request))
+
+def mypages(request, user_name):
+        if 'username' not in request.session or not request.session['username'] == user_name:
+               return HttpResponseRedirect('/register/login')
+
+        else:
+		return render_to_response('register/mypages.html',{'username':user_name,'is_loggedin':True}, RequestContext(request))
+
