@@ -37,3 +37,21 @@ def search(request):
 		if result:
 			is_empty = False
 		return render_to_response('search_result.html',{'is_empty':is_empty, 'person':person},RequestContext(request))
+
+def info_page(request):
+	is_loggedin = False
+	information = False
+	user_name = ''
+	if 'is_loggedin' in request.session and request.session['is_loggedin']:
+		is_loggedin = True
+		user_name = request.session['username']
+	return render_to_response('info.html',{'is_loggedin':is_loggedin, 'username':user_name ,'information':information},RequestContext(request))
+
+def info_det(request,info_type):
+        is_loggedin = False
+	information = True
+	user_name = ''
+        if 'is_loggedin' in request.session and request.session['is_loggedin']:
+                is_loggedin = True
+		user_name=request.session['username']
+	return render_to_response('info.html',{'is_loggedin':is_loggedin,'username':user_name, 'information':information, 'info_type':info_type},RequestContext(request))

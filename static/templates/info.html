@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}
+Information Corner
+{% endblock %}
+{% block body_content %}
+<div>
+<h2>Information Corner</h2>
+</div>
+<div>
+<a href="/achievement/viewall"><button type="button">Achievement</button></a>
+<a href="/project/viewall"><button type="button">Projects</button></a>
+<a href="/alert/viewall"><button type="button">Alerts</button></a>
+<a href="/apply/viewall"><button type="button">Apply</button></a>
+</div>
+<div>
+{% if information %}
+<h4>{{info_type}}</h4>
+	{{ data.as_table }}
+{% endif %}
+</div>
+{% endblock %}
