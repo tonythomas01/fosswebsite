@@ -11,10 +11,10 @@
 
 <body>
 <div>
-{% comment %}
+
 {% load staticfiles %}
-<img src="{% static 'images/fosslogo.jpg' %}" alt="FOSS Logo"/>
-{% endcomment %}
+<a href="/"><img src="{% static 'images/fosslogo.jpg' %}" alt="FOSS Logo"/></a>
+</br>
 <a href="/information"><button type="button">Information Corner</button></a>
 {% if not is_loggedin %}
 <a href="/register/login"><button type="button">Login</button></a>
