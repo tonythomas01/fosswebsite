@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}
+Contribution
+{% endblock %}
+{% block body_content %}
+
+	{% if contrib_obj %}
+		<table style="width:1000px">
+		<tr>
+			<td><b>Student</b></td>
+			<td><b>Bug id</b></td>
+			<td><b>Url to the bug</b></td>
+			<td><b>Organisation</b></td>
+			<td><b>Bug description</b></td>
+		</tr>	
+		</br>
+		{% for c in contrib_obj %}
+			<tr>
+				
+				<td><a href="/register/{{c.username.username}}/profile">{{ c.username.firstname }}</a></td>
+				<td>{{c.bug_id}}</td>
+				<td>{{c.bug_url}}</td>
+				<td>{{c.org_name}}</td>
+				<td>{{c.bug_description}}</td>
+			</tr>
+		{% endfor %}
+		</table>
+	{% endif %}
+
+{% endblock %}
+

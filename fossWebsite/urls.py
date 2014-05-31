@@ -26,3 +26,7 @@ urlpatterns += patterns('register.views',
     url(r'^register/(?P<user_name>\w+)/profile','profile'),
     url(r'^register/(?P<user_name>\w+)/change_password','change_password'),
 )
+
+urlpatterns += patterns('achievement.views',
+    url(r'^contribution/viewall$', 'contrib_viewall'),
+)
