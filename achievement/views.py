@@ -20,4 +20,25 @@ def contrib_viewall(request):
 				contrib_obj.append(c_obj)
 		return render_to_response('achievement/contrib_viewall.html',{'is_loggedin':is_loggedin, 'username':username, 'contrib_obj':contrib_obj}, RequestContext(request))
 	else:
-		return render_to_response('achievement/noview.html',{'is_loggedin':is_loggedin, 'username':username}, RequestContext(request))
+		return render_to_response('achievement/noview.html',{'is_loggedin':is_loggedin, 'username':username, 'type': 'Contribution'}, RequestContext(request))
+
+def article_viewall(request):
+	is_loggedin = False
+	username = ''
+        if 'is_loggedin' in request.session:
+                if request.session['is_loggedin']:
+                        is_loggedin = True
+                        username = request.session['username']
+	achieve_obj = Achievement.objects.filter(achieve_type = 'article')
+	if achieve_obj:
+		article_list = []
+		for a_obj in achieve_obj:
+			achieve_id = a_obj.achievement_id
+			article_obj = get_object_or_404(Article, achievement_id = achieve_id)
+			if article_obj:	
+				article_list.append(article_obj)
+		return render_to_response('achievement/article_viewall.html',{'is_loggedin':is_loggedin, 'username':username, 'article_list':article_list}, RequestContext(request))
+	else:
+		return render_to_response('achievement/noview.html',{'is_loggedin':is_loggedin, 'username':username, 'type': 'Article'}, RequestContext(request))
+
+

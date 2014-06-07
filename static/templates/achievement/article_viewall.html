@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}
+Article
+{% endblock %}
+{% block body_content %}
+
+	{% if article_list %}
+		<table style="width:1000px">
+		<tr>
+			<td><b>Student</b></td>
+			<td><b>Magazine</b></td>
+			<td><b>Title</b></td>
+			<td><b>Area</b></td>
+			<td><b>Date</b></td>
+		</tr>	
+		</br>
+		{% for c in article_list %}
+			<tr>
+				
+				<td><a href="/register/{{c.username.username}}/profile">{{ c.username.firstname|title }}</a></td>
+				<td>{{c.magazine_name}}</td>
+				<td>{{c.title}}</td>
+				<td>{{c.area}}</td>
+				<td>{{c.publication_date}}</td>
+			</tr>
+		{% endfor %}
+		</table>
+	{% endif %}
+
+{% endblock %}
+
