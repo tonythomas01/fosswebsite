@@ -36,7 +36,7 @@ class Article(models.Model):
 #GSoC class: type = gsoc
 class Gsoc(models.Model):
 	achievement_id = models.ForeignKey(Achievement, blank=False, null=False)
-        article_id = models.IntegerField(max_length=100, primary_key=True, blank=False, unique=True)
+        gsoc_id = models.IntegerField(max_length=100, primary_key=True, blank=False, unique=True)
         username = models.ForeignKey(User_info, blank=False, null=False)
 	organisation = models.CharField(max_length=50, blank=False, null=False)
 	project_title = models.CharField(max_length=50, blank=False, null=False)
