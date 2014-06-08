@@ -114,7 +114,7 @@ def change_password(request, user_name):
 							new_hashed_password = make_password(new_password)
 							user_data.password = new_hashed_password
 							user_data.save()
-							return render_to_response('register/success.html')
+							return render_to_response('register/success.html',{'username':user_name, 'is_loggedin':True},RequestContext(request))
 		else:
 			form=ChangePasswordForm()
 		return render_to_response('register/change_password.html', {'form':form, 'username':user_name, 'error':error, 'is_loggedin':True}, RequestContext(request))
