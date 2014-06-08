@@ -31,4 +31,6 @@ urlpatterns += patterns('achievement.views',
     url(r'^contribution/viewall$', 'contrib_viewall'),
     url(r'^article/viewall$', 'article_viewall'),
     url(r'^gsoc/viewall$', 'gsoc_viewall'),
+    url(r'^speaker/viewall$', 'speaker_viewall'),
+
 )
