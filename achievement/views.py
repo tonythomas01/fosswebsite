@@ -62,3 +62,23 @@ def gsoc_viewall(request):
 		return render_to_response('achievement/noview.html',{'is_loggedin':is_loggedin, 'username':username, 'type': 'Gsoc'}, RequestContext(request))
 
 
+def speaker_viewall(request):
+	is_loggedin = False
+	username = ''
+        if 'is_loggedin' in request.session:
+                if request.session['is_loggedin']:
+                        is_loggedin = True
+                        username = request.session['username']
+	achieve_obj = Achievement.objects.filter(achieve_type = 'speaker')
+	if achieve_obj:
+		speaker_list = []
+		for a_obj in achieve_obj:
+			achieve_id = a_obj.achievement_id
+			speaker_obj = get_object_or_404(Speaker, achievement_id = achieve_id)
+			if speaker_obj:	
+				speaker_list.append(speaker_obj)
+		return render_to_response('achievement/speaker_viewall.html',{'is_loggedin':is_loggedin, 'username':username, 'speaker_list':speaker_list}, RequestContext(request))
+	else:
+		return render_to_response('achievement/noview.html',{'is_loggedin':is_loggedin, 'username':username, 'type': 'Speaker'}, RequestContext(request))
+
+
