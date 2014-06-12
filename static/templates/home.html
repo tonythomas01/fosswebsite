@@ -2,17 +2,71 @@
 {% block title %}
 FOSS@amrita
 {% endblock %}
+{% block style %}
+body
+{
+margin-left:20px;
+}
+
+.container
+{
+text-align:center;
+}
+
+.center_div
+{
+border:1px solid gray;
+margin-left:auto;
+margin-right:auto;
+margin-top:auto;
+width:70%;
+height:45%;
+background-color:#d0f0f6;
+text-align:left;
+padding:38px;
+position:relative;
+left:-2%;
+}
+
+.contact_div
+{
+border:1px solid gray;
+margin-left:auto;
+margin-right:auto;
+margin-top:auto;
+width:70%;
+height:68%;
+background-color:#d0f0f6;
+text-align:left;
+padding:38px;
+position:relative;
+left:-2%;
+}
+
+{% endblock %}
 {% block body_content %}
 <div>
 
 <h2>Welcome to FOSS@amrita</h2>
+<a href="#contact"><button type="button">Contact</button></a>
+
+<div class='container'>
+	<div class='center_div'>
 <p>FOSS is a term inclusive of free software and open source software. It is an approach, that is now gaining more recognition due to its potential benefits, in addition to providing an ideal platform for learning. With liberally licensed software that allows users to study, copy, and modify code students can enhance their learning in the vast and multiplying fields of computer science.
-</p>
-<p>
+
 FOSS@Amrita is a student community at Amrita University. Being one of the most active student communities in the campus, we encourage, support and mentor students to improve their technical and social skills through contributing to open source.
 
 We aim at encouraging students to embrace the free and open source approach that is fast gaining momentum. We’re a community of students that support and guide each other towards making open source contributions, and towards the usage of free software.</p>
+	</div>
+	</div>
+</br>
+<h3>Contact</h3>
+<div id='contact' class='contact_div'>
 
+{% include 'contact.html' %}
+</div>
+	
+	
 </div>
 {% endblock %}
 

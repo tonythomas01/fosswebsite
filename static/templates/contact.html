@@ -1,0 +1,11 @@
+<form action="/i">
+  {% csrf_token %}
+  <input type="text" name="sender_name" placeholder="Your name"></br>
+  <input type="text" name="sender_email" placeholder="Your email id"></br>
+  <textarea rows="4" cols="50" name="mail_text" placeholder="Your message">
+  </textarea>
+  </br>
+  <input type="submit" value="Send Mail">
+</form>
+
+<p>Under construction.. will create this mailing system to admin soon</p>
