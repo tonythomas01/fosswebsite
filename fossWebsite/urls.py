@@ -28,6 +28,7 @@ urlpatterns += patterns('register.views',
 )
 
 urlpatterns += patterns('achievement.views',
+    url(r'^achievement/viewall$','achieve_viewall'),
     url(r'^contribution/viewall$', 'contrib_viewall'),
     url(r'^article/viewall$', 'article_viewall'),
     url(r'^gsoc/viewall$', 'gsoc_viewall'),

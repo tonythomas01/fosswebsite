@@ -1,0 +1,130 @@
+<html>
+<head>
+        <title>
+                Achievements
+        </title>
+        <style>
+              
+ 	#header {height: 48px;width: 100%;z-index: 1000;}
+	.fixed {
+	
+	background: url(http://static.tumblr.com/njty47g/Omoleufdi/topbar_bg.png) left top repeat-x;
+	position: fixed;
+	left: 0;
+	-webkit-box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
+	-moz-box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
+	box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
+	}
+
+	.inner {
+	width: 940px;
+	margin: 0 auto;
+	height: 48px;
+	}
+
+	.shadow{
+	width: 100%;
+	height: 5px;
+	position: absolute;
+	left: 0;
+	bottom: -5px;
+	z-index: 500;
+	display: none;
+	}
+	.contact_div{
+	text-align:center;
+	border:1px solid gray;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:auto;
+	width:70%;
+	height:78%;
+	background-color:#d0f0f6;
+	text-align:left;
+	padding:38px;
+	position:relative;
+	left:-2%;
+	}
+        </style>
+
+</head>
+
+<body>
+	<div id="header" class="fixed" style="display: block; top: 0px; ">
+        <div class="inner">
+        <!-- .inner -->
+		<a href="/">HOME</a>
+		<a href="#contribution"><button type="button">Contribution</button></a>
+		<a href="#article"><button type="button">Article</button></a>
+		<a href="#gsoc"><button type="button">GSoC</button></a>
+		<a href="#internship"><button type="button">Internship</button></a>
+		<a href="#speaker"><button type="button">Speaker</button></a>
+		<a href="#acmicpc"><button type="button">ACM-ICPC</button></a>
+		<a href="#contest"><button type="button">Contest</button></a>
+		
+        </div>
+        <div class="shadow" style="display:block;"><span></span></div>
+</div>
+</br>
+</br>
+<div id='contribution' >
+<h3>Contributions</h3>
+	<div class='contact_div'>
+		{% if contrib_obj %}
+	        	{% include 'achievement/contrib_view.html' %}
+			<a href = "/contribution/viewall"><button type="button">View all Contribution</button></a>
+		{% else %}
+		Sorry, No entires in db
+		{% endif %}
+	</div>
+</div>
+	
+</br>
+</br>
+<div id='article' >
+	<h3>Article</h3>
+	<div class='contact_div'>
+                {% if article_obj %}
+                        {% include 'achievement/contrib_view.html' %}
+                        <a href = "/article/viewall"><button type="button">View all Article</button></a>
+                {% else %}
+                Sorry, No entires in db
+                {% endif %}
+	</div>
+</div>
+
+</br>
+</br>
+<div id='gsoc' >
+	<h3>GSoC</h3>
+	<div class='contact_div'>
+	        <a href = "/gsoc/viewall"><button type="button">View all GSoC</button></a>
+
+	</div>
+</div>
+
+</br>
+</br>
+<div id='internship'>
+	<h3>Internships</h3>
+	<div class='contact_div'>
+		<a href = "/intern/viewall"><button type="button">View all Internship</button></a>
+	</div>
+</div>
+{% comment %}
+
+<h3>Speakers</h3>
+<div id='speaker' class='contact_div'>
+</div>
+
+<h3>ACM-ICPC coders</h3>
+<div id='acmicpc' class='contact_div'>
+</div>
+
+<h3>Contest winners</h3>
+<div id='contest' class='contact_div'>
+</div>
+
+{% endcomment %}
+</body>
+</html>

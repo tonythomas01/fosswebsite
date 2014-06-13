@@ -5,6 +5,8 @@ Contribution
 {% block body_content %}
 
 	{% if contrib_obj %}
+		{% include 'achievement/contrib_view.html' %}
+		{% comment %}
 		<table style="width:1000px">
 		<tr>
 			<td><b>Student</b></td>
@@ -25,6 +27,7 @@ Contribution
 			</tr>
 		{% endfor %}
 		</table>
+		{% endcomment %}
 	{% endif %}
 
 {% endblock %}
