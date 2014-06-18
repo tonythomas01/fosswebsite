@@ -108,7 +108,12 @@
 <div id='internship'>
 	<h3>Internships</h3>
 	<div class='contact_div'>
-		<a href = "/intern/viewall"><button type="button">View all Internship</button></a>
+		{% if intern_list %}
+			{% include 'achieveement/intern_view.html' %}
+			<a href = "/intern/viewall"><button type="button">View all Internship</button></a>
+		{% else %}
+		Sorry, No entires in db
+		{% endif %}
 	</div>
 </div>
 {% comment %}

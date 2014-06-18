@@ -1,0 +1,18 @@
+
+	<table style="width:1000px">
+	<tr>
+		<td><b>Student</b></td>
+		<td><b>Type</b></td>
+		<td><b>Place</b></td>
+		<td><b>Period</b></td>
+	</tr>	
+	</br>
+	{% for c in intern_list %}
+		<tr>			
+			<td><a href="/register/{{c.username.username}}/profile">{{ c.username.firstname|title }}</a></td>
+			<td>{{c.intern_type}}</td>
+			<td>{{c.place}}</td>
+			<td>{{c.period}}</td>			
+		</tr>
+	{% endfor %}
+	</table>

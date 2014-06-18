@@ -14,8 +14,8 @@ urlpatterns += patterns('fossWebsite.views',
     url(r'^home/$', 'home'),
     url(r'^$','homeredirect'),
     url(r'^search/','search'),
-    url(r'^information/(?P<info_type>\w+)','info_det'),
-    url(r'^information/','info_page'),
+#    url(r'^information/(?P<info_type>\w+)','info_det'),
+#    url(r'^information/','info_page'),
 
 )
 urlpatterns += patterns('register.views',
@@ -33,5 +33,5 @@ urlpatterns += patterns('achievement.views',
     url(r'^article/viewall$', 'article_viewall'),
     url(r'^gsoc/viewall$', 'gsoc_viewall'),
     url(r'^speaker/viewall$', 'speaker_viewall'),
-
+    url(r'^intern/viewall$', 'intern_viewall'),
 )
