@@ -10,6 +10,7 @@ def achieve_viewall(request):
 	article_list = []
 	gsoc_list = []
 	speaker_list = []
+	intern_list = []
         if 'is_loggedin' in request.session:
                 if request.session['is_loggedin']:
                         is_loggedin = True
@@ -42,8 +43,15 @@ def achieve_viewall(request):
                         speaker_obj = get_object_or_404(Speaker, achievement_id = achieve_id)
                         if speaker_obj:
                                 speaker_list.append(speaker_obj)
+	achieve_intern_list = Achievement.objects.filter(achieve_type = 'intern')[:5]
+	if achieve_intern_list:
+		for a_obj in achieve_intern_list:
+			achieve_id = a_obj.achievement_id
+			intern_obj = get_object_or_404(Intern, achievement_id = achieve_id)
+			if intern_obj:	
+				intern_list.append(intern_obj)
 	
-	return render_to_response('achievement/achievement_viewall.html',{'username':username, 'is_loggedin':is_loggedin, 'contrib_list':contrib_list, 'article_obj':article_list, 'gsoc_list':gsoc_list, 'speaker_list':speaker_list},RequestContext(request))
+	return render_to_response('achievement/achievement_viewall.html',{'username':username, 'is_loggedin':is_loggedin, 'contrib_list':contrib_list, 'article_obj':article_list, 'gsoc_list':gsoc_list, 'speaker_list':speaker_list,'intern_list':intern_list},RequestContext(request))
 
 def contrib_viewall(request):
 	is_loggedin = False
