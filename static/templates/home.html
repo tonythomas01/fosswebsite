@@ -47,6 +47,7 @@ left:-2%;
 {% block body_content %}
 <div>
 <a href="#contact"><button type="button">Contact</button></a>
+<a href="#gallery"><button type="button">Gallery</button></a>
 <h2>Welcome to FOSS@amrita</h2>
 
 <div class='container'>
@@ -59,6 +60,11 @@ We aim at encouraging students to embrace the free and open source approach that
 	</div>
 	</div>
 </br>
+<div id = 'gallery'>
+	<h3> Gallery</h3>
+	{% include 'image_slider.html' %}
+</div>
+
 <h3>Contact</h3>
 <div id='contact' class='contact_div'>
 
