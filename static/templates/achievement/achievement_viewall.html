@@ -98,8 +98,12 @@
 <div id='gsoc' >
 	<h3>GSoC</h3>
 	<div class='contact_div'>
-	        <a href = "/gsoc/viewall"><button type="button">View all GSoC</button></a>
-
+		{% if gsoc_list %}
+			{% include 'achievement/gsoc_view.html' %}
+		        <a href = "/gsoc/viewall"><button type="button">View all GSoC</button></a>
+		{% else %}
+			Sorry, No entires in db
+		{% endif %}
 	</div>
 </div>
 

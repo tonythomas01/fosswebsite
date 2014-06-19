@@ -5,26 +5,7 @@ Gsoc
 {% block body_content %}
 
 	{% if gsoc_list %}
-		<table style="width:1000px">
-		<tr>
-			<td><b>Student</b></td>
-			<td><b>Organisation</b></td>
-			<td><b>Project title</b></td>
-			<td><b>Mentor</b></td>
-			<td><b>Url</b></td>
-		</tr>	
-		</br>
-		{% for c in gsoc_list %}
-			<tr>
-				
-				<td><a href="/register/{{c.username.username}}/profile">{{ c.username.firstname|title }}</a></td>
-				<td>{{c.organisation}}</td>
-				<td>{{c.project_title}}</td>
-				<td>{{c.mentor_name}}</td>
-				<td>{{c.gsoc_url}}</td>
-			</tr>
-		{% endfor %}
-		</table>
+		{% include 'achievement/gsoc_view.html' %}
 	{% endif %}
 
 {% endblock %}
