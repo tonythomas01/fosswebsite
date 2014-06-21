@@ -120,12 +120,22 @@
 		{% endif %}
 	</div>
 </div>
-{% comment %}
 
-<h3>Speakers</h3>
-<div id='speaker' class='contact_div'>
+</br>
+</br>
+<div id='speaker'>
+	<h3>Speakers</h3>
+	<div class='contact_div'>
+		{% if speaker_list %}
+			{% include 'achievement/speaker_view.html' %}
+			<a href = '/speaker/viewall'><button type="button">View all Speakers</button></a>
+		{% else %}
+		Sorry, No entires in db
+		{% endif %}
+	</div>	
 </div>
 
+{% comment %}
 <h3>ACM-ICPC coders</h3>
 <div id='acmicpc' class='contact_div'>
 </div>
