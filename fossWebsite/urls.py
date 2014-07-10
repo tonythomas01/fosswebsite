@@ -34,4 +34,5 @@ urlpatterns += patterns('achievement.views',
     url(r'^gsoc/viewall$', 'gsoc_viewall'),
     url(r'^speaker/viewall$', 'speaker_viewall'),
     url(r'^intern/viewall$', 'intern_viewall'),
-)
+    url(r'^contest/viewall$', 'contest_won_viewall'),
+) 

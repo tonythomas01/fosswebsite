@@ -139,11 +139,20 @@
 <h3>ACM-ICPC coders</h3>
 <div id='acmicpc' class='contact_div'>
 </div>
+{% endcomment %}
 
-<h3>Contest winners</h3>
-<div id='contest' class='contact_div'>
+<div id='contest'>
+	<h3>Contest winners</h3>
+	<div class='contact_div'>
+		{% if contest_list %}
+			{% include 'achievement/contest_view.html' %}
+                        <a href = '/contest/viewall'><button type="button">View all the contest</button></a>
+		{% else %}
+			Sorry, No entried in db
+		{% endif %}
+	</div>
 </div>
 
-{% endcomment %}
+
 </body>
 </html>

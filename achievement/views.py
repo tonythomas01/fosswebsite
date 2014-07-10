@@ -11,6 +11,8 @@ def achieve_viewall(request):
 	gsoc_list = []
 	speaker_list = []
 	intern_list = []
+	contest_list = []
+	contest_participant_list = []
         if 'is_loggedin' in request.session:
                 if request.session['is_loggedin']:
                         is_loggedin = True
@@ -51,7 +53,17 @@ def achieve_viewall(request):
 			if intern_obj:	
 				intern_list.append(intern_obj)
 	
-	return render_to_response('achievement/achievement_viewall.html',{'username':username, 'is_loggedin':is_loggedin, 'contrib_list':contrib_list, 'article_obj':article_list, 'gsoc_list':gsoc_list, 'speaker_list':speaker_list,'intern_list':intern_list},RequestContext(request))
+	achieve_contest_list = Achievement.objects.filter(achieve_type = 'contest')[:5]
+	if achieve_contest_list:
+		for a_obj in achieve_contest_list:
+			achieve_id = a_obj.achievement_id
+			contest_won_obj = get_object_or_404(Contest_won, achievement_id = achieve_id)
+			if contest_won_obj:	
+				c_id = contest_won_obj.contest_id
+				c_p_objs = Contest_won_participant.objects.filter(contest_id = c_id)
+				contest_participant_list.extend(c_p_objs)
+				contest_list.append(contest_won_obj)
+	return render_to_response('achievement/achievement_viewall.html',{'username':username, 'is_loggedin':is_loggedin, 'contrib_list':contrib_list, 'article_obj':article_list, 'gsoc_list':gsoc_list, 'speaker_list':speaker_list,'intern_list':intern_list, 'contest_list':contest_list, 'contest_participant_list':contest_participant_list},RequestContext(request))
 
 def contrib_viewall(request):
 	is_loggedin = False
@@ -149,5 +161,28 @@ def intern_viewall(request):
 		return render_to_response('achievement/intern_viewall.html',{'is_loggedin':is_loggedin, 'username':username, 'intern_list':intern_list}, RequestContext(request))
 	else:
 		return render_to_response('achievement/noview.html',{'is_loggedin':is_loggedin, 'username':username, 'type': 'Internship'}, RequestContext(request))
+
+def contest_won_viewall(request):
+	is_loggedin = False
+	username = ''
+        if 'is_loggedin' in request.session:
+                if request.session['is_loggedin']:
+                        is_loggedin = True
+                        username = request.session['username']
+	achieve_list = Achievement.objects.filter(achieve_type = 'contest')
+	if achieve_list:
+		contest_list = []
+		contest_participant_list = []
+		for a_obj in achieve_list:
+			achieve_id = a_obj.achievement_id
+			contest_won_obj = get_object_or_404(Contest_won, achievement_id = achieve_id)
+			if contest_won_obj:	
+				c_id = contest_won_obj.contest_id
+				c_p_objs = Contest_won_participant.objects.filter(contest_id = c_id)
+				contest_participant_list.extend(c_p_objs)
+				contest_list.append(contest_won_obj)
+		return render_to_response('achievement/contest_viewall.html',{'is_loggedin':is_loggedin, 'username':username, 'contest_list':contest_list, 'contest_participant_list':contest_participant_list}, RequestContext(request))
+	else:
+		return render_to_response('achievement/noview.html',{'is_loggedin':is_loggedin, 'username':username, 'type': 'Contest\'s won'}, RequestContext(request))
 
 

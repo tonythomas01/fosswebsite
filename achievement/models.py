@@ -80,6 +80,7 @@ class ACM_ICPC_Participant(models.Model):
 	name = models.CharField(max_length=25, blank=False, null=False)
 
 #Contest_won class: type = contest
+#the username(Achievement) is the user who is adding this information , not the participant ;
 class Contest_won(models.Model):
 	achievement_id = models.ForeignKey(Achievement, blank=False, null=False)
 	contest_id = models.IntegerField(max_length=100, primary_key=True, blank=False, null=False)

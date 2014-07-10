@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}
+Contest's Won
+{% endblock %}
+{% block body_content %}
+
+	{% if contest_list %}
+		{% include 'achievement/contest_view.html' %}
+	{% endif %}
+
+{% endblock %}
+
