@@ -63,7 +63,15 @@ def achieve_viewall(request):
 				c_p_objs = Contest_won_participant.objects.filter(contest_id = c_id)
 				contest_participant_list.extend(c_p_objs)
 				contest_list.append(contest_won_obj)
-	return render_to_response('achievement/achievement_viewall.html',{'username':username, 'is_loggedin':is_loggedin, 'contrib_list':contrib_list, 'article_obj':article_list, 'gsoc_list':gsoc_list, 'speaker_list':speaker_list,'intern_list':intern_list, 'contest_list':contest_list, 'contest_participant_list':contest_participant_list},RequestContext(request))
+	icpc_list = ACM_ICPC_detail.objects.all().order_by('yr_of_participation')[:5]
+	if icpc_list:
+		icpc_participant_list = []
+		for icpc_obj in icpc_list:
+			team = icpc_obj.team_name
+			i_p_objs = ACM_ICPC_Participant.objects.filter(team_name = team)
+			icpc_participant_list.extend(i_p_objs)
+		
+	return render_to_response('achievement/achievement_viewall.html',{'username':username, 'is_loggedin':is_loggedin, 'contrib_list':contrib_list, 'article_obj':article_list, 'gsoc_list':gsoc_list, 'speaker_list':speaker_list,'intern_list':intern_list, 'contest_list':contest_list, 'contest_participant_list':contest_participant_list, 'icpc_list':icpc_list, 'icpc_participant_list':icpc_participant_list},RequestContext(request))
 
 def contrib_viewall(request):
 	is_loggedin = False
@@ -184,5 +192,23 @@ def contest_won_viewall(request):
 		return render_to_response('achievement/contest_viewall.html',{'is_loggedin':is_loggedin, 'username':username, 'contest_list':contest_list, 'contest_participant_list':contest_participant_list}, RequestContext(request))
 	else:
 		return render_to_response('achievement/noview.html',{'is_loggedin':is_loggedin, 'username':username, 'type': 'Contest\'s won'}, RequestContext(request))
+
+def icpc_viewall(request):
+	is_loggedin = False
+	username = ''
+        if 'is_loggedin' in request.session:
+                if request.session['is_loggedin']:
+                        is_loggedin = True
+                        username = request.session['username']
+	icpc_list = ACM_ICPC_detail.objects.all().order_by('yr_of_participation')
+	if icpc_list:
+		icpc_participant_list = []
+		for icpc_obj in icpc_list:
+			team = icpc_obj.team_name
+			i_p_objs = ACM_ICPC_Participant.objects.filter(team_name = team)
+			icpc_participant_list.extend(i_p_objs)
+		return render_to_response('achievement/icpc_viewall.html',{'is_loggedin':is_loggedin, 'username':username, 'icpc_list':icpc_list, 'icpc_participant_list':icpc_participant_list}, RequestContext(request))
+	else:
+		return render_to_response('achievement/noview.html',{'is_loggedin':is_loggedin, 'username':username, 'type': 'ACM ICPC Contest'}, RequestContext(request))
 
 

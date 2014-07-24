@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}
+ACM ICPC
+{% endblock %}
+{% block body_content %}
+
+	{% if icpc_list %}
+		{% include 'achievement/icpc_view.html' %}
+	{% endif %}
+
+{% endblock %}
+

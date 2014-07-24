@@ -35,4 +35,5 @@ urlpatterns += patterns('achievement.views',
     url(r'^speaker/viewall$', 'speaker_viewall'),
     url(r'^intern/viewall$', 'intern_viewall'),
     url(r'^contest/viewall$', 'contest_won_viewall'),
+    url(r'^icpc/viewall$', 'icpc_viewall'),
 ) 

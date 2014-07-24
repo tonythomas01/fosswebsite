@@ -73,10 +73,14 @@ class ACM_ICPC_detail(models.Model):
 	yr_of_participation = models.IntegerField(max_length=4, blank=False, null=False)
 	level = models.CharField(max_length=100, choices=LEVEL_CHOICE, blank=False, null=False)
 	ranking = models.IntegerField(max_length=4, blank=False, null=False)
+		
+	class Meta:
+		unique_together = ('team_name','yr_of_participation')
 
 #ACM_ICPC_Participant class; type = acm
 class ACM_ICPC_Participant(models.Model):
-	team_name = models.ForeignKey(ACM_ICPC_detail, blank=False, null=False)
+	yr_of_participation = models.ForeignKey(ACM_ICPC_detail,related_name= 'year', blank=False, null=False)
+	team_name = models.ForeignKey(ACM_ICPC_detail, blank=False, null=False, related_name = 'team')
 	name = models.CharField(max_length=25, blank=False, null=False)
 
 #Contest_won class: type = contest

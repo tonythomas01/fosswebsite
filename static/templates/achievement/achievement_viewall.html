@@ -134,12 +134,20 @@
 		{% endif %}
 	</div>	
 </div>
+</br></br>
 
-{% comment %}
-<h3>ACM-ICPC coders</h3>
-<div id='acmicpc' class='contact_div'>
+<div id='acmicpc'>
+	<h3>ACM-ICPC coders</h3>
+	<div class='contact_div'>
+		{% if icpc_list %}
+			{% include 'achievement/icpc_view.html' %}
+			<a href = '/icpc/viewall'><button type = "button">View all ICPC Participants</button></a>
+		{% else %}
+		Sorry, No entries in db
+		{% endif %}
+	</div>
 </div>
-{% endcomment %}
+
 
 <div id='contest'>
 	<h3>Contest winners</h3>

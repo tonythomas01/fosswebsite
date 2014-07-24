@@ -1,0 +1,13 @@
+{% for a in icpc_list %}
+	<b>{{a.team_name}} ({{a.yr_of_participation}})</b><br/>
+	Level: {{a.level}}</br>
+	Ranking: {{a.ranking}}</br>
+	Participants: 
+	{% for p in icpc_participant_list %}
+		{% if p.team_name.team_name == a.team_name and p.yr_of_participation.yr_of_participation == a.yr_of_participation %}
+			{{p.name}}
+		{% endif %}
+	{% endfor %}
+	<hr/>
+{% endfor %}
+
