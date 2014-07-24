@@ -70,7 +70,7 @@
 <div id='contribution' >
 <h3>Contributions</h3>
 	<div class='contact_div'>
-		{% if contrib_obj %}
+		{% if contrib_list %}
 	        	{% include 'achievement/contrib_view.html' %}
 			<a href = "/contribution/viewall"><button type="button">View all Contribution</button></a>
 		{% else %}
@@ -84,8 +84,8 @@
 <div id='article' >
 	<h3>Article</h3>
 	<div class='contact_div'>
-                {% if article_obj %}
-                        {% include 'achievement/contrib_view.html' %}
+                {% if article_list %}
+                        {% include 'achievement/article_view.html' %}
                         <a href = "/article/viewall"><button type="button">View all Article</button></a>
                 {% else %}
                 Sorry, No entires in db
