@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from register.models import User_info
-# Create your models here.
+# Create your models
 STATUS_CHOICES=(('o','Ongoing'),('c','Completed'))
 
 class Project(models.Model):
