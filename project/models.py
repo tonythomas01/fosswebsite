@@ -17,6 +17,6 @@ class Project_mentor(models.Model):
 
 class Project_student(models.Model):
 	project_id = models.ForeignKey(Project, blank=False, null=False)
-        username = models.ForeignKey(User_info, blank=False, null=False)
+    username = models.ForeignKey(User_info, blank=False, null=False)
 
 
