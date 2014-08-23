@@ -1,4 +1,4 @@
 fossWebsite
 ===========
 
-Official website for FOSS Club at Amrita Vishwavidyapeetham, amritapuri
+Official website for FOSS Club at Amrita Vishwa Vidyapeetham, Amritapuri.
