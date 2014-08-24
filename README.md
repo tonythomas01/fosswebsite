@@ -1,4 +1,7 @@
-fossWebsite
-===========
-
-Official website for FOSS Club at Amrita Vishwa Vidyapeetham, Amritapuri.
+# Foss Website
+## Introduction
+The official website of FOSS at Amritapuri website
+## Authors
+See AUTHORS.
+## Installation instructions
+See INSTALL.
