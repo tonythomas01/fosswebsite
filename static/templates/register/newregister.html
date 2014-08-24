@@ -15,20 +15,12 @@ text-align:center;
 {% block body_content %}
 <div class='container'>
 <h3>Create a new user</h3>
-<form action ="" method ='POST'>
+<form action ="" method ='POST' enctype = "multipart/form-data">
 	{% csrf_token %}
-  	{% comment %}
-	{% if error %}
-                        <ul>
-                                {% for e in error %}
-                                        <li>{{ e }}</li>
-                                {% endfor %}
-                        </ul>
-                        {% endif %}
-        {% endcomment %}
-	{{ form.as_table }}
-        <input type='submit' value='login'style="size:25px;">
-        </form>
+	    {{ form.as_table }}
+    	<input id="id_image" type="file" class="" name="image">
+    <input type='submit' value='login'style="size:25px;">
+</form>
 
 </div>
 {% endblock %}

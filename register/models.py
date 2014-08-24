@@ -1,9 +1,11 @@
 from django.db import models
 
+
 # Create your models here.
-GENDER_CHOICES = (('M', 'Male'),('F','Female'))
-ROLE_CHOICES = (('S','Student'),('M','Mentor'),('B','Both'))
-GOAL_CHOICES = (('startup','startup'),('higher_studies','Higher Studies'),('job','Job'),('other','Others'))
+GENDER_CHOICES = (('M', 'Male'), ('F', 'Female'))
+ROLE_CHOICES = (('S', 'Student'), ('M', 'Mentor'), ('B', 'Both'))
+GOAL_CHOICES = (('startup', 'startup'), ('higher_studies', 'Higher Studies'), ('job', 'Job'), ('other', 'Others'))
+
 
 class User_info(models.Model):
 	username = models.CharField(max_length=20, primary_key=True, unique=True, blank=False)
