@@ -92,14 +92,45 @@ $(document).ready(function() {
         {% include 'image_slider.html' %}
     </div><!--container-->
 </div><!--theme theme-3-->
-<div class="page-header">
-</div><!--page-header-->
-<div class="theme" id="slide-4" data-slide="4">
+<div class="slide theme" id="slide-4" data-slide="4">
+    <h1 class="theme-3-h1 centered">Connect With Us</h1>
+        <h3 class="theme-1-h2">
+            We'd enjoy connecting with you!<br/>
+            Interact with us through comments, questions, <br/>
+            suggestions, topic discussions etc.
+        </h3>
     <div class="container">
-        <h1 class="theme-2-h1 centered">Contact Us</h1>
-        {% include 'contact.html' %}
-    </div><!-- /container -->
-</div><!-- theme-2 --> 
-</div>
+        <div id="contact-row-4" class="row centered">
+            <div class="col-12 col-sm-3 with-hover-text">
+                <p><i class="fa fa-phone button"></i>
+                    <br>943792737287
+                </p>
+            </div><!-- col12 -->
+            <div class="col-12 col-sm-3 with-hover-text">
+                <p>
+                <i class="fa fa-home button"></i><br>
+                    Amritapuri, Kollam, Kerala
+                </p>
+            </div><!-- /col12 -->
+            <div class="col-12 col-sm-3 with-hover-text">
+                <p>
+                    <a target="_blank" href="https://www.facebook.com/FossatAmrita">
+                        <i class="fa fa-facebook button"></i><br/>
+                    Fb/FossatAmrita
+                    </a>
+                </p>
+            </div><!-- /col12 -->
+            <div class="col-12 col-sm-3 with-hover-text">
+                <p>
+                    <a target="_blank" href="https://www.twitter.com/FossatAmrita">
+                        <i class="fa fa-twitter button"></i><br/>
+                        Twitter/FossAtAmrita
+                    </a>
+                </p>
+            </div><!-- /col12 -->
+        </div><!-- /row -->
+    </div><!--container-->
+</div><!-- slide-4 --> 
+{% include 'contact.html' %}
 {% endblock body %}
 

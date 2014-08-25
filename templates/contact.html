@@ -1,32 +1,36 @@
-<form role="form" method="post" id="profileForm">
-    {% csrf_token %}
-    <div class="col-lg-2"></div>
-    <div class="col-lg-8">
-        <div class="form-group inputGroupContainer">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                <input type="text" class="form-control" name="sender_name" placeholder="Name" />
-            </div><!--input-group-->
-        </div><!--form-group-->
-        <div class="form-group inputGroupContainer">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                <input type="email" class="form-control" name="sender_email" placeholder="Email Address" />
-            </div><!--input-group-->
-        </div><!--form-group-->
-        <div class="form-group inputGroupContainer">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
-                <textarea name="mail_text" class="form-control" rows="10" placeholder="Message"></textarea>
-            </div><!--input-group-->
-        </div><!--form-group-->
-        <div class="row">
-            <div class="col-md-5"></div>
-            <div class="col-md-2">
-                <input type="submit" name="submit" id="submit" value="Send" class="btn btn-info btn-block">
-            </div><!--col-md-4-->
-            <div class="col-md-5"></div>
-        </div><!--row-->
-    </div><!--col-lg-8-->
-    <div class="col-lg-2"></div>
-</form>
+<div class="theme theme-2">
+    <h1 class="theme-2-h1 centered">Write to us</h1>
+    <br>
+    <form role="form" method="post" id="profileForm">
+        {% csrf_token %}
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <div class="form-group inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    <input type="text" class="form-control" name="sender_name" placeholder="Name"/>
+                </div><!--input-group-->
+            </div><!--form-group-->
+            <div class="form-group inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                    <input type="email" class="form-control" name="sender_email" placeholder="Email Address" />
+                </div><!--input-group-->
+            </div><!--form-group-->
+            <div class="form-group inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                    <textarea name="mail_text" class="form-control" rows="10" placeholder="Message"></textarea>
+                </div><!--input-group-->
+            </div><!--form-group-->
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-2">
+                    <input type="submit" name="submit" id="submit" value="Send" class="btn btn-info btn-block">
+                </div><!--col-md-4-->
+                <div class="col-md-5"></div>
+            </div><!--row-->
+        </div><!--col-lg-8-->
+        <div class="col-lg-2"></div>
+    </form>
+</div><!--theme theme-2-->
