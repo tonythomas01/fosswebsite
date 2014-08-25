@@ -73,4 +73,5 @@ target/
 __pycache__/
 local_settings.py
 static/
+!templates/static/
 db/
