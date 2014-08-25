@@ -1,0 +1,53 @@
+<!-- NAVBAR
+================================================== -->
+<nav class="navbar navbar-fixed-top navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+                <i class="icon-bar"></i>
+                <i class="icon-bar"></i>
+            </button>
+            <a class="navbar-brand" href="/"><i class="fa fa-linux"></i> AM-FOSS</a>
+        </div><!--navbar-header-->
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" role="navigation" id="navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li data-slide="1" class="{% ifequal request.path '/achievement/viewall#contribution' %}active{% endifequal %}">
+                    <a id="menu-link-2" href="#contribution"><i class="fa fa-share-alt"></i> Contribution</a>
+                </li>
+                <li data-slide="2" class="{% ifequal request.path '/achievement/viewall#article' %}active{% endifequal %}">
+                    <a id="menu-link-2" href="#article"><i class="fa fa-file-text"></i> Article</a>
+                </li>
+                <li data-slide="3" class="{% ifequal request.path '/achievement/viewall#gsoc' %}active{% endifequal %}">
+                    <a id="menu-link-3" href="#gsoc"><i class="fa fa-google-plus"></i> GSoC</a>
+                </li>
+                <li data-slide="4" class="{% ifequal request.path '/achievement/viewall#internship' %}active{% endifequal %}">
+                    <a id="menu-link-2" href="#internship"><i class="fa fa-graduation-cap"></i> Internship</a>
+                </li>
+                <li data-slide="5" class="{% ifequal request.path '/achievement/viewall#speaker' %}active{% endifequal %}">
+                    <a id="menu-link-2" href="#speaker"><i class="fa fa-bullhorn"></i> Speaker</a>
+                </li>
+                <li data-slide="6" class="{% ifequal request.path '/achievement/viewall#acmicpc' %}active{% endifequal %}">
+                    <a id="menu-link-6" href="#acmicpc"><i class="fa fa-code"></i> ACM-ICPC</a>
+                </li>
+                <li data-slide="7" class="{% ifequal request.path '/achievement/viewall#contest' %}active{% endifequal %}">
+                    <a id="menu-link-7" href="#contest"><i class="fa fa-dashboard"></i> Contest</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if not is_loggedin %}
+                <li class="{% ifequal request.path '/register/login' %}active{% endifequal %}">
+                    <a href="/register/login"><i class="fa fa-sign-in fa-fw"></i> Login</a>
+                </li>
+                {% else %}
+                <li class="{% ifequal request.path '/register/{{ username }}/mypage' %}active{% endifequal %}">
+                    <a href="/register/{{username}}/mypage"><i class="fa fa-user fa-fw"></i> Profile</a>
+                </li>
+                <li class="{% ifequal request.path '/register/logout' %}active{% endifequal %}">
+                    <a href="/register/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div><!--collapse-->
+    </div><!--container-->
+</nav> <!-- navbar navbar-inverse -->
