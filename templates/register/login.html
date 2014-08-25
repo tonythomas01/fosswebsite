@@ -1,53 +1,45 @@
-{% extends 'base.html' %}
+{% extends 'static/base.html' %}
 {% block title %}
 Login page
 {% endblock %}
-
-{% block style %}
-body
-{
-margin-left:20px;
-}
-
-.container
-{
-text-align:center;
-}
-
-.center_div
-{
-border:1px solid gray;
-margin-left:auto;
-margin-right:auto;
-margin-top:auto;
-width:28%;
-height:35%;
-background-color:#d0f0f6;
-text-align:left;
-padding:38px;
-position:relative;
-left:-2%;
-}
-{% endblock %}
-{% block body_content %}
-        <div class='container'>
-        <h4>If you are a new user, creat a account <a href="/register/new">here</a></h4>
-        <div class='center_div'>
-        <h3>Login here :</h3>
-        <form action ="" method ='POST'>
-                {% csrf_token %}
-                        {% if error %}
-                        <ul>
-                                {% for e in error %}
-                                        <li>{{ e }}</li>
-                                {% endfor %}
-                        </ul>
-                        {% endif %}
-                        {{ form.as_table }}
-        <input type='submit' value='login'style="size:25px;">
-        </form>
+{% block body %}
+<div class="container">
+    <br>
+    <div class="jumbo-header">
+        <h1> FOSS@Amrita Login </h1>
+    </div><!--page-header-->
+    <form class="form-signin" role="form" method="POST">
+        <h3 class="form-signin-heading centered">Please sign in</h3>
+        {% csrf_token %}
+        <div class="centered">
+            <span class="fa-stack fa-4x">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-user fa-stack-1x" style="color:#eee;"></i>
+            </span>
+        </div><!--centered-->
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                <input name="email" type="text" class="form-control" id="email" value="" placeholder="Email Address"/>
+            </div><!--form-group-->
+        </div><!--form-group-->
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <input name="pwd" type="password" class="form-control" id="password" value="" placeholder="Password" />
+            </div><!--form-group-->
+        </div><!--form-group-->
+        {% if error %}
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {% for er in error %}
+                {{ er }}
+            {% endfor %}
         </div>
-        </div>
-
-{% endblock %}
+        {% endif %}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <p class="centered"><a href="/register/new">New User?</a></p>
+    </form>
+</div><!--container-->
+{% endblock body %}
 
