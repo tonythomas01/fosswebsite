@@ -1,3 +1,42 @@
+{% block script %}
+<script src="{{ STATIC_URL }}js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    // navigation click actions 
+    $('.scroll-link').on('click', function(event){
+        event.preventDefault();
+        var sectionID = $(this).attr("data-id");
+        scrollToID('#' + sectionID, 1500);
+    });
+    // scroll to top action
+    $('.scroll-top').on('click', function(event) {
+        event.preventDefault();
+        $('html, body').animate({scrollTop:0}, 'slow');         
+    });
+    // mobile nav toggle
+    $('#nav-toggle').on('click', function (event) {
+        event.preventDefault();
+        $('#main-nav').toggleClass("open");
+    });
+});
+// scroll function
+function scrollToID(id, speed){
+    var offSet = 50;
+    var targetOffset = $(id).offset().top - offSet;
+    var mainNav = $('#main-nav');
+    $('html,body').animate({scrollTop:targetOffset}, speed);
+    if (mainNav.hasClass("open")) {
+        mainNav.css("height", "1px").removeClass("in").addClass("collapse");
+        mainNav.removeClass("open");
+    }
+}
+if (typeof console === "undefined") {
+    console = {
+        log: function() { }
+    };
+}
+</script>
+{% endblock script %}
 <!-- NAVBAR
 ================================================== -->
 <nav class="navbar navbar-fixed-top navbar-default" role="navigation">
@@ -7,7 +46,7 @@
                 <i class="icon-bar"></i>
                 <i class="icon-bar"></i>
             </button>
-            <a class="navbar-brand" href="/"><i class="fa fa-linux"></i> AM-FOSS</a>
+            <a class="navbar-brand scroll-top" href="#"><i class="fa fa-linux"></i> AM-FOSS</a>
         </div><!--navbar-header-->
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" role="navigation" id="navbar-collapse-1">
@@ -15,11 +54,11 @@
                 <li class="{% ifequal request.path '/achievement/viewall' %}active{% endifequal %}">
                     <a href="/achievement/viewall"><i class="fa fa-trophy"></i> Achievements</a>
                 </li>
-                <li data-slide="3" class="{% ifequal request.path '/home/#side-3' %}active{% endifequal %}">
-                    <a id="menu-link-3" href="#slide-3"><i class="fa fa-image"></i> Gallery</a>
+                <li data-slide="3" class="{% ifequal request.path '#side-3' %}active{% endifequal %}">
+                    <a data-id="slide-3" href="#" class="scroll-link"><i class="fa fa-image" data-id="slide-3"></i> Gallery</a>
                 </li>
-                <li data-slide="4" class="{% ifequal request.path '/home/#side-4' %}active{% endifequal %}">
-                    <a id="menu-link-4" href="#slide-4"><i class="fa fa-envelope"></i> Contact</a>
+                <li data-slide="4" class="{% ifequal request.path '#side-4' %}active{% endifequal %}">
+                    <a data-id="slide-4" href="#" class="scroll-link"><i class="fa fa-envelope"></i> Contact</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
