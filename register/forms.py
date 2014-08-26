@@ -177,19 +177,6 @@ class NewRegisterForm(ModelForm):
         else:
             raise forms.ValidationError("Passwords don't match")
 
-
-class ProfileForm(ModelForm):
-    class Meta:
-	model = User_info
-	exclude = ['password']
-
-
-class OtherProfileForm(ModelForm):
-    class Meta:
-	model = User_info
-	exclude = ['username', 'password', 'contact']
-
-
 class ChangePasswordForm(forms.Form):
     old_password = forms.CharField(max_length=20, widget=forms.PasswordInput)
     new_password = forms.CharField(max_length=20, widget=forms.PasswordInput)

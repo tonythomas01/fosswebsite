@@ -8,6 +8,8 @@ from django.views.csrf import csrf_failure
 from django.utils import simplejson
 from django.http import Http404
 from hashlib import sha512 as hash_func
+from achievement.models import *
+from images.models import ProfileImage
 
 def logged_in(request):
     """
@@ -96,19 +98,22 @@ def newregister(request):
     return render_to_response('register/newregister.html', {'form': form}, RequestContext(request))
 
 def profile(request, user_name):
-	if 'username' not in request.session or not request.session['username'] == user_name:
-		is_loggedin=False
-		user_object = get_object_or_404(User_info, username=user_name)
-                user_details = user_object.__dict__
-                user_form = OtherProfileForm(user_details)
-		if 'is_loggedin' in request.session and request.session['is_loggedin']:	
-			is_loggedin = True
-		return render_to_response('register/other_profile.html',{'is_loggedin':is_loggedin, 'user_form':user_form}, RequestContext(request))
-	else:
-		user_object = get_object_or_404(User_info, username=user_name)
-		user_details = user_object.__dict__
-		user_form = ProfileForm(user_details)
-		return render_to_response('register/my_profile.html', {'is_loggedin':True, 'username':user_name, 'user_form':user_form}, RequestContext(request))
+#	if 'username' not in request.session or not request.session['username'] == user_name:
+	is_loggedin=False
+	user_object = get_object_or_404(User_info, username=user_name)
+	profile_image_object = ProfileImage.objects.filter(username=user_object)
+       	user_email = user_object.email.replace('.', 'DOT').replace('@', 'AT')
+       	contributions = Contribution.objects.all().filter(username=user_name)[:3]
+       	articles = Article.objects.all().filter(username=user_name)[:3]
+       	gsoc = Gsoc.objects.all().filter(username=user_name)[:3]
+       	interns = Intern.objects.all().filter(username=user_name)[:3]
+        speakers = Speaker.objects.all().filter(username=user_name)[:3]
+       	if profile_image_object:
+       		image_name = user_name+".jpg"	# profile_image_object.image.name
+       	else:
+       		image_name = "default_image.jpeg"
+        return render_to_response('register/profile.html', {'is_loggedin': is_loggedin, 'user_object': user_object, 'user_email': user_email, 'gsoc': gsoc, 'interns':interns, 'speakers': speakers, 'image_name': image_name, "articles": articles, 'contributions': contributions}, RequestContext(request))
+
 
 
 def change_password(request, user_name):
