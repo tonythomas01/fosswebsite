@@ -5,7 +5,7 @@ from register.forms import LoginForm, NewRegisterForm
 from django.contrib.auth.hashers import *
 from images.models import ProfileImage, User_info
 from django.views.csrf import csrf_failure
-from django.utils import simplejson
+import json
 from django.http import Http404
 from hashlib import sha512 as hash_func
 

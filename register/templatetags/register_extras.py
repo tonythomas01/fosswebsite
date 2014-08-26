@@ -1,6 +1,6 @@
 from django.template import Library
 from django.template.defaultfilters import stringfilter
-from django.utils import simplejson
+import json
 from django.utils.safestring import mark_safe
 
 register = Library()
