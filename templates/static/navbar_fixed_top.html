@@ -59,17 +59,17 @@ if (typeof console === "undefined") {
                     <a href="/achievement/viewall"><i class="fa fa-trophy"></i> Activities</a>
                 </li>
                 {% if request.path != '/home/' %}
-                <li data-slide="3" class="{% ifequal request.path '/home/#side-3' %}active{% endifequal %}">
-                    <a data-id="slide-3" href="/home/#slide-3"><i class="fa fa-image" data-id="slide-3"></i> Gallery</a>
+                <li class="{% ifequal request.path '/home/#slide-3' %}active{% endifequal %}">
+                    <a data-id="slide-3" href="/home/#slide-3"><i class="fa fa-image"></i> Gallery</a>
                 </li>
-                <li data-slide="4" class="{% ifequal request.path '/home/#side-4' %}active{% endifequal %}">
-                    <a data-id="slide-4" href="/home/#slide-4" class="scroll-link"><i class="fa fa-envelope"></i> Contact</a>
+                <li class="{% ifequal request.path '/home/#slide-4' %}active{% endifequal %}">
+                    <a data-id="slide-4" href="/home/#slide-4"><i class="fa fa-envelope"></i> Contact</a>
                 </li>
                 {% else %}
-                <li data-slide="3" class="{% ifequal request.path '/home/#side-3' %}active{% endifequal %}">
-                    <a data-id="slide-3" href="#slide-3" class="scroll-link"><i class="fa fa-image" data-id="slide-3"></i> Gallery</a>
+                <li data-slide="3" class="{% ifequal request.path '/home/#slide-3' %}active{% endifequal %}">
+                    <a data-id="slide-3" href="#slide-3" class="scroll-link"><i class="fa fa-image"></i> Gallery</a>
                 </li>
-                <li data-slide="4" class="{% ifequal request.path '/home/#side-4' %}active{% endifequal %}">
+                <li data-slide="4" class="{% ifequal request.path '/home/#slide-4' %}active{% endifequal %}">
                     <a data-id="slide-4" href="#slide-4" class="scroll-link"><i class="fa fa-envelope"></i> Contact</a>
                 </li>
                 {% endif %}
