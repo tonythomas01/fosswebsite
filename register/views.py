@@ -1,9 +1,26 @@
-from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
+from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
-from register.forms import *
+from register.forms import LoginForm, NewRegisterForm
 from django.contrib.auth.hashers import *
-from images.models import ProfileImage
+from images.models import ProfileImage, User_info
+from django.views.csrf import csrf_failure
+from django.utils import simplejson
+from django.http import Http404
+from hashlib import sha512 as hash_func
+
+def logged_in(request):
+    """
+    To check if the user is logged in 
+    """
+    try:
+        if request.session['loggedinside']:
+            return True
+        else:
+            return False
+    except KeyError:
+        return False
+
 
 # Create your views here.
 def login(request):
@@ -53,9 +70,9 @@ def newregister(request):
     """
     if request.method == 'POST':
         request.session.set_test_cookie()
-    	if request.session.test_cookie_worked():
-    		request.session.delete_test_cookie()
-    	else:
+        if request.session.test_cookie_worked():
+                request.session.delete_test_cookie()
+        else:
             return HttpResponse("Please enable cookies and try again")
         form = NewRegisterForm(request.POST, request.FILES)
         if form.is_valid():
@@ -75,9 +92,8 @@ def newregister(request):
             request.session['is_loggedin'] = True
             return HttpResponseRedirect('/')
     else:
-		form = NewRegisterForm()
+            form = NewRegisterForm()
     return render_to_response('register/newregister.html', {'form': form}, RequestContext(request))
-
 
 def profile(request, user_name):
 	if 'username' not in request.session or not request.session['username'] == user_name:
