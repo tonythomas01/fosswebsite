@@ -46,7 +46,11 @@ if (typeof console === "undefined") {
                 <i class="icon-bar"></i>
                 <i class="icon-bar"></i>
             </button>
+            {% if request.path != '/home/' %}
+            <a class="navbar-brand" href="/home/"><i class="fa fa-linux"></i> AM-FOSS</a>
+            {% else %}
             <a class="navbar-brand scroll-top" href="#"><i class="fa fa-linux"></i> AM-FOSS</a>
+            {% endif %}
         </div><!--navbar-header-->
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" role="navigation" id="navbar-collapse-1">
@@ -54,12 +58,21 @@ if (typeof console === "undefined") {
                 <li class="{% ifequal request.path '/achievement/viewall' %}active{% endifequal %}">
                     <a href="/achievement/viewall"><i class="fa fa-trophy"></i> Activities</a>
                 </li>
-                <li data-slide="3" class="{% ifequal request.path '#side-3' %}active{% endifequal %}">
-                    <a data-id="slide-3" href="#" class="scroll-link"><i class="fa fa-image" data-id="slide-3"></i> Gallery</a>
+                {% if request.path != '/home/' %}
+                <li data-slide="3" class="{% ifequal request.path '/home/#side-3' %}active{% endifequal %}">
+                    <a data-id="slide-3" href="/home/#slide-3"><i class="fa fa-image" data-id="slide-3"></i> Gallery</a>
                 </li>
-                <li data-slide="4" class="{% ifequal request.path '#side-4' %}active{% endifequal %}">
-                    <a data-id="slide-4" href="#" class="scroll-link"><i class="fa fa-envelope"></i> Contact</a>
+                <li data-slide="4" class="{% ifequal request.path '/home/#side-4' %}active{% endifequal %}">
+                    <a data-id="slide-4" href="/home/#slide-4" class="scroll-link"><i class="fa fa-envelope"></i> Contact</a>
                 </li>
+                {% else %}
+                <li data-slide="3" class="{% ifequal request.path '/home/#side-3' %}active{% endifequal %}">
+                    <a data-id="slide-3" href="#slide-3" class="scroll-link"><i class="fa fa-image" data-id="slide-3"></i> Gallery</a>
+                </li>
+                <li data-slide="4" class="{% ifequal request.path '/home/#side-4' %}active{% endifequal %}">
+                    <a data-id="slide-4" href="#slide-4" class="scroll-link"><i class="fa fa-envelope"></i> Contact</a>
+                </li>
+                {% endif %}
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <form action="/search/" class="navbar-form navbar-left" role="search">
