@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from register.forms import LoginForm, NewRegisterForm
 from django.contrib.auth.hashers import *
-from images.models import ProfileImage
+from images.models import ProfileImage, User_info
 from django.views.csrf import csrf_failure
 from django.utils import simplejson
 from django.http import Http404
