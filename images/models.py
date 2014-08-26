@@ -36,7 +36,7 @@ One to one relation with User_info model.
 
 
 class ProfileImage(models.Model):
-    image = models.ImageField(upload_to='static/images/profile_image/', storage=OverwriteStorage(), blank=False,
+    image = models.ImageField(upload_to="images/profile_image/", storage=OverwriteStorage(), blank=False,
                               null=False)
     username = models.ForeignKey(User_info, blank=False, null=False)
 

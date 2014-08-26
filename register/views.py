@@ -83,10 +83,11 @@ def newregister(request):
             new_register.password = hashed_password
             new_register.save()
             user_object = get_object_or_404(User_info, username=inp_username)
-            profile_image = request.FILES['image']
-            profile_image_object = ProfileImage(image=profile_image, username=user_object)
-            profile_image_object.image.name = inp_username + ".jpg"
-            profile_image_object.save()
+            if 'image' in request.FILES:
+                profile_image = request.FILES['image']
+                profile_image_object = ProfileImage(image=profile_image, username=user_object)
+                profile_image_object.image.name = inp_username + ".jpg"
+                profile_image_object.save()
             request.session['username'] = form.cleaned_data['username']
             request.session['is_loggedin'] = True
             return HttpResponseRedirect('/')
