@@ -77,7 +77,7 @@ body {
 html,
 body {
     height: 100%;
-    margin-top: 10px;
+    margin-top: 20px;
     /* The html and body elements cannot have any padding or margin. */
 }
 
@@ -304,7 +304,7 @@ a:hover {
     padding: 15px;
     padding: 35px 25px 20px;
     margin: 0 auto 25px;
-    width:365px;
+    width:500px;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     border-radius: 2px;
@@ -770,7 +770,6 @@ h6 {
     background-position: center center;
     background-repeat: no-repeat;
     padding-bottom: 150px;
-    padding-top: 20px;
     text-align: center;
 }
 .pattern {
