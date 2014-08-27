@@ -4,7 +4,7 @@ from register.models import User_info
 
 # Create your models here.
 ACHIEVEMENT_CHOICE = (('acm','ACM_ICPC'),('article','Article'),('contribution','Contribution'),('gsoc','GSoC'),('intern','Internship'),('speaker','Speaker'),('contest','Contest'),('other','Other'))
-INTERN_CHOICE = (('internship','Internship'),('masters','Masters'),('exchange','Exchange programme'))
+INTERN_CHOICE = (('internship','Internship'),('masters','Masters'),('exchange student','Exchange programme'))
 SPEAKER_CHOICE =(('talk',' Talk'),('demo','Demo'),('workshop','Workshop'), ('paper','Paper Presentation'),('other','Other'))
 LEVEL_CHOICE = (('regional','Regional'), ('finals','World-Finals'))
 
@@ -50,7 +50,7 @@ class Intern(models.Model):
         intern_id = models.IntegerField(max_length=100, primary_key=True, blank=False, unique=True)
         username = models.ForeignKey(User_info, blank=False, null=False)
 	place = models.CharField(max_length=50, blank=False, null=False)
-	intern_type =  models.CharField(max_length=15, choices=INTERN_CHOICE, blank=False, null=False)
+	intern_type =  models.CharField(max_length=16, choices=INTERN_CHOICE, blank=False, null=False)
 	period = models.CharField(max_length=25, blank=False, null=False)
 
 

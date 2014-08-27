@@ -1,0 +1,76 @@
+{% extends 'static/base.html' %}
+{% block title %}
+Login page
+{% endblock %}
+
+{% block style %}
+
+.defaultpic {
+float: left;
+margin-left: 5%;
+margin-right: 5%;
+}
+
+{% endblock %}
+
+{% block body_content %}
+    {% if is_loggedin %}
+    	<a href='/register/{{username}}/change_password'><button type='button'>Change Password</button></a><br>
+    {% endif %}
+    <img class = "defaultpic" src="{{ STATIC_URL }}images/profile_image/{{ image_name }}" height="160" width="160" /></br>
+    <b>{{user_object.firstname |title }} {{user_object.lastname |title }}</b></br>
+    <em>Contact: </em> {{ user_email }} </br>
+    <em>Interest: </em> {{user_object.interest}} </br>
+        <em>Achievement: </em> {{user_object.achieve}} </br>
+        <em>Expertise: </em> {{user_object.expertise}} </br>
+        <em>Goal: </em> {{user_object.goal}} </br> </br>
+    {% if contributions %}
+        <hr>
+        <em><b>Contributions</b></em><br>
+	{% for c in contributions %}
+		Organisation: {{ c.org_name }} <br>
+		Ticket: {{ c.bug_id }}, <a href={{ c.bug_url }}>{{c.bug_url}}</a><br>
+		{{ c.bug_description }}
+	{% endfor %}
+    {% endif %}
+    {% if speakers %}
+        <hr>
+        <em><b>Speaker</b></em> </br>
+        {% for s in speakers %}
+            Conference: {{ s.conference_name | title }} , {{s.year}} </br>
+            Type: {{s.speaker_type}} </br>
+            Title: {{ s.title }} </br>
+            URL: {{s.speaker_url}} </br>
+            </br>
+        {% endfor %}
+    {% endif %}
+    {% if articles %}
+        <hr>
+        <em><b>Articles Published</b></em> <br>
+            {% for a in articles %}
+                Magazine: {{ a.magazine_name}} <br>
+                Title: {{a.title}} <br>
+                Area: {{a.area}} <br>
+               	Publication date: {{ a.publication_date}} <br>
+            {% endfor %}
+    {% endif %}
+    {% if gsoc %}
+        <hr>
+        <em><b>Gsoc</b></em><br>
+	{% for g in gsoc %}
+		Organisation: {{ g.organisation }}<br>
+        	Project: {{ g.project_title }}<br>
+		URL: <a href={{ g.gsoc_url }}>{{ g.gsoc_url }}</a><br>
+        	Mentor: {{ g.mentor_name }}<br>
+	{% endfor %}	
+    {% endif %}
+    {% if interns %}
+        <hr>
+        <em><b>Internships</b></em><br>
+	{% for internship in interns %}
+		{{ internship.intern_type | title }} at {{internship.place}} for {{internship.period }}<br>
+	{% endfor %}
+    {% endif %}
+    <hr>
+{% endblock %}
+
