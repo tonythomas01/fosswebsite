@@ -2,18 +2,9 @@
 {% block title %}
 Login page
 {% endblock %}
-
-{% block style %}
-
-.defaultpic {
-float: left;
-margin-left: 5%;
-margin-right: 5%;
-}
-
-{% endblock %}
-
-{% block body_content %}
+{% block body %}
+<br>
+<div class="container">
     {% if is_loggedin %}
     	<a href='/register/{{username}}/change_password'><button type='button'>Change Password</button></a><br>
     {% endif %}
@@ -72,5 +63,6 @@ margin-right: 5%;
 	{% endfor %}
     {% endif %}
     <hr>
-{% endblock %}
+</div>
+{% endblock body %}
 

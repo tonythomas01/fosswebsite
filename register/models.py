@@ -8,12 +8,19 @@ class User_info(models.Model):
     firstname = models.CharField(max_length=20, blank=False, unique=False)
     lastname = models.CharField(max_length=20, blank=False, unique=False)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
-    email = models.EmailField() 
     contact = models.CharField(max_length=11)
     role = models.CharField(max_length=1, choices=ROLE_CHOICES)
     interest = models.CharField(max_length=200)
     achieve = models.CharField(max_length=200)
     expertise = models.CharField(max_length=200)
     goal = models.CharField(max_length=15, choices=GOAL_CHOICES)
-    username = models.CharField(max_length=20, primary_key=True, unique=True, blank=False)
+    username = models.CharField(max_length=20, unique=True, blank=False, primary_key=True)
+    email = models.EmailField(blank=False, unique=True) 
     password = models.CharField(max_length=20, blank=False)
+
+    class meta:
+        db_table= 'user_info'          
+
+    def __unicode__(self):
+        return self.email
+

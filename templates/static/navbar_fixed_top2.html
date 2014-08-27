@@ -80,7 +80,7 @@ if (typeof console === "undefined") {
                 </li>
                 {% else %}
                 <li class="{% ifequal request.path '/register/{{ username }}/mypage' %}active{% endifequal %}">
-                    <a href="/register/{{username}}/mypage"><i class="fa fa-user fa-fw"></i> Profile</a>
+                    <a href="/register/{{ username }}/mypage"><i class="fa fa-user fa-fw"></i> {{ username }}</a>
                 </li>
                 <li class="{% ifequal request.path '/register/logout' %}active{% endifequal %}">
                     <a href="/register/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>

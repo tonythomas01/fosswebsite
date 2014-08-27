@@ -35,8 +35,32 @@ def user_exists(email_):
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(max_length=20)
-    password = forms.CharField(widget=forms.PasswordInput)
+    username=forms.CharField(
+        required=True,
+        max_length=100,
+        label='Username', 
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Username'}
+        )
+    )
+
+    password=forms.CharField(
+        required=True,
+        max_length=100,
+        label='Password',
+        widget=forms.PasswordInput(
+            attrs={'placeholder': 'Password'}
+        )
+    )
+
+    def clean_repass(self):
+        password = self.cleaned_data['password']
+        re_password = self.cleaned_data['repass']
+        if password == re_password:
+            return password
+        else:
+            raise forms.ValidationError("Passwords don't match")
+
 
 class NewRegisterForm(ModelForm):
     """
@@ -65,14 +89,6 @@ class NewRegisterForm(ModelForm):
             choices=GENDER_CHOICES, 
             attrs={'placeholder': 'Gender'}
             )
-    )
-
-    email=forms.EmailField(
-        required=True,
-        label='Email', 
-        widget=forms.TextInput(
-            attrs={'placeholder': 'Email Address'}
-        )
     )
 
     contact = forms.IntegerField(
@@ -122,6 +138,14 @@ class NewRegisterForm(ModelForm):
         widget=forms.Select(
             choices=GOAL_CHOICES, 
             attrs={'placeholder': 'Goal'}, 
+        )
+    )
+    
+    email=forms.EmailField(
+        required=True,
+        label='Email', 
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Email Address'}
         )
     )
 
@@ -176,6 +200,7 @@ class NewRegisterForm(ModelForm):
             return password
         else:
             raise forms.ValidationError("Passwords don't match")
+
 
 class ChangePasswordForm(forms.Form):
     old_password = forms.CharField(max_length=20, widget=forms.PasswordInput)
