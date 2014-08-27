@@ -1,31 +1,37 @@
 {% extends 'static/base.html' %}
 {% block title %}
-Login page
+Search Results
 {% endblock %}
-
 {% block style %}
-body
-{
-margin-left:20px;
-background:#5d9ab2;
+<style type="text/css">
+table td a{
+   display: block;
 }
-
-.container
-{
-text-align:center;
-}
-{% endblock %}
-
+</style>
+{% endblock style %}
 {% block body_content %}
-	<div class='container'>
+<br>
+<div class='container'>
 	{% if is_empty %}
-		<h4>Sorry, no result matched :(</h4>
+		<div class="alert alert-info" role="alert">
+            Sorry, no result matched :(
+        </div>
 	{% else %}
-		{{value.as_table}}
-		{% for value in person %}
-			<li>{{value}}</li></br>
-		{% endfor %}
+    <div class="page-header">
+        <h1>Search Results</h1>
+    </div><!--page-header-->
+    <div class="table-responsive">
+    <table class="table table-hover table-bordered table-striped">
+	{% for value in person %}
+        <tr>
+            <td>
+                <a href="{{ value }}" target="_blank">{{ value }}</a>
+            </td>
+        </tr>
+	{% endfor %}
+    </table>
+    </div><!--table-responsive-->
 	{% endif %}
-	</div>
+</div><!--container-->
 {% endblock %}
 	
