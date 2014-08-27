@@ -86,7 +86,6 @@ INSTALLED_APPS = (
     'document',
     'event',	
     'images',
-    'bootstrap3',
     'bootstrap3_datetime',
 )
 

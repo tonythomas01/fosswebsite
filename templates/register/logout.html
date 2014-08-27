@@ -1,20 +1,12 @@
-{% extends "static/base.html" %}
-{% block title %} Logout {% endblock %}
-{% block style %}
-body
-{
-margin-left:20px;
-background:#5d9ab2;
-}
-
-.container
-{
-text-align:center;
-}
+{% extends 'static/base.html' %}
+{% block title %} 
+Logout 
 {% endblock %}
-{% block body_content %}
-<div class='container'>
-<h3> You have succesfully logged out! </h3>
-</div>
-{% endblock %}
-~               
+{% block body %}
+<br>
+<div class="container">
+    <div class="alert alert-info" role="alert">
+        <p>You have succesfully <strong>logged</strong> out!</p>
+    </div><!--alert alert-info-->
+</div><!--container-->
+{% endblock body %} 
