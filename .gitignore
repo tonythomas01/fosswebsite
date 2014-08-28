@@ -75,3 +75,4 @@ local_settings.py
 static/
 !templates/static/
 db/
+media/images/profile_image/
