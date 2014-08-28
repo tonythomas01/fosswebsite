@@ -223,8 +223,8 @@ def profile(request, user_name):
 def change_password(request, user_name):
     try:
         if not logged_in(request):
-	    return render_to_response('register/change_password.html', 
-                            RequestContext(request))
+            return HttpResponseRedirect("/register/login")
+
         # POST request 
         if request.method == 'POST':
             form = ChangePasswordForm(request.POST)
