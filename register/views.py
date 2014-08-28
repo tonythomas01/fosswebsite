@@ -202,41 +202,32 @@ def profile(request, user_name):
     """
     A view to display the profile (public)
     """
-    # When a user is logged in, the program must display user dropdown
-    if logged_in(request):
-        is_loggedin = True
-        username = request.session['username']
-    # When a user is not logged in, the program must display login button
-    else:
-        is_loggedin = False
-        username = user_name
-
     user_object = get_object_or_404(User_info, \
-            username = username)
+            username = user_name)
     profile_image_object = ProfileImage.objects \
             .filter(username=user_object)
     user_email = user_object.email.replace('.', ' DOT ') \
             .replace('@', ' AT ')
     contributions = Contribution.objects.all() \
-            .filter(username=username)[:3]
+            .filter(username=user_name)[:3]
     articles = Article.objects.all() \
-            .filter(username=username)[:3]
+            .filter(username=user_name)[:3]
     gsoc = Gsoc.objects.all() \
-            .filter(username=username)[:3]
+            .filter(username=user_name)[:3]
     interns = Intern.objects.all() \
-            .filter(username=username)[:3]
+            .filter(username=user_name)[:3]
     speakers = Speaker.objects.all() \
-            .filter(username=username)[:3]
+            .filter(username=user_name)[:3]
 
     if profile_image_object:
-       	image_name = username+".jpg"
+       	image_name = user_name+".jpg"
     else:
        	image_name = "default_image.jpeg"
 
     return render_to_response( \
             'register/profile.html', \
-            {'is_loggedin': is_loggedin, \
-            'username':username, \
+            {'is_loggedin':logged_in(request), \
+            'username':user_name, \
             'user_object':user_object, \
             'user_email':user_email, \
             'user_email':user_email, \
