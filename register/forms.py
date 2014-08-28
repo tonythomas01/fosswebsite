@@ -203,6 +203,43 @@ class NewRegisterForm(ModelForm):
 
 
 class ChangePasswordForm(forms.Form):
-    old_password = forms.CharField(max_length=20, widget=forms.PasswordInput)
-    new_password = forms.CharField(max_length=20, widget=forms.PasswordInput)
-    confirm_new_password = forms.CharField(max_length=20, widget=forms.PasswordInput)
+    """
+    Password changer form
+    """
+    old_password=forms.CharField(
+        required=True,
+        max_length=100,
+        label='Current Password',
+        widget=forms.PasswordInput(
+            attrs={'placeholder': 'Current Password'}
+        )
+    )
+
+    new_password = forms.CharField(
+        required=True,
+        max_length=100,
+        label='New Password',
+        widget=forms.PasswordInput(
+            attrs={'placeholder': 'New Password'} 
+        )
+    )
+
+    confirm_new_password = forms.CharField(
+        max_length=100, 
+        required=True,
+        widget=forms.PasswordInput(
+            attrs={'placeholder': 'Confirm new password'} 
+        )
+    )
+
+    def clean_repass(self):
+        """
+        If passwords doesn't match, both the password
+        fields will be cleard by raising an error
+        """
+        password = self.cleaned_data['new_password']
+        re_password = self.cleaned_data['confirm_new_password']
+        if password == re_password:
+            return password
+        else:
+            raise forms.ValidationError("Passwords don't match")

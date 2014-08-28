@@ -222,51 +222,75 @@ def profile(request, user_name):
 
 def change_password(request, user_name):
     try:
-        if 'username' not in request.session or not request.session['username'] == user_name:
-            return HttpResponseRedirect('/register/login')
-
-        if request.method=='POST':
+        if not logged_in(request):
+	    return render_to_response('register/change_password.html', 
+                            RequestContext(request))
+        # POST request 
+        if request.method == 'POST':
             form = ChangePasswordForm(request.POST)
 
+            # Form inputs are valid
             if form.is_valid():
-               	old_password=request.POST['old_password']
+                user_name = request.session['username']
+               	old_password = hash_func(request.POST['old_password']) \
+                                .hexdigest()
+                new_password = hash_func(request.POST['new_password']) \
+                                .hexdigest()
+		confirm_new_password = hash_func(
+                                request.POST['confirm_new_password']) \
+                                .hexdigest()
+
 		user_data = User_info.objects.get(username = user_name)
-
-	        if not user_data:
-		    return HttpResponseRedirect('/')
-		else:
-                    actual_password = user_data.password
-
-                    if not check_password(old_password,actual_password):
-			error.append('Your currect password is not correct')
-		    else:
-                        new_password=request.POST['new_password']
-			confirm_new_password = request.POST['confirm_new_password']
-
-			if not new_password == confirm_new_password:
-			    error.append('password_do not match')
-			else:
-			    new_hashed_password = make_password(new_password)
-			    user_data.password = new_hashed_password
+                actual_pwd = user_data.password
+                
+                # Given current and stored passwords same
+                if old_password == actual_pwd:
+                    # New and current passwords user provided are not same 
+                    if new_password != actual_pwd:
+                        # Repass and new pass are same
+                        if new_password == confirm_new_password:
+		            user_data.password = new_password
 			    user_data.save()
-			    return render_to_response('register/success.html',
-                                    {'username':user_name, 'is_loggedin':True}, 
-                                    RequestContext(request))
+			    return render_to_response('register/pass_success.html',
+                                                RequestContext(request))
+                        # Repass and new pass are not same
+                        else:
+		            error = "New passwords doesn't match"
+	                    return render_to_response('register/change_password.html', 
+                                            {'form':form, \
+                                            'error': error}, \
+                                            RequestContext(request))
+                    # New and current password user provided are same
+                    else:
+                        error = "Your old and new password are same. Please \
+                                choose a different password"
+	                return render_to_response('register/change_password.html', 
+                                            {'form':form, \
+                                            'error': error}, \
+                                            RequestContext(request))
+                # Given current and stored passwords are not same
+                else:
+		    error = "Current password and given password doesn't match"
+	            return render_to_response('register/change_password.html', 
+                                            {'form':form, \
+                                            'error': error}, \
+                                            RequestContext(request))
+            # Form inputs is/are invalid
 	    else:
 		form = ChangePasswordForm()
+
 	    return render_to_response('register/change_password.html', 
-                            {'form':form, \
-                            'username':user_name, \
-                            'error':error,\
-                            'is_loggedin':True}, 
+                            {'form':form }, \
                             RequestContext(request))
+
+	return render_to_response('register/change_password.html', 
+                        RequestContext(request))
 
     except KeyError:
         return error_key(request)
 
 def mypage(request, user_name):
-    if 'username' not in request.session \
-            or not request.session['username'] == user_name:
+    if not logged_in(request):
         return HttpResponseRedirect('/register/login')
     else:
 	return render_to_response('register/mypages.html',
