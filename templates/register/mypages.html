@@ -2,9 +2,19 @@
 {% block title %}
 My Page
 {% endblock %}
-{% block body_content %}
-<div>
-<h4>{{username}}'s Page..</h4>
-<a href="/register/{{username}}/profile"><button type="button">My Profile</button></a>
-</div>
-{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="jumbotron">
+        <div class="jumbo-header">
+            <h1> {{ username }}</h1>
+        </div><!--page-header-->
+    </div><!--jumbotron-->
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <a href="/register/profile/{{ username }}">
+            <button type="button" class="btn btn-danger btn-block">View Full profile</button>
+        </a>
+    </div><!--col-md-4-->
+    <div class="col-md-4"></div>
+</div><!--container-->
+{% endblock body %}

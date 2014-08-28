@@ -8,7 +8,8 @@ from django.views.csrf import csrf_failure
 
 # Application specific functions
 from images.models import ProfileImage, User_info
-from register.forms import LoginForm, NewRegisterForm, ChangePasswordForm
+from register.forms import LoginForm, NewRegisterForm
+from register.forms import ChangePasswordForm
 from achievement.models import *
 from images.models import ProfileImage
 
@@ -21,8 +22,8 @@ def error_key(request):
     """
     Key error response
     """
-    return render_to_response('keyerror.html',
-            {'reason':'Key Error'},
+    return render_to_response('keyerror.html', \
+            {'reason':'Key Error'}, \
             RequestContext(request))
 
 
@@ -30,8 +31,8 @@ def csrf_failure(request, reason=""):
     """
     CSRF failure response
     """
-    return render_to_response('keyerror.html',
-            {'reason':reason}, 
+    return render_to_response('keyerror.html', \
+            {'reason':reason}, \
             RequestContext(request))
 
 
@@ -56,7 +57,7 @@ def login(request):
     try:
         # If the user is already loggedin never show the login page
         if logged_in(request):
-            return render_to_response('register/logged_in.html', 
+            return render_to_response('register/logged_in.html', \
                     RequestContext(request))
 
         # Upon signin button click 
@@ -86,16 +87,16 @@ def login(request):
                     else:
                         error = "Invalid password. Is it really you, " + \
                                 str(inp_username) + "?"
-                        return render_to_response('register/login.html',
+                        return render_to_response('register/login.html', \
                                 {'form':form, 'error':error},
                                 RequestContext(request))
 
                 # There's no entry in the table with the given username
                 else:
                     error = "User doesn't exist!"
-                    return render_to_response('register/login.html',
-                                {'form':form, 'error':error},
-                                RequestContext(request))
+                    return render_to_response('register/login.html', \
+                            {'form':form, 'error':error},
+                            RequestContext(request))
 
             # Invalid form inputs
             else:
@@ -130,8 +131,8 @@ def logout(request):
         del request.session['is_loggedin']
         del request.session['username']
         request.session.flush()
-        return render_to_response('register/logout.html', 
-                                RequestContext(request))
+        return render_to_response('register/logout.html', \
+                RequestContext(request))
     except KeyError:
         pass
 
@@ -159,7 +160,8 @@ def newregister(request):
                 
                 # Saving the user inputs into table 
                 new_register = form.save(commit=False)
-                new_register.password = hash_func(inp_password).hexdigest()
+                new_register.password = hash_func(inp_password) \
+                                            .hexdigest()
                 new_register.save()
                 
                 user_object = get_object_or_404(User_info, \
@@ -168,9 +170,11 @@ def newregister(request):
                 # Optional image upload processing and saving
                 if 'image' in request.FILES:
                     profile_image = request.FILES['image']
-                    profile_image_object = ProfileImage(image=profile_image, \
+                    profile_image_object = ProfileImage \
+                            (image=profile_image, \
                             username=user_object)
-                    profile_image_object.image.name = inp_username + ".jpg"
+                    profile_image_object.image.name = inp_username + \
+                                                    ".jpg"
                     profile_image_object.save()
                 
                 # Setting the session variables
@@ -195,35 +199,67 @@ def newregister(request):
 
 
 def profile(request, user_name):
-#if 'username' not in request.session or not request.session['username'] == user_name:
-    is_loggedin=False
-    user_object = get_object_or_404(User_info, username=user_name)
-    profile_image_object = ProfileImage.objects.filter(username=user_object)
-    user_email = user_object.email.replace('.', 'DOT').replace('@', 'AT')
-    contributions = Contribution.objects.all().filter(username=user_name)[:3]
-    articles = Article.objects.all().filter(username=user_name)[:3]
-    gsoc = Gsoc.objects.all().filter(username=user_name)[:3]
-    interns = Intern.objects.all().filter(username=user_name)[:3]
-    speakers = Speaker.objects.all().filter(username=user_name)[:3]
+    """
+    A view to display the profile (public)
+    """
+    # When a user is logged in, the program must display user dropdown
+    if logged_in(request):
+        is_loggedin = True
+        username = request.session['username']
+    # When a user is not logged in, the program must display login button
+    else:
+        is_loggedin = False
+        username = user_name
+
+    user_object = get_object_or_404(User_info, \
+            username = username)
+    profile_image_object = ProfileImage.objects \
+            .filter(username=user_object)
+    user_email = user_object.email.replace('.', ' DOT ') \
+            .replace('@', ' AT ')
+    contributions = Contribution.objects.all() \
+            .filter(username=username)[:3]
+    articles = Article.objects.all() \
+            .filter(username=username)[:3]
+    gsoc = Gsoc.objects.all() \
+            .filter(username=username)[:3]
+    interns = Intern.objects.all() \
+            .filter(username=username)[:3]
+    speakers = Speaker.objects.all() \
+            .filter(username=username)[:3]
 
     if profile_image_object:
-       	image_name = user_name+".jpg"
+       	image_name = username+".jpg"
     else:
        	image_name = "default_image.jpeg"
 
-    return render_to_response('register/profile.html', 
-            {'is_loggedin': is_loggedin, 'user_object': user_object, \
-            'user_email': user_email, 'gsoc': gsoc, 'interns':interns,\
-            'speakers': speakers, 'image_name': image_name, \
-            "articles": articles, 'contributions': contributions}, \
+    return render_to_response( \
+            'register/profile.html', \
+            {'is_loggedin': is_loggedin, \
+            'username':username, \
+            'user_object':user_object, \
+            'user_email':user_email, \
+            'user_email':user_email, \
+            'gsoc':gsoc, \
+            'interns':interns, \
+            'speakers':speakers, \
+            'image_name':image_name, \
+            "articles":articles, \
+            'contributions':contributions}, \
             RequestContext(request))
 
 
-
-def change_password(request, user_name):
+def change_password(request):
+    """
+    A view to change the password of a logged in user
+    """
     try:
-        if not logged_in(request):
+        is_loggedin = logged_in(request)
+
+        if not is_loggedin:
             return HttpResponseRedirect("/register/login")
+
+        username = request.session['username']
 
         # POST request 
         if request.method == 'POST':
@@ -231,7 +267,6 @@ def change_password(request, user_name):
 
             # Form inputs are valid
             if form.is_valid():
-                user_name = request.session['username']
                	old_password = hash_func(request.POST['old_password']) \
                                 .hexdigest()
                 new_password = hash_func(request.POST['new_password']) \
@@ -240,7 +275,7 @@ def change_password(request, user_name):
                                 request.POST['confirm_new_password']) \
                                 .hexdigest()
 
-		user_data = User_info.objects.get(username = user_name)
+		user_data = User_info.objects.get(username = username)
                 actual_pwd = user_data.password
                 
                 # Given current and stored passwords same
@@ -251,49 +286,75 @@ def change_password(request, user_name):
                         if new_password == confirm_new_password:
 		            user_data.password = new_password
 			    user_data.save()
-			    return render_to_response('register/pass_success.html',
-                                                RequestContext(request))
+			    return render_to_response( \
+                                    'register/pass_success.html',
+                                    {'username': username, \
+                                    'is_loggedin': is_loggedin}, \
+                                    RequestContext(request))
                         # Repass and new pass are not same
                         else:
 		            error = "New passwords doesn't match"
-	                    return render_to_response('register/change_password.html', 
-                                            {'form':form, \
-                                            'error': error}, \
-                                            RequestContext(request))
+	                    return render_to_response( \
+                                    'register/change_password.html', 
+                                    {'form':form, \
+                                    'username' :username, \
+                                    'is_loggedin':is_loggedin, \
+                                    'error':error}, \
+                                    RequestContext(request))
                     # New and current password user provided are same
                     else:
                         error = "Your old and new password are same. Please \
                                 choose a different password"
-	                return render_to_response('register/change_password.html', 
-                                            {'form':form, \
-                                            'error': error}, \
-                                            RequestContext(request))
+	                return render_to_response( \
+                                'register/change_password.html', 
+                                {'form':form, \
+                                'username':username, \
+                                'is_loggedin':is_loggedin, \
+                                'error':error}, \
+                                RequestContext(request))
                 # Given current and stored passwords are not same
                 else:
 		    error = "Current password and given password doesn't match"
-	            return render_to_response('register/change_password.html', 
-                                            {'form':form, \
-                                            'error': error}, \
-                                            RequestContext(request))
+	            return render_to_response( \
+                            'register/change_password.html', 
+                            {'form':form, \
+                            'username':username, \
+                            'is_loggedin':is_loggedin, \
+                            'error':error}, \
+                            RequestContext(request))
             # Form inputs is/are invalid
 	    else:
 		form = ChangePasswordForm()
 
-	    return render_to_response('register/change_password.html', 
-                            {'form':form }, \
-                            RequestContext(request))
+	    return render_to_response( \
+                    'register/change_password.html', 
+                    {'form':form, \
+                    'username':username, \
+                    'is_loggedin':is_loggedin}, \
+                    RequestContext(request))
 
-	return render_to_response('register/change_password.html', 
-                        RequestContext(request))
+	return render_to_response( \
+                'register/change_password.html',
+                {'username': username, \
+                'is_loggedin': is_loggedin}, \
+                RequestContext(request))
 
     except KeyError:
         return error_key(request)
 
-def mypage(request, user_name):
+
+def mypage(request):
+    """
+    An editable profile page for the user
+    """
     if not logged_in(request):
         return HttpResponseRedirect('/register/login')
+    
     else:
-	return render_to_response('register/mypages.html',
-                {'username':user_name,'is_loggedin':True}, 
+        username = request.session['username']
+	return render_to_response( \
+                'register/mypages.html',
+                {'username':username, \
+                'is_loggedin':True}, \
                 RequestContext(request))
 

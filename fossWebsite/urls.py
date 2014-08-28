@@ -1,39 +1,13 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import *
+from fossWebsite import views
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'fossWebsite.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', views.home),
+    url(r'^search',views.search),
+    url(r'^register', include('register.urls')),
+    url(r'^achievement', include('achievement.urls')),
+    url(r'^admin', include(admin.site.urls)),
 )
 
-urlpatterns += patterns('fossWebsite.views',
-    url(r'^home/$', 'home'),
-    url(r'^$','homeredirect'),
-    url(r'^search/','search'),
-#    url(r'^information/(?P<info_type>\w+)','info_det'),
-#    url(r'^information/','info_page'),
-
-)
-urlpatterns += patterns('register.views',
-    url(r'^register/login$', 'login'),
-    url(r'^register/logout$','logout'),
-    url(r'^register/new','newregister'),
-    url(r'^register/(?P<user_name>\w+)/mypage','mypage'),
-    url(r'^register/(?P<user_name>\w+)/profile','profile'),
-    url(r'^register/(?P<user_name>\w+)/change_password','change_password'),
-)
-
-urlpatterns += patterns('achievement.views',
-    url(r'^achievement/viewall$','achieve_viewall'),
-    url(r'^contribution/viewall$', 'contrib_viewall'),
-    url(r'^article/viewall$', 'article_viewall'),
-    url(r'^gsoc/viewall$', 'gsoc_viewall'),
-    url(r'^speaker/viewall$', 'speaker_viewall'),
-    url(r'^intern/viewall$', 'intern_viewall'),
-    url(r'^contest/viewall$', 'contest_won_viewall'),
-    url(r'^icpc/viewall$', 'icpc_viewall'),
-) 
