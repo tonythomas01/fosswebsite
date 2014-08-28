@@ -42,8 +42,8 @@ def search(request):
         search_list = search_field.split(' ')
         for term in search_list:
             #return HttpResponse(term)
-            rs_obj = User_info.objects\
-                    .filter(Q(firstname__icontains=term) |\
+            rs_obj = User_info.objects \
+                    .filter(Q(firstname__icontains=term) | \
                     Q(lastname__icontains=term))
             for result_object in rs_obj:
                 if result_object not in result:
@@ -54,7 +54,9 @@ def search(request):
             is_empty = False
 
         return render_to_response( \
-                'search_result.html',\
+                'search_result.html', \
                 {'is_empty':is_empty, \
+                'is_loggedin':logged_in(request), \
+                'username':request.session['username'], \
                 'person':person}, \
                 RequestContext(request))
