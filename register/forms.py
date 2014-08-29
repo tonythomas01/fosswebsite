@@ -3,7 +3,9 @@ from django import forms
 from django.db import models
 from django.forms.fields import DateField, ChoiceField, MultipleChoiceField
 from django.forms.widgets import RadioSelect, CheckboxSelectMultiple
+from captcha.fields import ReCaptchaField
 import re
+
 #from django.core import Validator
 from django.shortcuts import get_object_or_404
 from register.models import User_info
@@ -173,6 +175,10 @@ class NewRegisterForm(ModelForm):
         widget=forms.PasswordInput(
             attrs={'placeholder': 'Re Enter Your Password'}
         ),
+    )
+
+    captcha = ReCaptchaField(
+        attrs={'theme':'clean'}
     )
 
     class Meta:

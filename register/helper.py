@@ -87,3 +87,27 @@ def sendmail_after_userreg(username, password, email_to):
             email_from, \
             [email_to], \
             fail_silently = False)
+
+def sendmail_after_pass_change(username, password, email_to):
+    """
+    Email notification to be send after user password change
+    """
+    email_subject = 'FOSS@Amrita User Password change'
+    email_from = 'Amritapuri FOSS <amritapurifoss@gmail.com>'
+    email_message = """
+    Your password has been recently changed.
+    
+    Username: """ + username + """
+    New Password: """ + password + """
+    
+    --
+    Amritapuri FOSS
+    http://amritapurifoss.in
+    amritapurifoss@gmail.com
+    """    
+
+    django_send_mail(email_subject, \
+            email_message, \
+            email_from, \
+            [email_to], \
+            fail_silently = False)

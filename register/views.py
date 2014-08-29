@@ -12,6 +12,8 @@ from register.forms import LoginForm, NewRegisterForm
 from register.forms import ChangePasswordForm
 from achievement.models import *
 from images.models import ProfileImage
+from register.helper import sendmail_after_userreg
+from register.helper import notify_new_user, sendmail_after_pass_change
 
 # Python libraries
 from hashlib import sha512 as hash_func
@@ -157,7 +159,8 @@ def newregister(request):
                 cleaned_reg_data = form.cleaned_data
                 inp_username = cleaned_reg_data['username']
                 inp_password = cleaned_reg_data['password']
-                
+                inp_email = cleaned_reg_data['email']
+
                 # Saving the user inputs into table 
                 new_register = form.save(commit=False)
                 new_register.password = hash_func(inp_password) \
@@ -180,7 +183,11 @@ def newregister(request):
                 # Setting the session variables
                 request.session['username'] = form.cleaned_data['username']
                 request.session['is_loggedin'] = True
-                return render_to_response('register/register_success.html', 
+                sendmail_after_userreg(inp_username, inp_password, inp_email)
+                notify_new_user(inp_username, inp_email)
+                return render_to_response('register/register_success.html',
+                            {'is_loggedin':logged_in(), \
+                             'username':request.session['username']}, \
                             RequestContext(request))
 
             # Invalid form inputs
@@ -251,6 +258,7 @@ def change_password(request):
             return HttpResponseRedirect("/register/login")
 
         username = request.session['username']
+        email = request.session['email']
 
         # POST request 
         if request.method == 'POST':
@@ -258,6 +266,7 @@ def change_password(request):
 
             # Form inputs are valid
             if form.is_valid():
+                new_pass = request.POST['new_password']
                	old_password = hash_func(request.POST['old_password']) \
                                 .hexdigest()
                 new_password = hash_func(request.POST['new_password']) \
@@ -277,6 +286,8 @@ def change_password(request):
                         if new_password == confirm_new_password:
 		            user_data.password = new_password
 			    user_data.save()
+                            sendmail_after_pass_change(username, \
+                                    new_pass, email)
 			    return render_to_response( \
                                     'register/pass_success.html',
                                     {'username': username, \

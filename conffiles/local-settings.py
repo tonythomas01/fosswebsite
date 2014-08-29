@@ -8,6 +8,12 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 PROJECT_PATH = os.path.dirname(os.path.dirname(__file__))
 
+ADMINS = (
+    ('Seshagiri Prabhu', 'seshagiriprabhu@gmail.com'),
+)
+
+ADMINS_EMAIL = map(lambda x: x[1], ADMINS)
+
 # If running in debug mode, write emails to files.
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
@@ -35,6 +41,11 @@ PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.MD5PasswordHasher',
     'django.contrib.auth.hashers.CryptPasswordHasher',
 )
+
+# To be changed with site specific values
+RECAPTCHA_PUBLIC_KEY = '6LfcYvkSAAAAAAW8UHVHw3oBuF7S5NJZ-jnBUxn1'
+RECAPTCHA_PRIVATE_KEY = '6LfcYvkSAAAAAOkXjirru1nTiwvwi_drX93sTQKo'
+RECAPTCHA_USE_SSL = True
 
 DATABASES = {
     'default': {
