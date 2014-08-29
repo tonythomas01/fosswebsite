@@ -3,7 +3,9 @@ from django import forms
 from django.db import models
 from django.forms.fields import DateField, ChoiceField, MultipleChoiceField
 from django.forms.widgets import RadioSelect, CheckboxSelectMultiple
+from captcha.fields import ReCaptchaField
 import re
+
 #from django.core import Validator
 from django.shortcuts import get_object_or_404
 from register.models import User_info
@@ -35,8 +37,32 @@ def user_exists(email_):
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(max_length=20)
-    password = forms.CharField(widget=forms.PasswordInput)
+    username=forms.CharField(
+        required=True,
+        max_length=100,
+        label='Username', 
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Username'}
+        )
+    )
+
+    password=forms.CharField(
+        required=True,
+        max_length=100,
+        label='Password',
+        widget=forms.PasswordInput(
+            attrs={'placeholder': 'Password'}
+        )
+    )
+
+    def clean_repass(self):
+        password = self.cleaned_data['password']
+        re_password = self.cleaned_data['repass']
+        if password == re_password:
+            return password
+        else:
+            raise forms.ValidationError("Passwords don't match")
+
 
 class NewRegisterForm(ModelForm):
     """
@@ -65,14 +91,6 @@ class NewRegisterForm(ModelForm):
             choices=GENDER_CHOICES, 
             attrs={'placeholder': 'Gender'}
             )
-    )
-
-    email=forms.EmailField(
-        required=True,
-        label='Email', 
-        widget=forms.TextInput(
-            attrs={'placeholder': 'Email Address'}
-        )
     )
 
     contact = forms.IntegerField(
@@ -124,6 +142,14 @@ class NewRegisterForm(ModelForm):
             attrs={'placeholder': 'Goal'}, 
         )
     )
+    
+    email=forms.EmailField(
+        required=True,
+        label='Email', 
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Email Address'}
+        )
+    )
 
     username=forms.CharField(
         required=True,
@@ -149,6 +175,10 @@ class NewRegisterForm(ModelForm):
         widget=forms.PasswordInput(
             attrs={'placeholder': 'Re Enter Your Password'}
         ),
+    )
+
+    captcha = ReCaptchaField(
+        attrs={'theme':'clean'}
     )
 
     class Meta:
@@ -177,7 +207,45 @@ class NewRegisterForm(ModelForm):
         else:
             raise forms.ValidationError("Passwords don't match")
 
+
 class ChangePasswordForm(forms.Form):
-    old_password = forms.CharField(max_length=20, widget=forms.PasswordInput)
-    new_password = forms.CharField(max_length=20, widget=forms.PasswordInput)
-    confirm_new_password = forms.CharField(max_length=20, widget=forms.PasswordInput)
+    """
+    Password changer form
+    """
+    old_password=forms.CharField(
+        required=True,
+        max_length=100,
+        label='Current Password',
+        widget=forms.PasswordInput(
+            attrs={'placeholder': 'Current Password'}
+        )
+    )
+
+    new_password = forms.CharField(
+        required=True,
+        max_length=100,
+        label='New Password',
+        widget=forms.PasswordInput(
+            attrs={'placeholder': 'New Password'} 
+        )
+    )
+
+    confirm_new_password = forms.CharField(
+        max_length=100, 
+        required=True,
+        widget=forms.PasswordInput(
+            attrs={'placeholder': 'Confirm new password'} 
+        )
+    )
+
+    def clean_repass(self):
+        """
+        If passwords doesn't match, both the password
+        fields will be cleard by raising an error
+        """
+        password = self.cleaned_data['new_password']
+        re_password = self.cleaned_data['confirm_new_password']
+        if password == re_password:
+            return password
+        else:
+            raise forms.ValidationError("Passwords don't match")

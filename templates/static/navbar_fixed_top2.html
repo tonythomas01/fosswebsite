@@ -79,11 +79,25 @@ if (typeof console === "undefined") {
                     <a href="/register/login"><i class="fa fa-sign-in fa-fw"></i> Login</a>
                 </li>
                 {% else %}
-                <li class="{% ifequal request.path '/register/{{ username }}/mypage' %}active{% endifequal %}">
-                    <a href="/register/{{username}}/mypage"><i class="fa fa-user fa-fw"></i> Profile</a>
-                </li>
-                <li class="{% ifequal request.path '/register/logout' %}active{% endifequal %}">
-                    <a href="/register/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-user fa-fw"></i> {{ username }}<span class="caret"></span> 
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="/register/mypage">
+                                <i class="fa fa-user"></i> View profile
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/register/change_password">
+                                <i class="fa fa-lock"></i> Change Password
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/register/logout"><i class="fa fa-power-off"></i> Logout</a>
+                        </li>
+                    </ul>
                 </li>
                 {% endif %}
             </ul>

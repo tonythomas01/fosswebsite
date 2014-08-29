@@ -46,8 +46,8 @@ if (typeof console === "undefined") {
                 <i class="icon-bar"></i>
                 <i class="icon-bar"></i>
             </button>
-            {% if request.path != '/home/' %}
-            <a class="navbar-brand" href="/home/"><i class="fa fa-linux"></i> AM-FOSS</a>
+            {% if request.path != '/' %}
+            <a class="navbar-brand" href="/"><i class="fa fa-linux"></i> AM-FOSS</a>
             {% else %}
             <a class="navbar-brand scroll-top" href="#"><i class="fa fa-linux"></i> AM-FOSS</a>
             {% endif %}
@@ -58,19 +58,19 @@ if (typeof console === "undefined") {
                 <li class="{% ifequal request.path '/achievement/viewall' %}active{% endifequal %}">
                     <a href="/achievement/viewall"><i class="fa fa-trophy"></i> Activities</a>
                 </li>
-                {% if request.path != '/home/' %}
-                <li class="{% ifequal request.path '/home/#slide-3' %}active{% endifequal %}">
-                    <a data-id="slide-3" href="/home/#slide-3"><i class="fa fa-image"></i> Gallery</a>
+                {% if request.path != '/' %}
+                <li class="{% ifequal request.path '/#slide-3' %}active{% endifequal %}">
+                    <a data-id="slide-3" href="/#slide-3"><i class="fa fa-image"></i> Gallery</a>
                 </li>
-                <li class="{% ifequal request.path '/home/#slide-4' %}active{% endifequal %}">
-                    <a data-id="slide-4" href="/home/#slide-4"><i class="fa fa-envelope"></i> Contact</a>
+                <li class="{% ifequal request.path '/#slide-4' %}active{% endifequal %}">
+                    <a data-id="slide-4" href="/#slide-4"><i class="fa fa-envelope"></i> Contact</a>
                 </li>
                 {% else %}
-                <li data-slide="3" class="{% ifequal request.path '/home/#slide-3' %}active{% endifequal %}">
-                    <a data-id="slide-3" href="#slide-3" class="scroll-link"><i class="fa fa-image"></i> Gallery</a>
+                <li data-slide="3" class="{% ifequal request.path '/#slide-3' %}active{% endifequal %}">
+                    <a data-id="slide-3" href="/#slide-3" class="scroll-link"><i class="fa fa-image"></i> Gallery</a>
                 </li>
-                <li data-slide="4" class="{% ifequal request.path '/home/#slide-4' %}active{% endifequal %}">
-                    <a data-id="slide-4" href="#slide-4" class="scroll-link"><i class="fa fa-envelope"></i> Contact</a>
+                <li data-slide="4" class="{% ifequal request.path '/#slide-4' %}active{% endifequal %}">
+                    <a data-id="slide-4" href="/#slide-4" class="scroll-link"><i class="fa fa-envelope"></i> Contact</a>
                 </li>
                 {% endif %}
             </ul>
@@ -88,11 +88,25 @@ if (typeof console === "undefined") {
                     <a href="/register/login"><i class="fa fa-sign-in fa-fw"></i> Login</a>
                 </li>
                 {% else %}
-                <li class="{% ifequal request.path '/register/{{ username }}/mypage' %}active{% endifequal %}">
-                    <a href="/register/{{username}}/mypage"><i class="fa fa-user fa-fw"></i> Profile</a>
-                </li>
-                <li class="{% ifequal request.path '/register/logout' %}active{% endifequal %}">
-                    <a href="/register/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-user fa-fw"></i> {{ username }}<span class="caret"></span> 
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="/register/mypage">
+                                <i class="fa fa-user"></i> View profile
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/register/change_password">
+                                <i class="fa fa-lock"></i> Change Password
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/register/logout"><i class="fa fa-power-off"></i> Logout</a>
+                        </li>
+                    </ul>
                 </li>
                 {% endif %}
             </ul>

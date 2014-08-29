@@ -79,6 +79,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'captcha',
+    'mailer',
     'register',
     'project',
     'alerts',
@@ -86,7 +89,6 @@ INSTALLED_APPS = (
     'document',
     'event',	
     'images',
-    'bootstrap3_datetime',
 )
 
 MIDDLEWARE_CLASSES = (

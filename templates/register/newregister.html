@@ -3,14 +3,13 @@
 {% block title %} Register {% endblock %}
 {% block script %}
 <script src="{{ STATIC_URL }}js/jquery-2.1.1.min.js"></script>
-{{ user_form.media }}
 <script type="text/javascript">
 $(document).ready(function() {
     $('#registerForm')
         .bootstrapValidator({
             feedbackIcons: {
                 valid: 'fa fa-check',
-                invalid: 'glyphicon glyphicon-remove',
+                invalid: 'fa fa-times',
                 validating: 'fa fa-refresh'
             },
             fields: {
@@ -163,10 +162,10 @@ $(document).ready(function() {
     <div class="jumbo-header">
         <h1> Register </h1>
     </div><!--jumbo-header-->
-    <form method="post" id="registerForm" role="form" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="col-lg-3"></div>
-        <div class="col-lg-6">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+        <form method="post" id="registerForm" role="form" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="form-signin-2">
                 {% for field in form.visible_fields %}
                 <div id="div_{{ field.html_name }}">
@@ -256,7 +255,7 @@ $(document).ready(function() {
                 <label class="control-label">Choose a profile picture: </label>
                 <div class="input-group">
                     <a class="btn btn-primary" href='javascript:;'><i class="fa fa-upload"></i> Choose File
-                        <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+                        <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="image" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
                     </a>
                     <span type="text" class="label label-info" id="upload-file-info" value="The full path of the uploaded image will be appeared here" disabled></span>
                 </div><!--input-group-->
@@ -264,9 +263,9 @@ $(document).ready(function() {
                     {{ hidden }}
                 {% endfor %}
                 <div class="form-group">
-                    <script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6LdQssASAAAAAOX2cektnQ1DDSMQimXwczbEQbdY"></script>
+                    <script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6LfcYvkSAAAAAAW8UHVHw3oBuF7S5NJZ-jnBUxn1"></script>
                     <noscript>
-                        <iframe src="http://www.google.com/recaptcha/api/noscript?k=6LdQssASAAAAAOX2cektnQ1DDSMQimXwczbEQbdY" height="300" width="500" frameborder="0"></iframe><br/>
+                        <iframe src="http://www.google.com/recaptcha/api/noscript?k=6LfcYvkSAAAAAAW8UHVHw3oBuF7S5NJZ-jnBUxn1" height="300" width="500" frameborder="0"></iframe><br/>
                         <textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
                         <input type="hidden" name="recaptcha_response_field" value="manual_challenge"/>
                     </noscript>
@@ -277,10 +276,10 @@ $(document).ready(function() {
                     {% endifequal %}
                 </div><!--form-group-->
                 <button type="submit" class="btn btn-primary btn-block">Register</button>
-            </div><!--form-horizontal-->
-        </div><!--col-lg-4-->
-        <div class="col-lg-3"></div>
-    </form>
+            </div><!--form-signin-2-->
+        </form>
+    </div><!--col-lg-6-->
+    <div class="col-lg-3"></div>
 </div><!--container-->
 {% endblock body %}
 
