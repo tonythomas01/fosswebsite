@@ -186,7 +186,7 @@ def newregister(request):
                 sendmail_after_userreg(inp_username, inp_password, inp_email)
                 notify_new_user(inp_username, inp_email)
                 return render_to_response('register/register_success.html',
-                            {'is_loggedin':logged_in(), \
+                            {'is_loggedin':logged_in(request), \
                              'username':request.session['username']}, \
                             RequestContext(request))
 
