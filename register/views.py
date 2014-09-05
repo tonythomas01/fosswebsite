@@ -181,8 +181,9 @@ def newregister(request):
                     profile_image_object.save()
                 
                 # Setting the session variables
-                request.session['username'] = form.cleaned_data['username']
+                request.session['username'] = cleaned_reg_data['username']
                 request.session['is_loggedin'] = True
+		request.session['email'] = cleaned_reg_data['email']
                 sendmail_after_userreg(inp_username, inp_password, inp_email)
                 notify_new_user(inp_username, inp_email)
                 return render_to_response('register/register_success.html',
