@@ -31,25 +31,26 @@ def search(request):
     Search view
     """
     search_field = request.GET['search_field']
+    #if search field is empty
     if not search_field:
         return HttpResponseRedirect('/')
 
+    #if search field is not empty
     else:
         result = []
-        person = []
         is_empty = True
 
         search_list = search_field.split(' ')
         for term in search_list:
-            #return HttpResponse(term)
+            #search in the firstname and lastname of all members.
             rs_obj = User_info.objects \
                     .filter(Q(firstname__icontains=term) | \
                     Q(lastname__icontains=term))
             for result_object in rs_obj:
                 if result_object not in result:
                     result.append(result_object)
-                    person.append(result_object.firstname + \
-                            " " + result_object.lastname)
+
+        #if search result is not empty
         if result:
             is_empty = False
 
@@ -58,5 +59,5 @@ def search(request):
                 {'is_empty':is_empty, \
                 'is_loggedin':logged_in(request), \
                 'username':request.session['username'], \
-                'person':person}, \
+                'result':result}, \
                 RequestContext(request))

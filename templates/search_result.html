@@ -22,10 +22,10 @@ table td a{
     </div><!--page-header-->
     <div class="table-responsive">
     <table class="table table-hover table-bordered table-striped">
-	{% for value in person %}
+	{% for value in result %}
         <tr>
             <td>
-                <a href="{{ value }}" target="_blank">{{ value }}</a>
+                <a href="/register/profile/{{ value.username }}" target="_blank">{{ value.firstname | title }} {{value.lastname | title}}</a>
             </td>
         </tr>
 	{% endfor %}
