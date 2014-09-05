@@ -83,6 +83,7 @@ def login(request):
                     if actual_pwd == hashed_password:
                         request.session['is_loggedin'] = True
                         request.session['username'] = inp_username
+			request.session['email'] = user_tuple[0].email
                         return HttpResponseRedirect('/')
                     
                     # Invalid password
