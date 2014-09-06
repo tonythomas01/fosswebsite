@@ -14,41 +14,11 @@ from achievement.models import *
 from images.models import ProfileImage
 from register.helper import sendmail_after_userreg
 from register.helper import notify_new_user, sendmail_after_pass_change
+from fossWebsite.helper import error_key, csrf_failure, logged_in
 
 # Python libraries
 from hashlib import sha512 as hash_func
 import json
-
-
-def error_key(request):
-    """
-    Key error response
-    """
-    return render_to_response('keyerror.html', \
-            {'reason':'Key Error'}, \
-            RequestContext(request))
-
-
-def csrf_failure(request, reason=""):
-    """
-    CSRF failure response
-    """
-    return render_to_response('keyerror.html', \
-            {'reason':reason}, \
-            RequestContext(request))
-
-
-def logged_in(request):
-    """
-    To check if the user is logged in or not 
-    """
-    try:
-        if request.session['is_loggedin']:
-            return True
-        else:
-            return False
-    except KeyError:
-        return False
 
 
 # Create your views here.
