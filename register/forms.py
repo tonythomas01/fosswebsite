@@ -189,7 +189,7 @@ class NewRegisterForm(ModelForm):
         Checks for non-alphabets in the username.
         Raises an error if found
         """
-        usernam = self.cleaned_data['username']
+        username = self.cleaned_data['username']
         if check_alpha(username):
             return username
         else:
