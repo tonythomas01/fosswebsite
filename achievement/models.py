@@ -16,66 +16,67 @@ class Achievement(models.Model):
 
 #contribution class: type = contribution
 class Contribution(models.Model):
-	achievement_id = models.ForeignKey(Achievement, blank=False, null=False)
-	bug_id = models.IntegerField(max_length=100, primary_key=True, blank=False, unique=True)
-	username = models.ForeignKey(User_info, blank=False, null=False)
-	org_name = models.CharField(max_length=50, blank=False, null=False)
-	bug_url = models.URLField(max_length=200, blank=False, null=False)
-	bug_description = models.CharField(max_length=200)
+    achievement_id = models.ForeignKey(Achievement, blank=False, null=False)
+    bug_id = models.IntegerField(max_length=100, primary_key=True, blank=False, unique=True)
+    username = models.ForeignKey(User_info, blank=False, null=False)
+    org_name = models.CharField(max_length=50, blank=False, null=False)
+    bug_url = models.URLField(max_length=200, blank=False, null=False)
+    bug_description = models.CharField(max_length=200)
 
 #Article class: type = article
 class Article(models.Model):
-	achievement_id = models.ForeignKey(Achievement, blank=False, null=False)
-        article_id = models.IntegerField(max_length=100, primary_key=True, blank=False, unique=True)
-        username = models.ForeignKey(User_info, blank=False, null=False)
-	area = models.CharField(max_length=100, blank=False, null=False)
-	magazine_name = models.CharField(max_length=50, blank=False, null=False)
-	title = models.CharField(max_length=100, blank=False, null=False)
-	publication_date = models.DateField()
+    achievement_id = models.ForeignKey(Achievement, blank=False, null=False)
+    article_id = models.IntegerField(max_length=100, primary_key=True, blank=False, unique=True)
+    username = models.ForeignKey(User_info, blank=False, null=False)
+    area = models.CharField(max_length=100, blank=False, null=False)
+    magazine_name = models.CharField(max_length=50, blank=False, null=False)
+    title = models.CharField(max_length=100, blank=False, null=False)
+    publication_date = models.DateField()
 
 #GSoC class: type = gsoc
 class Gsoc(models.Model):
-	achievement_id = models.ForeignKey(Achievement, blank=False, null=False)
-        gsoc_id = models.IntegerField(max_length=100, primary_key=True, blank=False, unique=True)
-        username = models.ForeignKey(User_info, blank=False, null=False)
-	organisation = models.CharField(max_length=50, blank=False, null=False)
-	project_title = models.CharField(max_length=50, blank=False, null=False)
-	mentor_name = models.CharField(max_length=20, blank=False, null=False)
-	gsoc_url = models.URLField(max_length=200, blank=False, null=False)
+    achievement_id = models.ForeignKey(Achievement, blank=False, null=False)
+    gsoc_id = models.IntegerField(max_length=100, primary_key=True, blank=False, unique=True)
+    username = models.ForeignKey(User_info, blank=False, null=False)
+    organisation = models.CharField(max_length=50, blank=False, null=False)
+    project_title = models.CharField(max_length=50, blank=False, null=False)
+    mentor_name = models.CharField(max_length=20, blank=False, null=False)
+    gsoc_url = models.URLField(max_length=200, blank=False, null=False)
 
 
 #Internship class: type = intern #can be scholarship also
 class Intern(models.Model):
-	achievement_id = models.ForeignKey(Achievement, blank=False, null=False)
-        intern_id = models.IntegerField(max_length=100, primary_key=True, blank=False, unique=True)
-        username = models.ForeignKey(User_info, blank=False, null=False)
-	place = models.CharField(max_length=50, blank=False, null=False)
-	intern_type =  models.CharField(max_length=16, choices=INTERN_CHOICE, blank=False, null=False)
-	period = models.CharField(max_length=25, blank=False, null=False)
+    achievement_id = models.ForeignKey(Achievement, blank=False, null=False)
+    intern_id = models.IntegerField(max_length=100, primary_key=True, blank=False, unique=True)
+    username = models.ForeignKey(User_info, blank=False, null=False)
+    place = models.CharField(max_length=50, blank=False, null=False)
+    intern_type =  models.CharField(max_length=16, choices=INTERN_CHOICE, blank=False, null=False)
+    period = models.CharField(max_length=25, blank=False, null=False)   
 
 
 #Speaker class: type = speaker
 class Speaker(models.Model):
-	achievement_id = models.ForeignKey(Achievement, blank=False, null=False)
-        talk_id = models.IntegerField(max_length=100, primary_key=True, blank=False, unique=True)
-        username = models.ForeignKey(User_info, blank=False, null=False)
-	title = models.CharField(max_length=200, blank=False, null=False)
-	speaker_type = models.CharField(max_length=15, choices=SPEAKER_CHOICE, blank=False, null=False)
-	conference_name = models.CharField(max_length=50, blank=False, null=False)
-	speaker_url = models.URLField(max_length=200, blank=False, null=False)
-	year = models.IntegerField(max_length=4, blank=False, null=False)
+    achievement_id = models.ForeignKey(Achievement, blank=False, null=False)
+    talk_id = models.IntegerField(max_length=100, primary_key=True, blank=False, unique=True)
+    username = models.ForeignKey(User_info, blank=False, null=False)
+    title = models.CharField(max_length=200, blank=False, null=False)
+    speaker_type = models.CharField(max_length=15, choices=SPEAKER_CHOICE, blank=False, null=False)
+    conference_name = models.CharField(max_length=50, blank=False, null=False)
+    speaker_url = models.URLField(max_length=200, blank=False, null=False)
+    year = models.IntegerField(max_length=4, blank=False, null=False)
+
 
 #ACM_ICPC_details class: type = acm
 class ACM_ICPC_detail(models.Model):
-	achievement_id = models.ForeignKey(Achievement, blank=False, null=False)
-        team_name = models.CharField(max_length=25, primary_key=True, blank=False, unique=True)
-        username = models.ForeignKey(User_info, blank=False, null=False)
-	yr_of_participation = models.IntegerField(max_length=4, blank=False, null=False)
-	level = models.CharField(max_length=100, choices=LEVEL_CHOICE, blank=False, null=False)
-	ranking = models.IntegerField(max_length=4, blank=False, null=False)
+    achievement_id = models.ForeignKey(Achievement, blank=False, null=False)
+    team_name = models.CharField(max_length=25, primary_key=True, blank=False, unique=True)
+    username = models.ForeignKey(User_info, blank=False, null=False)
+    yr_of_participation = models.IntegerField(max_length=4, blank=False, null=False)
+    level = models.CharField(max_length=100, choices=LEVEL_CHOICE, blank=False, null=False)
+    ranking = models.IntegerField(max_length=4, blank=False, null=False)
 		
-	class Meta:
-		unique_together = ('team_name','yr_of_participation')
+    class Meta:
+        unique_together = ('team_name','yr_of_participation')
 
 #ACM_ICPC_Participant class; type = acm
 class ACM_ICPC_Participant(models.Model):

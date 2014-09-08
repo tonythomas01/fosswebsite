@@ -1,0 +1,15 @@
+{% extends 'static/base.html' %}
+{% block body %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% if error %}
+        {{ error }}<br>
+    {% endif %}
+    {% for field in form.visible_fields %}
+        {{ field }}<br>
+    {% endfor %}
+   
+
+<button type="submit">Add</button>
+</form>
+{% endblock %}

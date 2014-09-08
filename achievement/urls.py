@@ -10,4 +10,5 @@ urlpatterns = patterns('',
     url(r'^/interns/$', views.intern_viewall),
     url(r'^/contests/$', views.contest_won_viewall),
     url(r'^/icpc/$', views.icpc_viewall),
+    url(r'^/new/contribution/$', views.insert_contribution),
 ) 
