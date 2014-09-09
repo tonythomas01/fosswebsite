@@ -1,12 +1,10 @@
-{% extends 'static/base.html' %}
+{% extends 'static/base2.html' %}
 {% block title %}
 Contribution
 {% endblock %}
-{% block body_content %}
-
-	{% if contrib_list %}
-		{% include 'achievement/contrib_view.html' %}
-	{% endif %}
-
+{% block body %}
+<div class="container">
+	{% include 'achievement/contrib_view.html' %}
+</div><!--container-->
 {% endblock %}
 

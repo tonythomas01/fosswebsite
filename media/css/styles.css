@@ -627,19 +627,16 @@ h6 {
 .theme-1 {
     color: #ECF0F1;
     background: #5E7C88;
-    text-align: center;
 }
 
 .theme-2 {
     color: #4b5f6d;
     background: #ECF0F1;
-    text-align: center;
 }
 
 .theme-3 {
     color: #fff;
     background: #434A52;
-    text-align: center;
 }
 
 .theme-3 a {
@@ -685,6 +682,7 @@ h6 {
 .theme-2-h1,
 .theme-3-h1 {
     font-size: 44px;
+    text-align: center;
 }
 
 .theme-2 a:hover {

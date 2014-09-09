@@ -5,15 +5,18 @@
 {% block body %}
 <div class="theme theme-2" id="contribution" data-slide="1">
     <div class="container">
-        <h1 class="theme-1-h1">Contributions</h1>
         <div class='contact_div'>
             {% if contrib_list %}
             {% include 'achievement/contrib_view.html' %}
             <a href = "/achievement/contribution/">
-                <button type="button">View all Contribution</button>
+                <button class="btn btn-default" type="button">
+                    View all Contribution <i class="fa fa-arrow-circle-right"></i>
+                </button>
             </a>
             {% else %}
-            Sorry, No entires in db
+            <div class="alert alert-danger" role="alert">
+                <p>Sorry, No data to display</p>
+            </div><!--alert alert-info-->
             {% endif %}
         </div><!--contact-div-->
     </div><!--container-->
@@ -25,9 +28,15 @@
         <div class='contact_div'>
             {% if article_list %}
             {% include 'achievement/article_view.html' %}
-            <a href = "/article/viewall"><button type="button">View all Article</button></a>
+            <a href = "/article/viewall">
+                <button class="btn btn-default"  type="button">
+                    View all Article <i class="fa fa-arrow-circle-right"></i>
+                </button>
+            </a>
             {% else %}
-            Sorry, No entires in db
+            <div class="alert alert-danger" role="alert">
+                <p>Sorry, No data to display</p>
+            </div><!--alert alert-info-->
             {% endif %}
         </div><!--contact-div-->
     </div><!--container-->
@@ -39,9 +48,15 @@
         <div class='contact_div'>
             {% if gsoc_list %}
             {% include 'achievement/gsoc_view.html' %}
-            <a href = "/gsoc/viewall"><button type="button">View all GSoC</button></a>
+            <a href = "/gsoc/viewall">]
+                <button class="btn btn-default" type="button">
+                    View all GSoC <i class="fa fa-arrow-circle-right"></i>
+                </button>
+            </a>
             {% else %}
-            Sorry, No entires in db
+            <div class="alert alert-danger" role="alert">
+                <p>Sorry, No data to display</p>
+            </div><!--alert alert-info-->
             {% endif %}
         </div><!--contact-div-->
     </div><!--container-->
@@ -53,9 +68,15 @@
         <div class='contact_div'>
             {% if intern_list %}
             {% include 'achievement/intern_view.html' %}
-            <a href = "/intern/viewall"><button type="button">View all Internship</button></a>
+            <a href = "/intern/viewall">
+                <button class="btn btn-default" type="button">
+                    View all Internship <i class="fa fa-arrow-circle-right"></i>
+                </button>
+            </a>
             {% else %}
-            Sorry, No entires in db
+            <div class="alert alert-danger" role="alert">
+                <p>Sorry, No data to display</p>
+            </div><!--alert alert-info-->
             {% endif %}
         </div><!--contact-div-->
     </div><!--container-->
@@ -67,9 +88,15 @@
         <div class='contact_div'>
             {% if speaker_list %}
             {% include 'achievement/speaker_view.html' %}
-            <a href = '/speaker/viewall'><button type="button">View all Speakers</button></a>
+            <a href = '/speaker/viewall'>
+                <button class="btn btn-default" type="button">
+                    View all Speakers <i class="fa fa-arrow-circle-right"></i>
+                </button>
+            </a>
             {% else %}
-            Sorry, No entires in db
+            <div class="alert alert-danger" role="alert">
+                <p>Sorry, No data to display</p>
+            </div><!--alert alert-info-->
             {% endif %}
         </div><!--contact-div-->
     </div><!--container-->
@@ -82,9 +109,15 @@
         <div class='contact_div'>
             {% if icpc_list %}
             {% include 'achievement/icpc_view.html' %}
-            <a href = '/icpc/viewall'><button type = "button">View all ICPC Participants</button></a>
+            <a href = '/icpc/viewall'>
+                <button class="btn btn-default" type = "button">
+                    View all ICPC Participants <i class="fa fa-arrow-circle-right"></i>
+                </button>
+            </a>
             {% else %}
-            Sorry, No entries in db
+            <div class="alert alert-danger" role="alert">
+                <p>Sorry, No data to display</p>
+            </div><!--alert alert-info-->
             {% endif %}
         </div><!--contact-div-->
     </div><!--container-->
@@ -97,9 +130,15 @@
         <div class='contact_div'>
             {% if contest_list %}
             {% include 'achievement/contest_view.html' %}
-            <a href = '/contest/viewall'><button type="button">View all the contest</button></a>
+            <a href = '/contest/viewall'>
+                <button class="btn btn-default" type="button">
+                    View all the contest <i class="fa fa-arrow-circle-right"></i>
+                </button>
+            </a>
             {% else %}
-            Sorry, No entried in db
+            <div class="alert alert-danger" role="alert">
+                <p>Sorry, No data to display</p>
+            </div><!--alert alert-info-->
             {% endif %}
         </div><!--contact-div-->
     </div><!--container-->
