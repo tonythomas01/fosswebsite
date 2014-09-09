@@ -1,7 +1,8 @@
 from django.forms import ModelForm
 from django import forms
 from django.db import models
-from django.forms.fields import DateField, ChoiceField, MultipleChoiceField
+from django.forms.fields import DateField, ChoiceField
+from django.forms.fields import MultipleChoiceField
 from django.forms.widgets import RadioSelect, CheckboxSelectMultiple
 from captcha.fields import ReCaptchaField
 import re
@@ -10,9 +11,14 @@ import re
 from django.shortcuts import get_object_or_404
 from register.models import User_info
 
-GENDER_CHOICES = (('M', 'Male'), ('F', 'Female'))
-ROLE_CHOICES = (('S', 'Student'), ('M', 'Mentor'), ('B', 'Both'))
-GOAL_CHOICES = (('startup', 'startup'), ('higher_studies', 'Higher Studies'), ('job', 'Job'), ('other', 'Others'))
+GENDER_CHOICES = (('M', 'Male'), \
+        ('F', 'Female'))
+ROLE_CHOICES = (('S', 'Student'), \
+        ('M', 'Mentor'), \
+        ('B', 'Both'))
+GOAL_CHOICES = (('startup', 'startup'), \
+        ('higher_studies', 'Higher Studies'), \
+        ('job', 'Job'), ('other', 'Others'))
 
 
 #custom functions
@@ -37,6 +43,9 @@ def user_exists(email_):
 
 
 class LoginForm(forms.Form):
+    """
+    Login form
+    """
     username=forms.CharField(
         required=True,
         max_length=100,

@@ -15,6 +15,7 @@ from images.models import ProfileImage
 from register.helper import sendmail_after_userreg
 from register.helper import notify_new_user, sendmail_after_pass_change
 from fossWebsite.helper import error_key, csrf_failure, logged_in
+from fossWebsite.helper import get_session_variables
 
 # Python libraries
 from hashlib import sha512 as hash_func
@@ -181,6 +182,7 @@ def profile(request, user_name):
     """
     A view to display the profile (public)
     """
+    is_loggedin, username = get_session_variables(request)
     user_object = get_object_or_404(User_info, \
             username = user_name)
     profile_image_object = ProfileImage.objects \
@@ -205,8 +207,8 @@ def profile(request, user_name):
 
     return render_to_response( \
             'register/profile.html', \
-            {'is_loggedin':logged_in(request), \
-            'username':user_name, \
+            {'is_loggedin':is_loggedin, \
+            'username':username, \
             'user_object':user_object, \
             'user_email':user_email, \
             'user_email':user_email, \
@@ -224,14 +226,9 @@ def change_password(request):
     A view to change the password of a logged in user
     """
     try:
-        is_loggedin = logged_in(request)
-
+        is_loggedin, username = get_session_variables(request)
         if not is_loggedin:
             return HttpResponseRedirect("/register/login")
-
-        username = request.session['username']
-        email = request.session['email']
-
         # POST request 
         if request.method == 'POST':
             form = ChangePasswordForm(request.POST)
@@ -243,11 +240,11 @@ def change_password(request):
                                 .hexdigest()
                 new_password = hash_func(request.POST['new_password']) \
                                 .hexdigest()
-		confirm_new_password = hash_func(
+                confirm_new_password = hash_func(
                                 request.POST['confirm_new_password']) \
                                 .hexdigest()
 
-		user_data = User_info.objects.get(username = username)
+                user_data = User_info.objects.get(username = username)
                 actual_pwd = user_data.password
                 
                 # Given current and stored passwords same
@@ -256,19 +253,21 @@ def change_password(request):
                     if new_password != actual_pwd:
                         # Repass and new pass are same
                         if new_password == confirm_new_password:
-		            user_data.password = new_password
-			    user_data.save()
-                            sendmail_after_pass_change(username, \
-                                    new_pass, email)
-			    return render_to_response( \
+                            user_data.password = new_password
+                            sendmail_after_pass_change( \
+                                    username, \
+                                    new_pass, \
+                                    user_data.email)
+                            user_data.save()
+                            return render_to_response( \
                                     'register/pass_success.html',
                                     {'username': username, \
                                     'is_loggedin': is_loggedin}, \
                                     RequestContext(request))
                         # Repass and new pass are not same
                         else:
-		            error = "New passwords doesn't match"
-	                    return render_to_response( \
+                            error = "New passwords doesn't match"
+                            return render_to_response( \
                                     'register/change_password.html', 
                                     {'form':form, \
                                     'username' :username, \
@@ -279,7 +278,7 @@ def change_password(request):
                     else:
                         error = "Your old and new password are same. Please \
                                 choose a different password"
-	                return render_to_response( \
+                        return render_to_response( \
                                 'register/change_password.html', 
                                 {'form':form, \
                                 'username':username, \
@@ -288,8 +287,8 @@ def change_password(request):
                                 RequestContext(request))
                 # Given current and stored passwords are not same
                 else:
-		    error = "Current password and given password doesn't match"
-	            return render_to_response( \
+                    error = "Current password and given password doesn't match"
+                    return render_to_response( \
                             'register/change_password.html', 
                             {'form':form, \
                             'username':username, \
@@ -297,17 +296,17 @@ def change_password(request):
                             'error':error}, \
                             RequestContext(request))
             # Form inputs is/are invalid
-	    else:
-		form = ChangePasswordForm()
+            else:
+                form = ChangePasswordForm()
 
-	    return render_to_response( \
+            return render_to_response( \
                     'register/change_password.html', 
                     {'form':form, \
                     'username':username, \
                     'is_loggedin':is_loggedin}, \
                     RequestContext(request))
 
-	return render_to_response( \
+        return render_to_response( \
                 'register/change_password.html',
                 {'username': username, \
                 'is_loggedin': is_loggedin}, \
@@ -325,10 +324,10 @@ def mypage(request):
         return HttpResponseRedirect('/register/login')
     
     else:
-        username = request.session['username']
-	return render_to_response( \
+        is_loggedin, username = get_session_variables(request)
+        return render_to_response( \
                 'register/mypages.html',
                 {'username':username, \
-                'is_loggedin':True}, \
+                'is_loggedin':is_loggedin}, \
                 RequestContext(request))
 
