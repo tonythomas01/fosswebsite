@@ -32,4 +32,12 @@ def logged_in(request):
     except KeyError:
         return False
 
-
+def get_session_variables(request):
+    """
+    Returns session variables
+    Output: is_loggedin, username
+    """
+    username = ''
+    if logged_in(request):
+        username = request.session['username']
+    return logged_in(request), username    

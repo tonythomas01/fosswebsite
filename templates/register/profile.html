@@ -1,4 +1,4 @@
-{% extends 'static/base.html' %}
+{% extends 'static/base2.html' %}
 {% block title %}
 Login page
 {% endblock %}
@@ -64,54 +64,151 @@ Login page
         <div class="col-sm-4"></div>
     </div><!--row-->
 
+    <!--CONTRIBUTIONS-->
     {% if contributions %}
-        <hr>
-        <em><b>Contributions</b></em><br>
-	{% for c in contributions %}
-		Organisation: {{ c.org_name }} <br>
-		Ticket: {{ c.bug_id }}, <a href={{ c.bug_url }}>{{c.bug_url}}</a><br>
-		{{ c.bug_description }}
-	{% endfor %}
+    <div class="page-header">
+        <h1><i class="fa fa-share-alt"></i> Contributions</h1>
+    </div><!--page-header-->
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>Organization</td>
+                <td>Ticket</td>
+                <td>URL</td>
+                <td>Description</td>
+            </tr>
+        </thead>
+	    {% for c in contributions %}
+        <tbody>
+            <tr>
+                <td>{{ c.org_name }}</td>
+                <td>{{ c.bug_id }}</td>
+                <td>
+                    <a href="{{ c.bug_url }}" target="_blank">
+                        {{ c.bug_url }}
+                    </a>
+                </td>
+	            <td>{{ c.bug_description }}</td>
+            </tr>
+        </tbody>
+	    {% endfor %}
+    </table>
     {% endif %}
-    {% if speakers %}
-        <hr>
-        <em><b>Speaker</b></em> </br>
-        {% for s in speakers %}
-            Conference: {{ s.conference_name | title }} , {{s.year}} </br>
-            Type: {{s.speaker_type}} </br>
-            Title: {{ s.title }} </br>
-            URL: {{s.speaker_url}} </br>
-            </br>
-        {% endfor %}
-    {% endif %}
-    {% if articles %}
-        <hr>
-        <em><b>Articles Published</b></em> <br>
-            {% for a in articles %}
-                Magazine: {{ a.magazine_name}} <br>
-                Title: {{a.title}} <br>
-                Area: {{a.area}} <br>
-               	Publication date: {{ a.publication_date}} <br>
-            {% endfor %}
-    {% endif %}
-    {% if gsoc %}
-        <hr>
-        <em><b>Gsoc</b></em><br>
-	{% for g in gsoc %}
-		Organisation: {{ g.organisation }}<br>
-        	Project: {{ g.project_title }}<br>
-		URL: <a href={{ g.gsoc_url }}>{{ g.gsoc_url }}</a><br>
-        	Mentor: {{ g.mentor_name }}<br>
-	{% endfor %}	
-    {% endif %}
-    {% if interns %}
-        <hr>
-        <em><b>Internships</b></em><br>
-	{% for internship in interns %}
-		{{ internship.intern_type | title }} at {{internship.place}} for {{internship.period }}<br>
-	{% endfor %}
-    {% endif %}
-    <hr>
-</div>
-{% endblock body %}
 
+    <!--SPEAKERS-->
+    {% if speakers %}
+    <div class="page-header">
+        <h1><i class="fa fa-bullhorn"></i> Speaker</h1>
+    </div><!--page-header-->
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>Conference</td>
+                <td>Type</td>
+                <td>URL</td>
+            </tr>
+        </thead>
+        {% for s in speakers %}
+        <tbody>
+            <tr>
+                <td>
+                    {{ s.conference_name | title }}, {{s.year}} 
+                </td>
+                <td>{{ s.speaker_type }}</td>
+                <td>{{ s.title }} </td>
+                <td>
+                    <a href="{{ s.speaker_url }}" target="_blank">
+                        {{ s.speaker_url }}
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    <!--ARTICLES-->
+    {% if articles %}
+    <div class="page-header">
+        <h1><i class="fa fa-file-text"></i> Articles Published</h1>
+    </div><!--page-header-->
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>Magazine</td>
+                <td>Title</td>
+                <td>Area</td>
+                <td>Publication date</td>
+            </tr>
+        </thead>
+        {% for a in articles %}
+        <tbody>
+            <tr>
+                <td>{{ a.magazine_name }}</td>
+                <td>{{ a.title }}</td>
+                <td>{{ a.area }}</td>
+                <td>{{ a.publication_date }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    <!--GSOC-->
+    {% if gsoc %}
+    <div class="page-header">
+        <h1><i class="fa fa-google-plus"></i> Google Summer Of Code</h1>
+    </div><!--page-header-->
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>Organization</td>
+                <td>Project</td>
+                <td>URL</td>
+                <td>Mentor</td>
+            </tr>
+        </thead>
+	    {% for g in gsoc %}
+        <tbody>
+            <tr>
+                <td>{{ g.organisation }}</td>
+                <td>{{ g.project_title }}</td>
+                <td>
+                    <a href="{{ g.gsoc_url }}" target="_blank">
+                        {{ g.gsoc_url }}
+                    </a>
+                </td>
+                <td>{{ g.mentor_name }}</td>
+            </tr>
+        </tbody>
+	    {% endfor %}	
+    </table>
+    {% endif %}
+
+    <!--INTERNSHIPS-->
+    {% if interns %}
+    <div class="page-header">
+        <h1>Internships</h1>
+    </div><!--page-header-->
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>Organization</td>
+                <td>Project</td>
+                <td>URL</td>
+                <td>Mentor</td>
+            </tr>
+        </thead>
+	    {% for internship in interns %}
+        <tbody>
+            <tr>
+	            <td>{{ internship.intern_type | title }}</td>
+                <td>{{ internship.place }}</td>
+                <td>{{ internship.period }}</td>
+            </tr>
+        </tbody>
+	    {% endfor %}	
+    </table>
+    {% endif %}
+</div><!--container-->
+{% endblock body %}

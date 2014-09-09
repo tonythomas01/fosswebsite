@@ -4,6 +4,10 @@ Success!!
 {% endblock %}
 {% block body %}
 <br>
-	<p>You have succesfully added a new {{ achievement_type | title }}</p>
+<div class="container">
+    <div class="alert alert-success" role="alert">
+        <p>You have succesfully added a new <strong>{{ achievement_type }}</strong</p>
+    </div><!--alert alert-info-->
+</div><!--container-->
 {% endblock body %}
 

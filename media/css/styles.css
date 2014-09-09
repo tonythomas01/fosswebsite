@@ -627,19 +627,16 @@ h6 {
 .theme-1 {
     color: #ECF0F1;
     background: #5E7C88;
-    text-align: center;
 }
 
 .theme-2 {
     color: #4b5f6d;
     background: #ECF0F1;
-    text-align: center;
 }
 
 .theme-3 {
     color: #fff;
     background: #434A52;
-    text-align: center;
 }
 
 .theme-3 a {
@@ -685,6 +682,7 @@ h6 {
 .theme-2-h1,
 .theme-3-h1 {
     font-size: 44px;
+    text-align: center;
 }
 
 .theme-2 a:hover {
@@ -939,4 +937,71 @@ h6 {
 }
 .with-hover-text span {
     display: none;
+}
+.panel-green {
+    border-color: #5cb85c;
+}
+
+.panel-green .panel-heading {
+    border-color: #5cb85c;
+    color: #fff;
+    background-color: #5cb85c;
+}
+
+.panel-green a {
+    color: #5cb85c;
+}
+
+.panel-green a:hover {
+    color: #3d8b3d;
+}
+
+.panel-red {
+    border-color: #d9534f;
+    display: block;
+}
+
+.panel-red .panel-heading {
+    border-color: #d9534f;
+    color: #fff;
+    background-color: #d9534f;
+}
+
+.panel-red a {
+    color: #d9534f;
+    display: block;
+}
+
+.panel-red a:hover {
+    color: #b52b27;
+    display: block;
+}
+
+.panel-yellow {
+    border-color: #f0ad4e;
+}
+
+.panel-yellow .panel-heading {
+    border-color: #f0ad4e;
+    color: #fff;
+    background-color: #f0ad4e;
+}
+
+.panel-yellow a {
+    color: #f0ad4e;
+}
+
+.panel-yellow a:hover {
+    color: #df8a13;
+}
+.panel-primary {
+    color: #fff;
+    background-color:#2a6496;
+}
+.panel-primary a {
+    color: #fff;
+}
+.huge {
+    font-size: 50px;
+    line-height: normal;
 }

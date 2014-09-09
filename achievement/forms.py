@@ -4,6 +4,9 @@ from django.db import models
 from achievement.models import *
 
 class AddContributionForm(ModelForm):
+    """
+    Form to add open source Contribution
+    """
     bug_id = forms.IntegerField(
         required=True,
         label='bug_id',
@@ -11,6 +14,7 @@ class AddContributionForm(ModelForm):
             attrs={'placeholder':'Bug ID/Ticket'}
         )
     )
+
     org_name=forms.CharField(
          required=True,
          label='Organisation Name',
@@ -18,6 +22,7 @@ class AddContributionForm(ModelForm):
             attrs={'placeholder': 'Organisation Name'}
          )
     )
+
     bug_url=forms.CharField(
          required=True,
          label='Bug URL',
@@ -25,6 +30,7 @@ class AddContributionForm(ModelForm):
             attrs={'placeholder': 'URL'}
          )
     )
+
     bug_description=forms.CharField(
          required=True,
          label='Description',
@@ -33,6 +39,7 @@ class AddContributionForm(ModelForm):
             'cols': 20, 'rows': 5}
          )
     )
+
     class Meta:
-		model = Contribution
-		exclude = ['username', 'achievement_id',]
+	model = Contribution
+	exclude = ['username', 'achievement_id',]

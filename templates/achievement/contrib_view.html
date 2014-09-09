@@ -1,20 +1,33 @@
-<table style="width:1000px">
-    <tr>
-        <th>Student</th>
-        <th>Bug id</th>
-        <th>Url to the bug</th>
-        <th>Organisation</th>
-        <th>Bug description</th>
-    </tr>
-    </br>
+<h1 class="theme theme-1-h1">
+    <i class="fa fa-share-alt"></i> Contributions
+</h1>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Bug id</th>
+            <th>Url to the bug</th>
+            <th>Organization</th>
+            <th>Bug description</th>
+        </tr>
+    </thead>
+    <tbody>
     {% for c in contrib_list %}
     <tr>
-        <td><a href="/register/profile/{{c.username.username}}/">{{ c.username.firstname |title }} {{c.username.lastname | title}}</a></td>
-        <td>{{c.bug_id}}</td>
-        <td>{{c.bug_url}}</td>
-        <td>{{c.org_name}}</td>
-        <td>{{c.bug_description}}</td>
-        </tr>
+        <td>
+            <a href="/register/profile/{{c.username.username}}/" target="_blank">
+                {{ c.username.firstname | title }} {{ c.username.lastname | title }}
+            </a>
+        </td>
+        <td>{{ c.bug_id }}</td>
+        <td>
+            <a href="{{ c.bug_url }}" target="_blank">
+                {{ c.bug_url }}
+            </a>
+        </td>
+        <td>{{ c.org_name }}</td>
+        <td>{{ c.bug_description }}</td>
+    </tr>
     {% endfor %}
+    </tbody>
 </table>
-

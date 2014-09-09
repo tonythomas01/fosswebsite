@@ -6,7 +6,7 @@ $(document).ready(function() {
     $('.scroll-link').on('click', function(event){
         event.preventDefault();
         var sectionID = $(this).attr("data-id");
-        scrollToID('#' + sectionID, 1000);
+        scrollToID('#' + sectionID, 1500);
     });
     // scroll to top action
     $('.scroll-top').on('click', function(event) {
@@ -51,27 +51,79 @@ if (typeof console === "undefined") {
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" role="navigation" id="navbar-collapse-1">
             <ul class="nav navbar-nav">
+                {% if request.path == '/achievement/viewall/' %}
                 <li data-slide="1" class="{% ifequal request.path '/achievement/viewall#contribution' %}active{% endifequal %}">
-                    <a data-id="contribution" href="#" class="scroll-link"><i class="fa fa-share-alt"></i> Contribution</a>
+                    <a data-id="contribution" href="#" class="scroll-top">
+                        <i class="fa fa-share-alt"></i> Contribution
+                    </a>
                 </li>
                 <li data-slide="2" class="{% ifequal request.path '/achievement/viewall#article' %}active{% endifequal %}">
-                    <a data-id="article" href="#" class="scroll-link"><i class="fa fa-file-text"></i> Article</a>
+                    <a data-id="article" href="#" class="scroll-link">
+                        <i class="fa fa-file-text"></i> Article
+                    </a>
                 </li>
                 <li data-slide="3" class="{% ifequal request.path '/achievement/viewall#gsoc' %}active{% endifequal %}">
-                    <a data-id="gsoc" href="#" class="scroll-link"><i class="fa fa-google-plus"></i> GSoC</a>
+                    <a data-id="gsoc" href="#" class="scroll-link">
+                        <i class="fa fa-google-plus"></i> GSoC
+                    </a>
                 </li>
                 <li data-slide="4" class="{% ifequal request.path '/achievement/viewall#internship' %}active{% endifequal %}">
-                    <a data-id="internship" href="#" class="scroll-link"><i class="fa fa-graduation-cap"></i> Internship</a>
+                    <a data-id="internship" href="#" class="scroll-link">
+                        <i class="fa fa-graduation-cap"></i> Internship
+                    </a>
                 </li>
                 <li data-slide="5" class="{% ifequal request.path '/achievement/viewall#speaker' %}active{% endifequal %}">
-                    <a data-id="speaker" href="#" class="scroll-link"><i class="fa fa-bullhorn"></i> Speaker</a>
+                    <a data-id="speaker" href="#" class="scroll-link">
+                        <i class="fa fa-bullhorn"></i> Speaker
+                    </a>
                 </li>
                 <li data-slide="6" class="{% ifequal request.path '/achievement/viewall#acmicpc' %}active{% endifequal %}">
-                    <a data-id="acmicpc" href="#" class="scroll-link"><i class="fa fa-code"></i> ACM-ICPC</a>
+                    <a data-id="acmicpc" href="#" class="scroll-link">
+                        <i class="fa fa-code"></i> ACM-ICPC
+                    </a>
                 </li>
                 <li data-slide="7" class="{% ifequal request.path '/achievement/viewall#contest' %}active{% endifequal %}">
-                    <a data-id="contest" href="#" class="scroll-link"><i class="fa fa-dashboard"></i> Contest</a>
+                    <a data-id="contest" href="#" class="scroll-link">
+                        <i class="fa fa-dashboard"></i> Contest
+                    </a>
                 </li>
+                {% else %}
+                <li class="{% ifequal request.path '/achievement/viewall#contribution' %}active{% endifequal %}">
+                    <a data-id="contribution" href="/achievement/viewall#contribution">
+                        <i class="fa fa-share-alt"></i> Contribution
+                    </a>
+                </li>
+                <li class="{% ifequal request.path '/achievement/viewall#article' %}active{% endifequal %}">
+                    <a data-id="article" href="/achievement/viewall#article">
+                        <i class="fa fa-file-text"></i> Article
+                    </a>
+                </li>
+                <li class="{% ifequal request.path '/achievement/viewall#gsoc' %}active{% endifequal %}">
+                    <a data-id="gsoc" href="/achievement/viewall#gsoc">
+                        <i class="fa fa-google-plus"></i> GSoC
+                    </a>
+                </li>
+                <li class="{% ifequal request.path '/achievement/viewall#internship' %}active{% endifequal %}">
+                    <a data-id="internship" href="/achievement/viewall#internship">
+                        <i class="fa fa-graduation-cap"></i> Internship
+                    </a>
+                </li>
+                <li class="{% ifequal request.path '/achievement/viewall#speaker' %}active{% endifequal %}">
+                    <a data-id="speaker" href="/achievement/viewall#speaker">
+                        <i class="fa fa-bullhorn"></i> Speaker
+                    </a>
+                </li>
+                <li class="{% ifequal request.path '/achievement/viewall#acmicpc' %}active{% endifequal %}">
+                    <a data-id="acmicpc" href="/achievement/viewall#acmicpc">
+                        <i class="fa fa-code"></i> ACM-ICPC
+                    </a>
+                </li>
+                <li class="{% ifequal request.path '/achievement/viewall#contest' %}active{% endifequal %}">
+                    <a data-id="contest" href="/achievement/viewall#contest">
+                        <i class="fa fa-dashboard"></i> Contest
+                    </a>
+                </li>
+                {% endif %}
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if not is_loggedin %}
