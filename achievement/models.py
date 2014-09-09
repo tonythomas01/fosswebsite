@@ -17,11 +17,14 @@ class Achievement(models.Model):
 #contribution class: type = contribution
 class Contribution(models.Model):
     achievement_id = models.ForeignKey(Achievement, blank=False, null=False)
-    bug_id = models.IntegerField(max_length=100, primary_key=True, blank=False, unique=True)
+    bug_id = models.IntegerField(max_length=100, blank=False)
     username = models.ForeignKey(User_info, blank=False, null=False)
     org_name = models.CharField(max_length=50, blank=False, null=False)
     bug_url = models.URLField(max_length=200, blank=False, null=False)
     bug_description = models.CharField(max_length=200)
+
+    class Meta:
+        unique_together = ('bug_id','org_name')
 
 #Article class: type = article
 class Article(models.Model):
