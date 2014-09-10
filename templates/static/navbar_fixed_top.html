@@ -63,14 +63,17 @@ if (typeof console === "undefined") {
                     <a data-id="slide-3" href="/#slide-3"><i class="fa fa-image"></i> Gallery</a>
                 </li>
                 <li class="{% ifequal request.path '/#slide-4' %}active{% endifequal %}">
-                    <a data-id="slide-4" href="/#slide-4"><i class="fa fa-envelope"></i> Contact</a>
+                    <a data-id="slide-4" href="/#slide-4"><i class="fa fa-envelope"></i> Connect with Us</a>
                 </li>
                 {% else %}
                 <li data-slide="3" class="{% ifequal request.path '/#slide-3' %}active{% endifequal %}">
                     <a data-id="slide-3" href="/#slide-3" class="scroll-link"><i class="fa fa-image"></i> Gallery</a>
                 </li>
                 <li data-slide="4" class="{% ifequal request.path '/#slide-4' %}active{% endifequal %}">
-                    <a data-id="slide-4" href="/#slide-4" class="scroll-link"><i class="fa fa-envelope"></i> Contact</a>
+                    <a data-id="slide-4" href="/#slide-4" class="scroll-link"><i class="fa fa-envelope"></i> Connect with Us</a>
+                </li>
+                <li data-slide="5" class="{% ifequal request.path '/#slide-5' %}active{% endifequal %}">
+                    <a data-id="slide-5" href="/#slide-5" class="scroll-link"><i class="fa fa-pencil"></i> Write to Us</a>
                 </li>
                 {% endif %}
             </ul>
