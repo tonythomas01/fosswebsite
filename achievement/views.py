@@ -7,6 +7,7 @@ from django.template import RequestContext
 # Application specific functions
 from achievement.models import *
 from achievement.forms import AddContributionForm, AddArticleForm
+from achievement.forms import AddSpeakerForm
 from fossWebsite.helper import error_key, csrf_failure, logged_in
 from fossWebsite.helper import get_session_variables
 from achievement.helper import get_achievement_id
@@ -330,6 +331,65 @@ def insert_article(request):
             else:
                 return render_to_response('achievement/new_article.html', \
                         {'form': AddArticleForm, \
+                        'is_loggedin':is_loggedin, \
+                        'username':username}, \
+                        RequestContext(request))
+    except KeyError:
+        return error_key(request)
+
+
+def insert_talk(request):
+    """
+    View to add new talk
+    Models used: Achievement, Speaker
+    """
+    try:
+        is_loggedin, username = get_session_variables(request)
+        # User is not logged in
+        if not logged_in(request):
+            return HttpResponseRedirect('/register/login')
+
+        # User is logged in
+        else:
+            if request.method == 'POST':
+                form = AddSpeakerForm(request.POST)
+
+                # Invalid form imput
+                if not form.is_valid():
+                    error = "Invalid inputs"
+                    return render_to_response('achievement/new_speaker.html', \
+                            {'form':form, \
+                            'error':error, \
+                            'is_loggedin':is_loggedin, \
+                            'username':username}, \
+                            RequestContext(request))
+
+                # Form is valid
+                else:
+                    # Get the new achievement_id
+                    achievement_id = get_achievement_id(request)	
+                    achievement_type = "Speaker"
+
+                    # Saving inputs
+                    achievement_obj = Achievement(achievement_id, \
+                            achievement_type, \
+                            username)
+                    achievement_obj.save()
+                    contribution_obj = form.save(commit = False)
+                    contribution_obj.achievement_id = achievement_obj
+                    contribution_obj.achieve_typ = achievement_type
+                    user_obj = get_object_or_404(User_info, username = username)
+                    contribution_obj.username = user_obj
+                    contribution_obj.save()
+                    return render_to_response('achievement/success.html', \
+                            {'achievement_type':achievement_type, \
+                            'is_loggedin':is_loggedin, \
+                            'username':username}, \
+                            RequestContext(request))
+            # Method is not POST
+            else:
+                return render_to_response('achievement/new_speaker.html', \
+                        {'form': AddSpeakerForm, \
                         'is_loggedin':is_loggedin, \
                         'username':username}, \
                         RequestContext(request))

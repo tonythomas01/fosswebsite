@@ -1,23 +1,42 @@
-<table style="width:1000px">
-	<tr>
-		<td><b>Student</b></td>
-		<td><b>Type</b></td>
-		<td><b>Title</b></td>
-		<td><b>Conference</b></td>
-		<td><b>URL</b></td>
-		<td><b>Year</b></td>
-	</tr>	
-	</br>
-	{% for s in speaker_list %}
-		<tr>
-			
-			<td><a href="/register/{{s.username.username}}/profile">{{ s.username.firstname | title }}</a></td>
-			<td>{{s.speaker_type}}</td>
-			<td>{{s.title}}</td>
-			<td>{{s.conference_name}}</td>
-			<td>{{s.speaker_url}}</td>
-			<td>{{s.year}}<?td>
-		</tr>
-	{% endfor %}
+{% if request.path == '/achievement/viewall/' %}
+<h1 class="theme theme-3-h1">
+    <i class="fa fa-bullhorn"></i> Speakers
+</h1>
+{% else %}
+<h1 class="theme theme-1-h1">
+    <i class="fa fa-bullhorn"></i> Speakers
+</h1>
+{% endif %}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Type</th>
+            <th>Title</th>
+            <th>Conference</th>
+            <th>URL</th>
+            <th>Year</th>
+        </tr>	
+    </thead>
+    <tbody>
+    {% for s in speaker_list %}
+    <tr>
+        <td>
+            <a href="/register/profile/{{s.username.username}}/" target="_blank">
+                {{ s.username.firstname | title }} {{ s.username.lastname | title }}
+            </a>
+        </td>
+        <td>{{ s.speaker_type }}</td>
+        <td>{{ s.title }}</td>
+        <td>{{ s.conference_name }}</td>
+        <td>
+            <a href="{{ s.speaker_url }}" target="_blank">
+                {{ s.speaker_url }}
+            </a>
+        </td>
+        <td>{{ s.year }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
 </table>
 

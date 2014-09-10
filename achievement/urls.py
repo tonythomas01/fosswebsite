@@ -12,4 +12,5 @@ urlpatterns = patterns('',
     url(r'^/icpc/$', views.icpc_viewall),
     url(r'^/new/contribution/$', views.insert_contribution),
     url(r'^/new/article/$', views.insert_article),
+    url(r'^/new/talk/$', views.insert_talk),
 ) 

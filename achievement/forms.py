@@ -4,6 +4,19 @@ from django import forms
 from django.db import models
 from achievement.models import *
 
+# Create your models here.
+ACHIEVEMENT_CHOICE = (('acm','ACM_ICPC'), ('article','Article'), \
+        ('contribution','Contribution'), ('gsoc','GSoC'), \
+        ('intern','Internship'), ('speaker','Speaker'), \
+        ('contest','Contest'), ('other','Other'))
+INTERN_CHOICE = (('internship','Internship'),('masters','Masters'), \
+        ('exchange student','Exchange programme'))
+SPEAKER_CHOICE =(('talk',' Talk'), ('demo','Demo'), \
+        ('workshop','Workshop'), ('paper','Paper Presentation'), \
+        ('other','Other'))
+LEVEL_CHOICE = (('regional','Regional'), ('finals','World-Finals'))
+
+
 class AddContributionForm(ModelForm):
     """
     Form to add open source Contribution
@@ -24,7 +37,7 @@ class AddContributionForm(ModelForm):
          )
     )
 
-    bug_url=forms.CharField(
+    bug_url=forms.URLField(
          required=True,
          label='Bug URL',
          widget=forms.TextInput(
@@ -93,4 +106,62 @@ class AddArticleForm(ModelForm):
 
     class Meta:
         model = Article
+        exclude = ['username', 'achievement_id',]
+
+
+class AddSpeakerForm(ModelForm):
+    """
+    Form to add information about Speaker
+    """
+    talk_id = forms.IntegerField(
+        required=True,
+        label='Talk ID',
+        widget=forms.TextInput(
+            attrs={'placeholder':'Talk ID'}
+        )
+    )
+
+    title=forms.CharField(
+         required=True,
+         label='Title',
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Title of the article'}
+         )
+    )
+
+    speaker_type=forms.CharField(
+         required=True,
+         label='Speaker Type',
+         widget=forms.Select(
+            choices=SPEAKER_CHOICE,
+            attrs={'placeholder': 'Speaker Type'}
+         )
+    )
+
+    conference_name=forms.CharField(
+         required=True,
+         label='Conference Name',
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Name of the Conference'}
+         )
+    )
+
+    speaker_url=forms.URLField(
+         required=True,
+         label='Speaker URL',
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Speaker URL'}
+         )
+    )
+
+    year = forms.IntegerField(
+        required=True,
+        label='Year',
+        widget=forms.TextInput(
+            attrs={'placeholder':'Year'}
+        )
+    )
+
+    class Meta:
+        model = Speaker
         exclude = ['username', 'achievement_id',]
