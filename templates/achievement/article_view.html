@@ -1,21 +1,35 @@
-
-		<table style="width:1000px">
-		<tr>
-			<td><b>Student</b></td>
-			<td><b>Magazine</b></td>
-			<td><b>Title</b></td>
-			<td><b>Area</b></td>
-			<td><b>Date</b></td>
-		</tr>	
-		</br>
-		{% for c in article_list %}
-			<tr>
-				
-				<td><a href="/register/{{c.username.username}}/profile">{{ c.username.firstname|title }}</a></td>
-				<td>{{c.magazine_name}}</td>
-				<td>{{c.title}}</td>
-				<td>{{c.area}}</td>
-				<td>{{c.publication_date}}</td>
-			</tr>
-		{% endfor %}
-		</table>
+{% if request.path == '/achievement/viewall/' %}
+<h1 class="theme theme-3-h1">
+    <i class="fa fa-file-text"></i> Articles
+</h1>
+{% else %}
+<h1 class="theme theme-1-h1">
+    <i class="fa fa-file-text"></i> Articles
+</h1>
+{% endif %}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Magazine</th>
+            <th>Title</th>
+            <th>Area</th>
+            <th>Date</th>
+        </tr>	    
+    </thead>
+    <tbody>
+    {% for c in article_list %}
+    <tr>		
+        <td>
+            <a href="/register/{{c.username.username}}/profile" target="_blank">
+                {{ c.username.firstname | title }} {{ c.username.lastname | title }}
+            </a>
+        </td>
+        <td>{{ c.magazine_name }}</td>
+        <td>{{ c.title }}</td>
+        <td>{{ c.area }}</td>
+        <td>{{ c.publication_date }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
