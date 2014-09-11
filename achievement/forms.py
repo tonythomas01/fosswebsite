@@ -31,9 +31,9 @@ class AddContributionForm(ModelForm):
 
     org_name=forms.CharField(
          required=True,
-         label='Organisation Name',
+         label='Organization Name',
          widget=forms.TextInput(
-            attrs={'placeholder': 'Organisation Name'}
+            attrs={'placeholder': 'Organization Name'}
          )
     )
 
@@ -164,4 +164,53 @@ class AddSpeakerForm(ModelForm):
 
     class Meta:
         model = Speaker
+        exclude = ['username', 'achievement_id',]
+
+
+class AddGSoCForm(ModelForm):
+    """
+    Form to add information about GSoC
+    """
+    gsoc_id = forms.IntegerField(
+        required=True,
+        label='GSoC ID',
+        widget=forms.TextInput(
+            attrs={'placeholder':'GSoC ID'}
+        )
+    )
+
+    project_title=forms.CharField(
+         required=True,
+         label='Project Title',
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Title of your GSoC Project'}
+         )
+    )
+
+    organization=forms.CharField(
+         required=True,
+         label='Organization',
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Name of the Organization'}
+         )
+    )
+
+    mentor_name=forms.CharField(
+         required=True,
+         label='Mentor Name',
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Name of your GSoC mentor'}
+         )
+    )
+
+    gsoc_url=forms.URLField(
+         required=True,
+         label='GSoC URL',
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Link to GSoC'}
+         )
+    )
+
+    class Meta:
+        model = Gsoc
         exclude = ['username', 'achievement_id',]

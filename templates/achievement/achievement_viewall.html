@@ -7,7 +7,6 @@
     <div class="container">
         <div class='contact_div'>
             {% if contrib_list %}
-            <br>
             {% include 'achievement/contrib_view.html' %}
             <a href = "/achievement/contribution/">
                 <button class="btn btn-default" type="button">
@@ -27,7 +26,6 @@
     <div class="container">
         <div class='contact_div'>
             {% if article_list %}
-            <br>
             {% include 'achievement/article_view.html' %}
             <a href = "/achievement/articles/">
                 <button class="btn btn-default"  type="button">
@@ -45,14 +43,10 @@
 
 <div class="theme theme-1" id="gsoc"  data-slide="3">
     <div class="container">
-        <h1 class="theme-1-h1">
-            <i class="fa fa-google-plus"></i> GSoC
-        </h1>
         <div class='contact_div'>
             {% if gsoc_list %}
-            <br>
             {% include 'achievement/gsoc_view.html' %}
-            <a href = "/gsoc/viewall">]
+            <a href = "/achievement/gsoc/">
                 <button class="btn btn-default" type="button">
                     View all GSoC <i class="fa fa-arrow-circle-right"></i>
                 </button>

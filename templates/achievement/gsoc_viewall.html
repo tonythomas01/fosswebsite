@@ -2,11 +2,9 @@
 {% block title %}
 Gsoc
 {% endblock %}
-{% block body_content %}
-
-	{% if gsoc_list %}
-		{% include 'achievement/gsoc_view.html' %}
-	{% endif %}
-
+{% block body %}
+<div class="container">
+    {% include 'achievement/gsoc_view.html' %}
+</div><!--container-->
 {% endblock %}
 

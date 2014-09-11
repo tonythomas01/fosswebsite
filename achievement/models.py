@@ -66,7 +66,7 @@ class Gsoc(models.Model):
     gsoc_id = models.IntegerField(max_length=100, \
             primary_key=True, blank=False, unique=True)
     username = models.ForeignKey(User_info, blank=False, null=False)
-    organisation = models.CharField(max_length=50, \
+    organization = models.CharField(max_length=50, \
             blank=False, null=False)
     project_title = models.CharField(max_length=50, \
             blank=False, null=False)
