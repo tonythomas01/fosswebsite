@@ -62,14 +62,10 @@
 
 <div class="theme theme-2" id="internship" data-slide="4">
     <div class="container">
-        <h1 class="theme-2-h1">
-            <i class="fa fa-graduation-cap"></i> Internships
-        </h1>
         <div class='contact_div'>
             {% if intern_list %}
-            <br>
             {% include 'achievement/intern_view.html' %}
-            <a href = "/intern/viewall">
+            <a href = "/achievement/interns/">
                 <button class="btn btn-default" type="button">
                     View all Internship <i class="fa fa-arrow-circle-right"></i>
                 </button>

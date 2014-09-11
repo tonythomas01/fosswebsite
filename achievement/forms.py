@@ -214,3 +214,46 @@ class AddGSoCForm(ModelForm):
     class Meta:
         model = Gsoc
         exclude = ['username', 'achievement_id',]
+
+
+class AddInternForm(ModelForm):
+    """
+    Form to add information about Internship
+    """
+    intern_id = forms.IntegerField(
+        required=True,
+        label='Intern ID',
+        widget=forms.TextInput(
+            attrs={'placeholder':'Intern ID'}
+        )
+    )
+
+    place=forms.CharField(
+         required=True,
+         label='Organization',
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Organization'}
+         )
+    )
+
+    intern_type=forms.CharField(
+         required=True,
+         label='Internship Type',
+         widget=forms.Select(
+            choices=INTERN_CHOICE,
+            attrs={'placeholder': 'Type of internship'}
+         )
+    )
+
+    period=forms.CharField(
+         required=True,
+         label='Period',
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Duration of internship'}
+         )
+    )
+
+
+    class Meta:
+        model = Intern
+        exclude = ['username', 'achievement_id',]
