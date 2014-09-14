@@ -1,19 +1,39 @@
-<table style="width:1000px">
-<tr>
-	<td><b>Student</b></td>
-	<td><b>Organisation</b></td>
-	<td><b>Project title</b></td>
-	<td><b>Mentor</b></td>
-	<td><b>Url</b></td>
-</tr>	
-</br>
-{% for c in gsoc_list %}
-	<tr>	
-		<td><a href="/register/{{c.username.username}}/profile">{{ c.username.firstname|title }}</a></td>
-		<td>{{c.organisation}}</td>
-		<td>{{c.project_title}}</td>
-		<td>{{c.mentor_name}}</td>
-		<td>{{c.gsoc_url}}</td>
-	</tr>
-{% endfor %}
+{% if request.path == '/achievement/viewall/' %}
+<h1 class="theme theme-2-h1">
+    <i class="fa fa-google-plus"></i> GSoC
+</h1>
+{% else %}
+<h1 class="theme theme-1-h1">
+    <i class="fa fa-google-plus"></i> GSoC
+</h1>
+{% endif %}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Organization</th>
+            <th>Project title</th>
+            <th>Mentor</th>
+            <th>Url</th>
+        </tr>	
+    </thead>
+    <tbody>
+    {% for c in gsoc_list %}
+    <tr>	
+        <td>
+            <a href="/register/{{c.username.username}}/profile" target="_blank">
+                {{ c.username.firstname | title }} {{ c.username.lastname | title }}
+            </a>
+        </td>
+        <td>{{ c.organization }}</td>
+        <td>{{ c.project_title }}</td>
+        <td>{{ c.mentor_name }}</td>
+        <td>
+            <a href="{{ c.gsoc_url" target="_blank">
+                {{ c.gsoc_url }}
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
 </table>

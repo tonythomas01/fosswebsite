@@ -2,11 +2,9 @@
 {% block title %}
 Article
 {% endblock %}
-{% block body_content %}
-
-	{% if article_list %}
-		{% include 'achievement/article_view.html' %}
-	{% endif %}
-
-{% endblock %}
+{% block body %}
+<div class="container">
+    {% include 'achievement/article_view.html' %}
+</div><!--container-->
+{% endblock body %}
 

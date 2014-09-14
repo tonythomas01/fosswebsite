@@ -7,7 +7,6 @@
     <div class="container">
         <div class='contact_div'>
             {% if contrib_list %}
-            <br>
             {% include 'achievement/contrib_view.html' %}
             <a href = "/achievement/contribution/">
                 <button class="btn btn-default" type="button">
@@ -25,14 +24,10 @@
 
 <div class="theme theme-3" id="article"  data-slide="2">
     <div class="container">
-        <h1 class="theme-3-h1">
-            <i class="fa fa-file-text"></i> Article
-        </h1>
         <div class='contact_div'>
             {% if article_list %}
-            <br>
             {% include 'achievement/article_view.html' %}
-            <a href = "/article/viewall">
+            <a href = "/achievement/articles/">
                 <button class="btn btn-default"  type="button">
                     View all Article <i class="fa fa-arrow-circle-right"></i>
                 </button>
@@ -48,14 +43,10 @@
 
 <div class="theme theme-1" id="gsoc"  data-slide="3">
     <div class="container">
-        <h1 class="theme-1-h1">
-            <i class="fa fa-google-plus"></i> GSoC
-        </h1>
         <div class='contact_div'>
             {% if gsoc_list %}
-            <br>
             {% include 'achievement/gsoc_view.html' %}
-            <a href = "/gsoc/viewall">]
+            <a href = "/achievement/gsoc/">
                 <button class="btn btn-default" type="button">
                     View all GSoC <i class="fa fa-arrow-circle-right"></i>
                 </button>
@@ -71,14 +62,10 @@
 
 <div class="theme theme-2" id="internship" data-slide="4">
     <div class="container">
-        <h1 class="theme-2-h1">
-            <i class="fa fa-graduation-cap"></i> Internships
-        </h1>
         <div class='contact_div'>
             {% if intern_list %}
-            <br>
             {% include 'achievement/intern_view.html' %}
-            <a href = "/intern/viewall">
+            <a href = "/achievement/interns/">
                 <button class="btn btn-default" type="button">
                     View all Internship <i class="fa fa-arrow-circle-right"></i>
                 </button>
@@ -94,14 +81,11 @@
 
 <div class="theme theme-3" id="speaker" data-slide="5">
     <div class="container">
-        <h1 class="theme-3-h1">
-            <i class="fa fa-bullhorn"></i> Speakers
-        </h1>
         <div class='contact_div'>
             {% if speaker_list %}
             <br>
             {% include 'achievement/speaker_view.html' %}
-            <a href = '/speaker/viewall'>
+            <a href = '/achievement/speakers/'>
                 <button class="btn btn-default" type="button">
                     View all Speakers <i class="fa fa-arrow-circle-right"></i>
                 </button>
