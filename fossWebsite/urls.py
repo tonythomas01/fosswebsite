@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     url(r'^search',views.search),
     url(r'^register', include('register.urls')),
     url(r'^achievement', include('achievement.urls')),
+    url(r'^images', include('images.urls')),
     url(r'^admin', include(admin.site.urls)),
 )
 

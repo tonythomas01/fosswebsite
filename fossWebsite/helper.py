@@ -1,5 +1,6 @@
 # Django libraries
 from django.shortcuts import render_to_response
+from django.template import RequestContext
 
 
 def error_key(request):

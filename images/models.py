@@ -1,23 +1,51 @@
+# Django Libraries
 from django.db import models
 from django.core.files.storage import FileSystemStorage
+
+#Application specific import
 from register.models import User_info
 import os
 
 
-IMAGE_CHOICE = (('achievement', 'Achievement'), \
-        ('contest', 'Contest'), ('conference', 'Conference'), \
-        ('outing', 'Outing'), ('profile', 'Profile Pic'), \
-        ('other', 'Other'))
+FOLDER_CHOICE = (
+    ('technical', 'Technical'), ('fun', 'Fun'), ('other', 'Other'))
 
 
+"""
+Function to get dynamic image path. 
+It creates folder if it does not exist.
+"""
+
+def content_file_name(instance, filename):
+    upload_dir = os.path.join('images/uploads', \
+        instance.folder_name.folder_name)
+    if not os.path.exists(upload_dir):
+        os.makedirs(upload_dir)
+    return os.path.join(upload_dir, filename)
+
+
+"""
+Model to store the folder details; 
+'technical' or 'fun' or 'others' category
+"""
+
+class Folder(models.Model):
+    folder_name = models.CharField(max_length=50,  unique=True,\
+         primary_key=True, blank=False, null=False)
+    folder_description = models.CharField(max_length=200)
+    folder_type = models.CharField(max_length=15, \
+        choices=FOLDER_CHOICE, blank=False, null=False)
+
+
+"""
+Model to store images corresponding to the folder.
+"""
 class Image(models.Model):
-    img_id = models.IntegerField(max_length=100, \
-            primary_key=True, blank=False, unique=True)
-    img_name = models.CharField(max_length=50, blank=False, null=False)
-    img_description = models.CharField(max_length=200)
-    img_type = models.CharField(max_length=15, \
-            choices=IMAGE_CHOICE, blank=False, null=False)
-    img = models.ImageField(upload_to='uploads/photo')
+    img = models.ImageField(upload_to=content_file_name )
+    folder_name = models.ForeignKey(Folder, blank=False, null=False)
+
+    class Meta:
+        unique_together = ('img','folder_name')
 
 
 class OverwriteStorage(FileSystemStorage):
