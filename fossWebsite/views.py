@@ -1,12 +1,14 @@
+# Django libraries
 from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.template import RequestContext
-from register.models import User_info
 from django.db.models import Q
 
-# Create your views here.
+# Application specific libraries
 from register.views import logged_in
+from fossWebsite.helper import get_session_variables
+from register.models import User_info
 
 
 def home(request):
@@ -30,6 +32,7 @@ def search(request):
     """
     Search view
     """
+    is_loggedin, username = get_session_variables(request)
     search_field = request.GET['search_field']
     #if search field is empty
     if not search_field:
@@ -57,7 +60,7 @@ def search(request):
         return render_to_response( \
                 'search_result.html', \
                 {'is_empty':is_empty, \
-                'is_loggedin':logged_in(request), \
-                'username':request.session['username'], \
+                'is_loggedin':is_loggedin, \
+                'username':username, \
                 'result':result}, \
                 RequestContext(request))
