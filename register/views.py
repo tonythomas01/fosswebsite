@@ -325,9 +325,12 @@ def mypage(request):
     
     else:
         is_loggedin, username = get_session_variables(request)
+        name = User_info.objects.get(username=username)
         return render_to_response( \
                 'register/mypages.html',
                 {'username':username, \
-                'is_loggedin':is_loggedin}, \
+                'firstname':name.firstname, \
+                'is_loggedin':is_loggedin, \
+                'lastname':name.lastname,},\
                 RequestContext(request))
 
