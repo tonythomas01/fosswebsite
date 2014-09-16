@@ -113,4 +113,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
         "django.core.context_processors.static",
 )
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 from local_settings import *

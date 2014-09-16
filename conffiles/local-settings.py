@@ -14,6 +14,13 @@ ADMINS = (
 
 ADMINS_EMAIL = map(lambda x: x[1], ADMINS)
 
+# Sending email using SMTP gmail server
+
+#EMAIL_HOST_USER = 'amritapurifoss@gmail.com'
+#EMAIL_HOST_PASSWORD = '@mritaf0$$)(*'
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
 # If running in debug mode, write emails to files.
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
