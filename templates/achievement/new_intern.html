@@ -19,12 +19,7 @@ Add an Internship details
             {% for field in form.visible_fields %}
             <div id="div_{{ field.html_name }}">
                 <div class="form-group{% if field.errors %} has-error{% endif %}">
-                    {% if field.name == "intern_id" %}
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-file-text fa-fw"></i></span>
-                        {{ field|addcss:"form-control" }}
-                    </div><!--input-group--> 
-                    {% elif field.name == "place" %}
+                    {% if field.name == "place" %}
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
                         {{ field|addcss:"form-control" }}

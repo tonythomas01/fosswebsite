@@ -105,14 +105,6 @@ class AddArticleForm(ModelForm):
     """
     Form to add information about articles
     """
-    article_id = forms.IntegerField(
-        required=True,
-        label='Article ID',
-        widget=forms.TextInput(
-            attrs={'placeholder':'Article ID'}
-        )
-    )
-
     title=forms.CharField(
          required=True,
          label='Title',
@@ -154,14 +146,7 @@ class AddArticleForm(ModelForm):
 class AddSpeakerForm(ModelForm):
     """
     Form to add information about Speaker
-    """
-    talk_id = forms.IntegerField(
-        required=True,
-        label='Talk ID',
-        widget=forms.TextInput(
-            attrs={'placeholder':'Talk ID'}
-        )
-    )
+    """ 
 
     title=forms.CharField(
          required=True,
@@ -213,13 +198,6 @@ class AddGSoCForm(ModelForm):
     """
     Form to add information about GSoC
     """
-    gsoc_id = forms.IntegerField(
-        required=True,
-        label='GSoC ID',
-        widget=forms.TextInput(
-            attrs={'placeholder':'GSoC ID'}
-        )
-    )
 
     project_title=forms.CharField(
          required=True,
@@ -262,13 +240,6 @@ class AddInternForm(ModelForm):
     """
     Form to add information about Internship
     """
-    intern_id = forms.IntegerField(
-        required=True,
-        label='Intern ID',
-        widget=forms.TextInput(
-            attrs={'placeholder':'Intern ID'}
-        )
-    )
 
     place=forms.CharField(
          required=True,

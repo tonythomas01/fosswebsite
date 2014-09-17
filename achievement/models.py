@@ -47,14 +47,16 @@ class Article(models.Model):
     """
     achievement_id = models.ForeignKey(Achievement, \
             blank=False, null=False)
-    article_id = models.IntegerField(max_length=100, \
-            primary_key=True, blank=False, unique=True)
     username = models.ForeignKey(User_info, blank=False, null=False)
     area = models.CharField(max_length=100, blank=False, null=False)
     magazine_name = models.CharField(max_length=50, \
             blank=False, null=False)
     title = models.CharField(max_length=100, blank=False, null=False)
     publication_date = models.DateField(blank=False)
+
+    class Meta:
+        unique_together = ('title','magazine_name')
+
 
 
 class Gsoc(models.Model):
@@ -63,8 +65,6 @@ class Gsoc(models.Model):
     """
     achievement_id = models.ForeignKey(Achievement, \
             blank=False, null=False)
-    gsoc_id = models.IntegerField(max_length=100, \
-            primary_key=True, blank=False, unique=True)
     username = models.ForeignKey(User_info, blank=False, null=False)
     organization = models.CharField(max_length=50, \
             blank=False, null=False)
@@ -75,6 +75,8 @@ class Gsoc(models.Model):
     gsoc_url = models.URLField(max_length=200, \
             blank=False, null=False)
 
+    class Meta:
+        unique_together = ('organization','project_title')
 
 class Intern(models.Model):
     """
@@ -83,13 +85,14 @@ class Intern(models.Model):
     """
     achievement_id = models.ForeignKey(Achievement, \
             blank=False, null=False)
-    intern_id = models.IntegerField(max_length=100, \
-            primary_key=True, blank=False, unique=True)
     username = models.ForeignKey(User_info, blank=False, null=False)
     place = models.CharField(max_length=50, blank=False, null=False)
     intern_type =  models.CharField(max_length=16, \
             choices=INTERN_CHOICE, blank=False, null=False)
     period = models.CharField(max_length=25, blank=False, null=False)   
+
+    class Meta:
+        unique_together = ('username','intern_type','place')
 
 
 class Speaker(models.Model):
@@ -98,8 +101,6 @@ class Speaker(models.Model):
     """
     achievement_id = models.ForeignKey(Achievement, \
             blank=False, null=False)
-    talk_id = models.IntegerField(max_length=100, \
-            primary_key=True, blank=False, unique=True)
     username = models.ForeignKey(User_info, blank=False, null=False)
     title = models.CharField(max_length=200, blank=False, null=False)
     speaker_type = models.CharField(max_length=15, \
@@ -109,6 +110,9 @@ class Speaker(models.Model):
     speaker_url = models.URLField(max_length=200, \
             blank=False, null=False)
     year = models.IntegerField(max_length=4, blank=False, null=False)
+
+    class Meta:
+        unique_together = ('title','conference_name')
 
 
 class ACM_ICPC_detail(models.Model):
