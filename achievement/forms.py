@@ -59,6 +59,48 @@ class AddContributionForm(ModelForm):
 	exclude = ['username', 'achievement_id',]
 
 
+class UpdateContributionForm(ModelForm):
+    """
+    Form to update open source Contribution
+    """
+    bug_id = forms.IntegerField(
+        required=True,
+        label='bug_id',
+        widget=forms.TextInput(
+            attrs={'placeholder':'Bug ID/Ticket'}
+        )
+    )
+
+    org_name=forms.CharField(
+         required=True,
+         label='Organization Name',
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Organization Name'}
+         )
+    )
+
+    bug_url=forms.URLField(
+         required=True,
+         label='Bug URL',
+         widget=forms.TextInput(
+            attrs={'placeholder': 'URL'}
+         )
+    )
+
+    bug_description=forms.CharField(
+         required=True,
+         label='Description',
+         widget=forms.Textarea(
+            attrs={'placeholder': 'Description of Bug', \
+            'cols': 20, 'rows': 5}
+         )
+    )
+
+    class Meta:
+	model = Contribution
+	exclude = ['username', 'achievement_id',]
+
+
 class AddArticleForm(ModelForm):
     """
     Form to add information about articles
