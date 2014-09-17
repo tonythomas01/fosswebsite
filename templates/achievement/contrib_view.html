@@ -1,6 +1,31 @@
 <h1 class="theme theme-1-h1">
     <i class="fa fa-share-alt"></i> Contributions
 </h1>
+{% block script%}
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+google.load("visualization", "1", {packages:["corechart"]});
+google.setOnLoadCallback(drawChart);
+function drawChart() {
+
+    var data = google.visualization.arrayToDataTable([
+            ['Organization', 'No. of Bug Fix'],
+                {% for key, values in contrib_org.items %}
+                    ['{{key}}', {{ values }}],
+                {% endfor %}
+            ]);
+
+    var options = {
+        title: 'Contribution Stats',
+        backgroundColor: 'transparent',
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+    chart.draw(data, options);
+}
+</script>
+{% endblock script%}
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -31,3 +56,4 @@
     {% endfor %}
     </tbody>
 </table>
+<div id="piechart" style="width: 900px; height: 550px; background:#ECF0F1;"></div>

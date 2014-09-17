@@ -35,6 +35,16 @@ def achieve_viewall(request):
     intern_list = Intern.objects.all()[:5]
     contest_list = Contest_won.objects.all()[:5]
 
+    
+    contrib_org = {}
+    if contrib_list:
+        for contrib in contrib_list:
+            if contrib.org_name not in contrib_org.keys():
+                contrib_org[contrib.org_name] = 0
+
+        for contrib in contrib_list:
+            contrib_org[contrib.org_name] += 1
+
     if contest_list:	
         contest_participant_list = []
 	for contest_won_obj in contest_list:	
@@ -53,6 +63,7 @@ def achieve_viewall(request):
 		{'username':username, \
                 'is_loggedin':is_loggedin, \
                 'contrib_list':contrib_list, \
+                'contrib_org':contrib_org,\
                 'article_list':article_list, \
                 'gsoc_list':gsoc_list, \
                 'speaker_list':speaker_list, \
@@ -69,12 +80,12 @@ def contrib_viewall(request):
     """
     is_loggedin, username = get_session_variables(request)
     contrib_list = Contribution.objects.all()
-
+    
     if contrib_list:
         return render_to_response('achievement/contrib_viewall.html', \
                 {'is_loggedin':logged_in(request), \
                 'username':username, \
-                'contrib_list':contrib_list}, \
+                'contrib_list':contrib_list,}, \
                 RequestContext(request))
     else:
         return render_to_response('achievement/noview.html', \
