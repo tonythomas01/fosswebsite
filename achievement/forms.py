@@ -125,7 +125,7 @@ class AddSpeakerForm(ModelForm):
          required=True,
          label='Title',
          widget=forms.TextInput(
-            attrs={'placeholder': 'Title of the article'}
+            attrs={'placeholder': 'Title of the talk'}
          )
     )
 
