@@ -8,7 +8,7 @@ from django.template import RequestContext
 from achievement.models import *
 from achievement.forms import AddContributionForm, AddArticleForm
 from achievement.forms import AddSpeakerForm, AddGSoCForm
-from achievement.forms import AddInternForm
+from achievement.forms import AddInternForm, UpdateContributionForm
 from fossWebsite.helper import error_key, csrf_failure, logged_in
 from fossWebsite.helper import get_session_variables
 from achievement.helper import get_achievement_id
@@ -512,5 +512,53 @@ def insert_intern(request):
                         'is_loggedin':is_loggedin, \
                         'username':username}, \
                         RequestContext(request))
+    except KeyError:
+        return error_key(request)
+
+
+def update_contribution(request,achievement_id):
+    try:
+        is_loggedin, username = get_session_variables(request)
+        # User is not logged in
+        if not logged_in(request):
+            return HttpResponseRedirect('/register/login')
+        else:
+            #achievement_id = get_object_or_404(Achievement, username = user_name)
+            contribution = get_object_or_404(Contribution, achievement_id = achievement_id)
+            init_contribution = contribution.__dict__
+
+                #If method is not POST 
+            if request.method != 'POST':
+                #return form with old details
+                return render_to_response('achievement/update_contrib.html',\
+                    {'form':UpdateContributionForm(init_contribution),\
+                    'is_loggedin':is_loggedin, 'username':username},\
+                    RequestContext(request))
+
+            # If method is POST
+            else:
+                contribution_update_form = UpdateContributionForm(request.POST)
+                # Form is not valid
+                if not contribution_update_form.is_valid():
+                    #return form with old details
+                    return render_to_response('achievement/update_contrib.html',\
+                        {'form':UpdateContributionForm(init_contribution),\
+                        'is_loggedin':is_loggedin, 'username':username},\
+                        RequestContext(request)) 
+                # Form is valid:
+                else:
+                    contribution_update = contribution_update_form.save(commit = False)
+                    update_contribution_obj = get_object_or_404(Contribution, username = username)
+                    update_contribution_obj.bug_id = contribution_update.bug_id
+                    update_contribution_obj.org_name = contribution_update.org_name
+                    update_contribution_obj.bug_url = contribution_update.bug_url
+                    update_contribution_obj.bug_description = contribution_update.bug_description
+                    update_contribution_obj.save()  
+                    return render_to_response('achievement/success.html', \
+                        {'achievement_type':'Update Contribution', \
+                        'is_loggedin':is_loggedin, \
+                        'username':username}, \
+                        RequestContext(request))
+
     except KeyError:
         return error_key(request)
