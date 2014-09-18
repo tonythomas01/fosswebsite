@@ -82,7 +82,7 @@ Login page
 	    {% for c in contributions %}
         <tbody>
             <tr>
-                <td>{{ c.org_name }}</td>
+                <td>{{ c.org_name |title}}</td>
                 <td>{{ c.bug_id }}</td>
                 <td>
                     <a href="{{ c.bug_url }}" target="_blank">
@@ -153,9 +153,9 @@ Login page
         {% for a in articles %}
         <tbody>
             <tr>
-                <td>{{ a.magazine_name }}</td>
-                <td>{{ a.title }}</td>
-                <td>{{ a.area }}</td>
+                <td>{{ a.magazine_name | title}}</td>
+                <td>{{ a.title | title }}</td>
+                <td>{{ a.area | title}}</td>
                 <td>{{ a.publication_date }}</td>
                 <td>
                     {% if a.username.username == username %}
@@ -178,17 +178,17 @@ Login page
     <table class="table table-bordered">
         <thead>
             <tr>
-                <td>Organization</td>
-                <td>Project</td>
-                <td>URL</td>
-                <td>Mentor</td>
+                <th>Organization</th>
+                <th>Project</th>
+                <th>URL</th>
+                <th>Mentor</th>
             </tr>
         </thead>
 	    {% for g in gsoc %}
         <tbody>
             <tr>
-                <td>{{ g.organisation }}</td>
-                <td>{{ g.project_title }}</td>
+                <td>{{ g.organization | title}}</td>
+                <td>{{ g.project_title | title }}</td>
                 <td>
                     <a href="{{ g.gsoc_url }}" target="_blank">
                         {{ g.gsoc_url }}
