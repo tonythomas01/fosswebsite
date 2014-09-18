@@ -125,7 +125,7 @@ class AddArticleForm(ModelForm):
          required=True,
          label='Magazine',
          widget=forms.TextInput(
-            attrs={'placeholder': 'URL'}
+            attrs={'placeholder': 'Mazagine Name'}
          )
     )
 
@@ -134,13 +134,56 @@ class AddArticleForm(ModelForm):
         widget=DateTimePicker(
             options={"pickTime": False, 
                 "format":"YYYY-MM-DD"},
-            attrs={'placeholder': 'Published Date (DD-MM-YYYY)'}
+            attrs={'placeholder': 'Published Date (YYYY-MM-DD)'}
         )
     )
 
     class Meta:
         model = Article
         exclude = ['username', 'achievement_id',]
+
+
+class UpdateArticleForm(ModelForm):
+    """
+    Form to update information about articles
+    """
+    title=forms.CharField(
+         required=True,
+         label='Title',
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Title of the article'}
+         )
+    )
+
+    area=forms.CharField(
+         required=True,
+         label='Area',
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Area of the article'}
+         )
+    )
+
+    magazine_name=forms.CharField(
+         required=True,
+         label='Magazine',
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Mazagine Name'}
+         )
+    )
+
+    publication_date=forms.DateField(
+        required=True,
+        widget=DateTimePicker(
+            options={"pickTime": False, 
+                "format":"YYYY-MM-DD"},
+            attrs={'placeholder': 'Published Date (YYYY-MM-DD)'}
+        )
+    )
+
+    class Meta:
+        model = Article
+        exclude = ['username', 'achievement_id',]
+
 
 
 class AddSpeakerForm(ModelForm):

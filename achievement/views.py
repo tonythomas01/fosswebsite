@@ -6,9 +6,7 @@ from django.template import RequestContext
 
 # Application specific functions
 from achievement.models import *
-from achievement.forms import AddContributionForm, AddArticleForm
-from achievement.forms import AddSpeakerForm, AddGSoCForm
-from achievement.forms import AddInternForm, UpdateContributionForm
+from achievement.forms import *
 from fossWebsite.helper import error_key, csrf_failure, logged_in
 from fossWebsite.helper import get_session_variables
 from achievement.helper import get_achievement_id
@@ -567,6 +565,58 @@ def update_contribution(request,achievement_id):
                     update_contribution_obj.save()  
                     return render_to_response('achievement/success.html', \
                         {'achievement_type':'Update Contribution', \
+                        'is_loggedin':is_loggedin, \
+                        'username':username}, \
+                        RequestContext(request))
+
+    except KeyError:
+        return error_key(request)
+
+
+
+def update_article(request,achievement_id):
+    """
+    View to update the artciel information
+    """
+    try:
+        is_loggedin, username = get_session_variables(request)
+        # User is not logged in
+        if not logged_in(request):
+            return HttpResponseRedirect('/register/login')
+        else:
+            
+            article = get_object_or_404(Article, achievement_id = achievement_id)
+            init_article = article.__dict__
+
+            #If method is not POST 
+            if request.method != 'POST':
+                #return form with old details
+                return render_to_response('achievement/update_article.html',\
+                    {'form':UpdateArticleForm(init_article),\
+                    'is_loggedin':is_loggedin, 'username':username},\
+                    RequestContext(request))
+
+            # If method is POST
+            else:
+                article_update_form = UpdateArticleForm(request.POST)
+                # Form is not valid
+                if not article_update_form.is_valid():
+                    #return form with old details
+                    return render_to_response('achievement/update_article.html',\
+                        {'form':UpdateArticleForm(init_article),\
+                        'is_loggedin':is_loggedin, 'username':username},\
+                        RequestContext(request)) 
+                # Form is valid:
+                else:
+                    article_update = article_update_form.save(commit = False)
+                    update_article_obj = get_object_or_404(Article, username = username)
+                    update_article_obj.area = article_update.area
+                    update_article_obj.magazine_name = article_update.magazine_name
+                    update_article_obj.title = article_update.title
+                    update_article_obj.publication_date = article_update.publication_date
+                    update_article_obj.save()  
+                    return render_to_response('achievement/success.html', \
+                        {'achievement_type':'Update Article', \
                         'is_loggedin':is_loggedin, \
                         'username':username}, \
                         RequestContext(request))

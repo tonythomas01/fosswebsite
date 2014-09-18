@@ -15,6 +15,7 @@
             <th>Title</th>
             <th>Area</th>
             <th>Date</th>
+            <th></th>
         </tr>	    
     </thead>
     <tbody>
@@ -29,6 +30,13 @@
         <td>{{ c.title }}</td>
         <td>{{ c.area }}</td>
         <td>{{ c.publication_date }}</td>
+        <td>
+            {% if c.username.username == username %}
+            <a href="/achievement/article/update/{{c.achievement_id.achievement_id}}/" target="_blank">
+                Update
+            </a>
+            {% endif %}
+        </td>
     </tr>
     {% endfor %}
     </tbody>
