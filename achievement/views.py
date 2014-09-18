@@ -78,12 +78,20 @@ def contrib_viewall(request):
     """
     is_loggedin, username = get_session_variables(request)
     contrib_list = Contribution.objects.all()
+    contrib_org = {}
+    if contrib_list:
+        for contrib in contrib_list:
+            if contrib.org_name not in contrib_org.keys():
+                contrib_org[contrib.org_name] = 0
+
+        for contrib in contrib_list:
+            contrib_org[contrib.org_name] += 1
     
     if contrib_list:
         return render_to_response('achievement/contrib_viewall.html', \
                 {'is_loggedin':logged_in(request), \
                 'username':username, \
-                'contrib_list':contrib_list,}, \
+                'contrib_list':contrib_list, 'contrib_org':contrib_org}, \
                 RequestContext(request))
     else:
         return render_to_response('achievement/noview.html', \
