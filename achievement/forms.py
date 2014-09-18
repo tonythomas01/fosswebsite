@@ -313,3 +313,39 @@ class AddInternForm(ModelForm):
     class Meta:
         model = Intern
         exclude = ['username', 'achievement_id',]
+
+
+class UpdateInternForm(ModelForm):
+    """
+    Form to update information about Internship
+    """
+
+    place=forms.CharField(
+         required=True,
+         label='Organization',
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Organization'}
+         )
+    )
+
+    intern_type=forms.CharField(
+         required=True,
+         label='Internship Type',
+         widget=forms.Select(
+            choices=INTERN_CHOICE,
+            attrs={'placeholder': 'Type of internship'}
+         )
+    )
+
+    period=forms.CharField(
+         required=True,
+         label='Period',
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Duration of internship'}
+         )
+    )
+
+
+    class Meta:
+        model = Intern
+        exclude = ['username', 'achievement_id',]

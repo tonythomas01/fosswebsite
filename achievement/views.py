@@ -623,3 +623,53 @@ def update_article(request,achievement_id):
 
     except KeyError:
         return error_key(request)
+
+
+def update_intern(request,achievement_id):
+    """
+    View to update the artciel information
+    """
+    try:
+        is_loggedin, username = get_session_variables(request)
+        # User is not logged in
+        if not logged_in(request):
+            return HttpResponseRedirect('/register/login')
+        else:
+            
+            internship = get_object_or_404(Intern, achievement_id = achievement_id)
+            init_internship = internship.__dict__
+
+            #If method is not POST 
+            if request.method != 'POST':
+                #return form with old details
+                return render_to_response('achievement/update_intern.html',\
+                    {'form':UpdateInternForm(init_internship),\
+                    'is_loggedin':is_loggedin, 'username':username},\
+                    RequestContext(request))
+
+            # If method is POST
+            else:
+                intern_update_form = UpdateInternForm(request.POST)
+                # Form is not valid
+                if not intern_update_form.is_valid():
+                    #return form with old details
+                    return render_to_response('achievement/update_intern.html',\
+                        {'form':UpdateInternForm(init_internship),\
+                        'is_loggedin':is_loggedin, 'username':username},\
+                        RequestContext(request)) 
+                # Form is valid:
+                else:
+                    intern_update = intern_update_form.save(commit = False)
+                    intern_article_obj = get_object_or_404(Intern, username = username)
+                    intern_article_obj.place = intern_update.place
+                    intern_article_obj.intern_type = intern_update.intern_type
+                    intern_article_obj.period = intern_update.period
+                    intern_article_obj.save()  
+                    return render_to_response('achievement/success.html', \
+                        {'achievement_type':'Update Internship', \
+                        'is_loggedin':is_loggedin, \
+                        'username':username}, \
+                        RequestContext(request))
+
+    except KeyError:
+        return error_key(request)

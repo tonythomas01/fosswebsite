@@ -72,10 +72,11 @@ Login page
     <table class="table table-bordered">
         <thead>
             <tr>
-                <td>Organization</td>
-                <td>Ticket</td>
-                <td>URL</td>
-                <td>Description</td>
+                <th>Organization</th>
+                <th>Ticket</th>
+                <th>URL</th>
+                <th>Description</th>
+                <th></th>
             </tr>
         </thead>
 	    {% for c in contributions %}
@@ -89,6 +90,13 @@ Login page
                     </a>
                 </td>
 	            <td>{{ c.bug_description }}</td>
+                <td>
+                {% if c.username.username == username %}
+                <a href="/achievement/contribution/update/{{c.achievement_id.achievement_id}}/" target="_blank">
+                    Update
+                </a>
+                {% endif %}
+                </td>
             </tr>
         </tbody>
 	    {% endfor %}
@@ -135,10 +143,11 @@ Login page
     <table class="table table-bordered">
         <thead>
             <tr>
-                <td>Magazine</td>
-                <td>Title</td>
-                <td>Area</td>
-                <td>Publication date</td>
+                <th>Magazine</th>
+                <th>Title</th>
+                <th>Area</th>
+                <th>Publication date</th>
+                <th></th>
             </tr>
         </thead>
         {% for a in articles %}
@@ -148,6 +157,13 @@ Login page
                 <td>{{ a.title }}</td>
                 <td>{{ a.area }}</td>
                 <td>{{ a.publication_date }}</td>
+                <td>
+                    {% if a.username.username == username %}
+                    <a href="/achievement/article/update/{{a.achievement_id.achievement_id}}/" target="_blank">
+                    Update
+                    </a>
+                    {% endif %}
+                </td>
             </tr>
         </tbody>
         {% endfor %}
@@ -193,10 +209,10 @@ Login page
     <table class="table table-bordered">
         <thead>
             <tr>
-                <td>Organization</td>
-                <td>Project</td>
-                <td>URL</td>
-                <td>Mentor</td>
+                <th>Organization</th>
+                <th>Project</th>
+                <th>Period</th>
+                <th></th>
             </tr>
         </thead>
 	    {% for internship in interns %}
@@ -205,6 +221,14 @@ Login page
 	            <td>{{ internship.intern_type | title }}</td>
                 <td>{{ internship.place }}</td>
                 <td>{{ internship.period }}</td>
+                <td>
+                    {% if internship.username.username == username %}
+                    <a href="/achievement/intern/update/{{internship.achievement_id.achievement_id}}/" target="_blank">
+                    Update
+                    </a>
+                    {% endif %}
+                </td>
+
             </tr>
         </tbody>
 	    {% endfor %}	

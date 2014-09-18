@@ -18,5 +18,6 @@ urlpatterns = patterns('',
     url(r'^/new/intern/$', views.insert_intern),
 
     url(r'^/contribution/update/(?P<achievement_id>\w+)/$',views.update_contribution),
-    url(r'^/article/update/(?P<achievement_id>\w+)/$',views.update_article)
+    url(r'^/article/update/(?P<achievement_id>\w+)/$',views.update_article),
+    url(r'^/intern/update/(?P<achievement_id>\w+)/$',views.update_intern),
 ) 
