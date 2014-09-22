@@ -35,7 +35,6 @@ function drawChart() {
             <th>Url to the bug</th>
             <th>Organization</th>
             <th>Bug description</th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -53,14 +52,7 @@ function drawChart() {
             </a>
         </td>
         <td>{{ c.org_name }}</td>
-        <td>{{ c.bug_description }}</td> 
-        <td>
-            {% if c.username.username == username %}
-            <a href="/achievement/contribution/update/{{c.achievement_id.achievement_id}}/" target="_blank">
-                Update
-            </a>
-            {% endif %}
-        </td>
+        <td>{{ c.bug_description }}</td>  
     </tr>
     {% endfor %}
     </tbody>

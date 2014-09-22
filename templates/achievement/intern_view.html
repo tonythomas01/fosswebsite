@@ -13,8 +13,7 @@
             <th>Student</th>
             <th>Type</th>
             <th>Place</th>
-            <th>Period</th>
-            <th></th>
+            <th>Period</th>      
         </tr>	
     </thead>
     <tbody>
@@ -28,15 +27,7 @@
         <td>{{ c.intern_type }}</td>
         <td>{{ c.place }}</td>
         <td>{{ c.period }}</td>			
-        <td>
-            {% if c.username.username == username %}
-            <a href="/achievement/article/update/{{c.achievement_id.achievement_id}}/" target="_blank">
-            Update
-            </a>
-            {% endif %}
-        </td>
-
-    </tr>
+   </tr>
     {% endfor %}
     </tbody>
 </table>
