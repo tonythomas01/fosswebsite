@@ -47,13 +47,14 @@ $(document).ready(function() {
                         },
                     }
                 }, 
-                achieve : {
+                typing_speed : {
                     validators : {
-                        notEmpty: {
-                            message: 'Achievements cannot be empty'  
-                        },
+                        regexp: {
+                            regexp: /^[0-9]+$/,
+                            message: 'Give typing speed in WPM (numeric)'
+                        }
                     }
-                }, 
+                },
                 expertise : {
                     validators : {
                         notEmpty: {
@@ -190,9 +191,34 @@ $(document).ready(function() {
                             <span class="input-group-addon"><i class="fa fa-bell"></i></span>
                             {{ field|addcss:"form-control" }}
                         </div><!--input-group-->
-                        {% elif field.name == "achieve" %}
+                        {% elif field.name == "blog_url" %}
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-trophy"></i></span>
+                            <span class="input-group-addon"><i class="fa fa-bell"></i></span>
+                            {{ field|addcss:"form-control" }}
+                        </div><!--input-group-->
+                        {% elif field.name == "twitter_id" %}
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            {{ field|addcss:"form-control" }}
+                        </div><!--input-group-->
+                        {% elif field.name == "topcoder_handle" %}
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            {{ field|addcss:"form-control" }}
+                        </div><!--input-group-->
+                        {% elif field.name == "github_id" %}
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-bell"></i></span>
+                            {{ field|addcss:"form-control" }}
+                        </div><!--input-group-->
+                        {% elif field.name == "bitbucket_id" %}
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-bell"></i></span>
+                            {{ field|addcss:"form-control" }}
+                        </div><!--input-group-->
+                        {% elif field.name == "typing_speed" %}
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
                             {{ field|addcss:"form-control" }}
                         </div><!--input-group-->
                         {% elif field.name == "expertise" %}

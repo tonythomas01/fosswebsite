@@ -34,15 +34,7 @@ Login page
                     <td>
                         {{ user_object.interest }}
                     </td>
-                </tr>
-                <tr>
-                    <td>
-                        <strong>Achievements</strong>
-                    </td>
-                    <td>
-                        {{ user_object.achieve }}
-                    </td>
-                </tr>
+                </tr> 
                 <tr>
                     <td>
                         <strong>Expertise</strong> 
@@ -53,13 +45,75 @@ Login page
                 </tr>
                 <tr>
                     <td>
-                        <strong>Goal</strong>
+                        <strong>Blog URL</strong>
                     </td>
                     <td>
-                        {{ user_object.goal }}
+                        {% if user_object.blog_url %}
+                            {{user_object.blog_url }}
+                        {% else %}
+                            _
+                        {% endif %}
+
                     </td>
                 </tr>
-            </table>
+                    <tr>
+                    <td>
+                        <strong>Twitter ID</strong>
+                    </td>
+                    <td>
+                        {% if user_object.twitter_id %}
+                            {{user_object.twitter_id }}
+                        {% else %}
+                            _
+                        {% endif %}
+
+                    </td>
+               </tr>
+               <tr>
+                    <td>
+                        <strong>Topcoder Handle</strong>
+                    </td>
+                    <td>
+                        {% if user_object.topcoder_handle %}
+                            {{user_object.topcoder_handle }}
+                        {% else %}
+                            _
+                        {% endif %}
+                    </td>
+                </tr>               
+                <tr>
+                    <td>
+                        <strong>Github ID</strong>
+                    </td>
+                    <td>                       
+                        {% if user_object.github_id %}
+                            {{user_object.github_id }}
+                        {% else %}
+                            _
+                        {% endif %}
+                   </td>
+               </tr>
+               <tr>
+                    <td>
+                        <strong>Bitbucket ID</strong>
+                    </td>
+                    <td>
+                        {% if user_object.bitbucket_id %} 
+                            {{user_object.bitbucket_id }}
+                        {% else %}
+                            _
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Typing Speed</strong>
+                    </td>
+                    <td>
+                        {{ user_object.typing_speed }} WPM
+                    </td>
+                </tr>
+           </table>
         </div><!--col-sm-6-->
         <div class="col-sm-4"></div>
     </div><!--row-->

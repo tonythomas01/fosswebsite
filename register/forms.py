@@ -118,7 +118,48 @@ class NewRegisterForm(ModelForm):
             attrs={'placeholder': 'Role'}, 
         )
     )
-
+    blog_url=forms.CharField(
+        required=False,
+        label='blog_url', 
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Blog URL'}, 
+        )
+    )
+    twitter_id=forms.CharField(
+        required=False,
+        label='Twitter ID', 
+        widget=forms.TextInput( 
+            attrs={'placeholder': 'Twitter ID'}, 
+        )
+    )
+    topcoder_handle=forms.CharField(
+        required=False,
+        label='Role', 
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Role'}, 
+        )
+    )
+    github_id=forms.CharField(
+        required=False,
+        label='Github ID', 
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Github ID'}, 
+        )
+    )   
+    bitbucket_id=forms.CharField(
+        required=False,
+        label='Bitbucket ID', 
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Bitbucket ID'}, 
+        )
+    )   
+    typing_speed=forms.CharField(
+        required=True,
+        label='Typing Speed', 
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Typing Speed'}, 
+        )
+    )
     interest = forms.CharField(
         required=True,
         label='Interests', 
@@ -126,15 +167,6 @@ class NewRegisterForm(ModelForm):
             attrs={'placeholder':'Interests'}
         )
     )
-
-    achieve = forms.CharField(
-        required=True,
-        label='Achievement', 
-        widget=forms.TextInput(
-            attrs={'placeholder':'Achievements'}
-        )
-    )
-
     expertise = forms.CharField(
         required=True,
         label='Expertise', 
