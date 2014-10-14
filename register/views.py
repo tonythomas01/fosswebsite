@@ -8,7 +8,7 @@ from django.views.csrf import csrf_failure
 
 # Application specific functions
 from images.models import ProfileImage, User_info
-from register.forms import LoginForm, NewRegisterForm
+from register.forms import LoginForm, NewRegisterForm, UpdateProfileForm
 from register.forms import ChangePasswordForm
 from achievement.models import *
 from images.models import ProfileImage
@@ -333,4 +333,61 @@ def mypage(request):
                 'is_loggedin':is_loggedin, \
                 'lastname':name.lastname,},\
                 RequestContext(request))
+
+
+def update_profile(request):
+    try:
+        is_loggedin, username = get_session_variables(request)
+        # User is not logged in
+        if not logged_in(request):
+            return HttpResponseRedirect('/register/login')
+        else:
+            user_details = get_object_or_404(User_info, username = username)
+            init_user_details = user_details.__dict__
+
+            #If method is not POST 
+            if request.method != 'POST':
+                #return form with old details
+                return render_to_response('register/update_profile.html',\
+                    {'form':UpdateProfileForm(init_user_details),\
+                    'is_loggedin':is_loggedin, 'username':username},\
+                    RequestContext(request))
+
+            # If method is POST
+            else:
+                profile_update_form = UpdateProfileForm(request.POST)
+                # Form is not valid
+                if not profile_update_form.is_valid():
+                    #return form with old details
+
+                    print profile_update_form.cleaned_data
+                    return render_to_response('register/update_profile.html',\
+                        {'form':UpdateProfileForm(init_user_details),\
+                        'is_loggedin':is_loggedin, 'username':username},\
+                        RequestContext(request))    
+                # Form is valid:
+                else:
+                    user_details_form = profile_update_form.save(commit = False)
+                    user_details_obj = get_object_or_404(User_info, username = username)
+                    user_details_obj.firstname = user_details_form.firstname
+                    user_details_obj.lastname = user_details_form.lastname
+                    user_details_obj.gender = user_details_form.gender
+                    user_details_obj.contact = user_details_form.contact
+                    user_details_obj.role = user_details_form.role
+                    user_details_obj.blog_url = user_details_form.blog_url
+                    user_details_obj.twitter_id = user_details_form.twitter_id
+                    user_details_obj.bitbucket_id = user_details_form.topcoder_handle
+                    user_details_obj.github_id = user_details_form.github_id
+                    user_details_obj.bitbucket_id = user_details_form.bitbucket_id
+                    user_details_obj.typing_speed = user_details_form.typing_speed
+                    user_details_obj.interest= user_details_form.interest
+                    user_details_obj.expertise = user_details_form.expertise
+                    user_details_obj.goal = user_details_form.goal
+                    #user_details_obj.email = user_details_form.email
+                    user_details_obj.save()  
+                    redirect_url = "/register/profile/"+username+"/"
+                    return HttpResponseRedirect(redirect_url)
+
+    except KeyError:
+        return error_key(request)
 
