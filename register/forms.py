@@ -136,7 +136,7 @@ class NewRegisterForm(ModelForm):
         required=False,
         label='Role', 
         widget=forms.TextInput(
-            attrs={'placeholder': 'Role'}, 
+            attrs={'placeholder': 'Topcoder Handle'}, 
         )
     )
     github_id=forms.CharField(
@@ -247,6 +247,130 @@ class NewRegisterForm(ModelForm):
             return password
         else:
             raise forms.ValidationError("Passwords don't match")
+
+
+class UpdateProfileForm(ModelForm):
+    """
+    Update Profile Form
+    """
+    firstname=forms.CharField(
+         required=True,
+         label='First Name', 
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Firstname'}
+         )
+    )
+
+    lastname=forms.CharField(
+         required=True,
+         label='Last Name', 
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Lastname'}
+         )
+    )
+
+    gender=forms.CharField(
+        required=True,
+        label='Gender', 
+        widget=forms.Select(
+            choices=GENDER_CHOICES, 
+            attrs={'placeholder': 'Gender'}
+            )
+    )
+
+    contact = forms.IntegerField(
+        required=True,
+        label='Phone number', 
+        widget=forms.TextInput(
+            attrs={'placeholder':'Phone Number'}
+        )
+    )
+
+    role=forms.CharField(
+        required=True,
+        label='Role', 
+        widget=forms.Select(
+            choices=ROLE_CHOICES, 
+            attrs={'placeholder': 'Role'}, 
+        )
+    )
+    blog_url=forms.CharField(
+        required=False,
+        label='blog_url', 
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Blog URL'}, 
+        )
+    )
+    twitter_id=forms.CharField(
+        required=False,
+        label='Twitter ID', 
+        widget=forms.TextInput( 
+            attrs={'placeholder': 'Twitter ID'}, 
+        )
+    )
+    topcoder_handle=forms.CharField(
+        required=False,
+        label='Role', 
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Topcoder Handle'}, 
+        )
+    )
+    github_id=forms.CharField(
+        required=False,
+        label='Github ID', 
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Github ID'}, 
+        )
+    )   
+    bitbucket_id=forms.CharField(
+        required=False,
+        label='Bitbucket ID', 
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Bitbucket ID'}, 
+        )
+    )   
+    typing_speed=forms.CharField(
+        required=True,
+        label='Typing Speed', 
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Typing Speed'}, 
+        )
+    )
+    interest = forms.CharField(
+        required=True,
+        label='Interests', 
+        widget=forms.TextInput(
+            attrs={'placeholder':'Interests'}
+        )
+    )
+    expertise = forms.CharField(
+        required=True,
+        label='Expertise', 
+        widget=forms.TextInput(
+            attrs={'placeholder':'Expertize'}
+        )
+    )
+
+    goal=forms.CharField(
+        required=True,
+        label='Goal', 
+        widget=forms.Select(
+            choices=GOAL_CHOICES, 
+            attrs={'placeholder': 'Goal'}, 
+        )
+    )
+    """
+    email=forms.EmailField(
+        required=False,
+        label='Email', 
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Email Address'}
+        )
+    )"""
+
+    class Meta:
+        model = User_info
+        exclude = ['password','username','email',]
 
 
 class ChangePasswordForm(forms.Form):
