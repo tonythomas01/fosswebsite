@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^/new/talk/$', views.insert_talk),
     url(r'^/new/gsoc/$', views.insert_gsoc),
     url(r'^/new/intern/$', views.insert_intern),
+    url(r'^/new/icpc/$', views.insert_icpc),
 
     url(r'^/contribution/update/(?P<achievement_id>\w+)/$',views.update_contribution),
     url(r'^/article/update/(?P<achievement_id>\w+)/$',views.update_article),

@@ -349,3 +349,86 @@ class UpdateInternForm(ModelForm):
     class Meta:
         model = Intern
         exclude = ['username', 'achievement_id',]
+
+
+class AddIcpcForm(ModelForm):
+    """
+    Form to add ICPC details
+    """ 
+
+    team_name=forms.CharField(
+         required=True,
+         label='Title',
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Team Name'}
+         )
+    )
+    yr_of_participation = forms.IntegerField(
+        required=True,
+        label='Year',
+        widget=forms.TextInput(
+            attrs={'placeholder':'Year (YYYY)'}
+        )
+    )
+    level=forms.CharField(
+         required=True,
+         label='level',
+         widget=forms.Select(
+            choices=LEVEL_CHOICE,
+            attrs={'placeholder': 'Level'}
+         )
+    )
+    ranking=forms.IntegerField(
+         required=True,
+         label='Ranking',
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Ranking'}
+         )
+    )
+    participant1_name=forms.CharField(
+         required=True,
+         label='participant1_name',
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Name of 1st Team member'}
+         )
+    )
+    participant2_name=forms.CharField(
+         required=True,
+         label='participant2_name',
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Name of 2nd Team member'}
+         )
+    )
+    participant3_name=forms.CharField(
+         required=True,
+         label='participant3_name',
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Name of 3rd team member'}
+         )
+    )
+    participant1_email=forms.EmailField(
+         required=True,
+         label='Email ID',
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Email ID of Participant 1'}
+         )
+    )
+    participant2_email=forms.EmailField(
+         required=True,
+         label='Email ID',
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Email ID of Participant 2'}
+         )
+    )
+    participant3_email=forms.EmailField(
+         required=True,
+         label='Email ID',
+         widget=forms.TextInput(
+            attrs={'placeholder': 'Email ID of Participant 3'}
+         )
+    )
+    class Meta:
+        model = ACM_ICPC_detail
+        exclude = ['username', 'achievement_id',]
+
+

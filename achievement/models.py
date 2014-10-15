@@ -122,7 +122,7 @@ class ACM_ICPC_detail(models.Model):
     achievement_id = models.ForeignKey(Achievement, \
             blank=False, null=False)
     team_name = models.CharField(max_length=25, \
-            primary_key=True, blank=False, unique=True)
+             blank=False)
     username = models.ForeignKey(User_info, \
             blank=False, null=False)
     yr_of_participation = models.IntegerField(max_length=4, \
@@ -131,20 +131,18 @@ class ACM_ICPC_detail(models.Model):
             choices=LEVEL_CHOICE, blank=False, null=False)
     ranking = models.IntegerField(max_length=4, \
             blank=False, null=False)
+    participant1_name = models.CharField(max_length=30, \
+            blank=False, null=False)
+    participant2_name = models.CharField(max_length=30, \
+            blank=False, null=False)
+    participant3_name = models.CharField(max_length=30, \
+            blank=False, null=False)
+    participant1_email = models.EmailField(blank=False) 
+    participant2_email = models.EmailField(blank=False) 
+    participant3_email = models.EmailField(blank=False) 
 
     class Meta:
-        unique_together = ('team_name','yr_of_participation')
-
-
-class ACM_ICPC_Participant(models.Model):
-    """
-    ACM_ICPC_Participant class; type = acm
-    """
-    yr_of_participation = models.ForeignKey(ACM_ICPC_detail, \
-            related_name= 'year', blank=False, null=False)
-    team_name = models.ForeignKey(ACM_ICPC_detail, blank=False, \
-            null=False, related_name = 'team')
-    name = models.CharField(max_length=25, blank=False, null=False)
+        unique_together = ('team_name','yr_of_participation','level')
 
 
 class Contest_won(models.Model):

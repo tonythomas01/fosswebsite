@@ -125,10 +125,10 @@
             <i class="fa fa-code"></i> ACM-ICPC coders
         </h1>
         <div class='contact_div'>
-            {% if icpc_list %}
+            {% if icpc_participants_regional_list or icpc_participants_final_list %}
             <br>
             {% include 'achievement/icpc_view.html' %}
-            <a href = '/icpc/viewall'>
+            <a href = '/achievement/icpc/'>
                 <button class="btn btn-default" type = "button">
                     View all ICPC Participants <i class="fa fa-arrow-circle-right"></i>
                 </button>

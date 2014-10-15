@@ -13,6 +13,18 @@ from achievement.helper import get_achievement_id
 
 
 # Create your views here.
+def email_registered(email):
+    user = User_info.objects.filter(email = email)
+    return bool(user)
+
+def get_username_from_email(email):
+    if(email_registered):
+        user = User_info.objects.filter(email=email)
+        if user:
+            return user[0].username
+    else:
+        return ''
+
 def achieve_viewall(request):
     """
     View to display recent 5 achievements
@@ -24,7 +36,8 @@ def achieve_viewall(request):
     speaker_list = []
     intern_list = []
     contest_participant_list = []
-    icpc_participant_list = []
+    icpc_participants_regional_list = []
+    icpc_participants_final_list = []
 
     contrib_list = Contribution.objects.all()[:5]
     article_list = Article.objects.all()[:5]
@@ -49,14 +62,39 @@ def achieve_viewall(request):
 	    c_id = contest_won_obj.contest_id
 	    c_p_objs = Contest_won_participant.objects.filter(contest_id = c_id)
 	    contest_participant_list.extend(c_p_objs)
-    icpc_list = ACM_ICPC_detail.objects.all().order_by('yr_of_participation')[:5]
-
-    if icpc_list:
-        for icpc_obj in icpc_list:
+    
+    icpc_list_regionals = ACM_ICPC_detail.objects.filter(level='regional').order_by('ranking')[:2]
+    if icpc_list_regionals:
+        for icpc_obj in icpc_list_regionals:
             team = icpc_obj.team_name
-            i_p_objs = ACM_ICPC_Participant.objects.filter(team_name = team)
-            icpc_participant_list.extend(i_p_objs)
-		
+            member1 = [icpc_obj.participant1_name, \
+                get_username_from_email(icpc_obj.participant1_email)]
+
+            member2 = [icpc_obj.participant2_name, \
+                get_username_from_email(icpc_obj.participant2_email)]
+
+            member3 = [icpc_obj.participant3_name, \
+                get_username_from_email(icpc_obj.participant3_email)]
+
+            icpc_participant_list = [icpc_obj, member1,member2,member3]
+            icpc_participants_regional_list.append(icpc_participant_list)
+
+    icpc_list_finals = ACM_ICPC_detail.objects.filter(level='finals').order_by('ranking')[:2]
+    if icpc_list_finals:
+        for icpc_obj in icpc_list_finals:
+            team = icpc_obj.team_name
+            member1 = [icpc_obj.participant1_name, \
+                get_username_from_email(icpc_obj.participant1_email)]
+
+            member2 = [icpc_obj.participant2_name, \
+                get_username_from_email(icpc_obj.participant2_email)]
+
+            member3 = [icpc_obj.participant3_name, \
+                get_username_from_email(icpc_obj.participant3_email)]
+
+            icpc_participant_list = [icpc_obj, member1,member2,member3]
+            icpc_participants_final_list.append(icpc_participant_list)
+
     return render_to_response('achievement/achievement_viewall.html',\
 		{'username':username, \
                 'is_loggedin':is_loggedin, \
@@ -68,8 +106,8 @@ def achieve_viewall(request):
                 'intern_list':intern_list, \
                 'contest_list':contest_list, \
                 'contest_participant_list':contest_participant_list, \
-                'icpc_list':icpc_list, \
-                'icpc_participant_list':icpc_participant_list}, \
+                'icpc_participants_final_list':icpc_participants_final_list, \
+                'icpc_participants_regional_list':icpc_participants_regional_list}, \
                 RequestContext(request))
 
 def contrib_viewall(request):
@@ -215,21 +253,32 @@ def icpc_viewall(request):
     View to display all ICPCers.
     """
     is_loggedin, username = get_session_variables(request)
-    icpc_list = ACM_ICPC_detail.objects.all().order_by('yr_of_participation')
-
+    icpc_participants_list = []
+    p_list= []
+    icpc_list = ACM_ICPC_detail.objects.all().order_by('ranking')
     if icpc_list:
-        icpc_participant_list = []
-        for icpc_obj in icpc_list:
-            team = icpc_obj.team_name
-            i_p_objs = ACM_ICPC_Participant.objects.filter(team_name = team)
-            icpc_participant_list.extend(i_p_objs)
 
+        for icpc_obj in icpc_list:
+            
+            team = icpc_obj.team_name
+            member1 = [icpc_obj.participant1_name, \
+                get_username_from_email(icpc_obj.participant1_email)]
+
+            member2 = [icpc_obj.participant2_name, \
+                get_username_from_email(icpc_obj.participant2_email)]
+
+            member3 = [icpc_obj.participant3_name, \
+                get_username_from_email(icpc_obj.participant3_email)]
+
+            icpc_participant_list = [icpc_obj, member1,member2,member3]
+            icpc_participants_list.append(icpc_participant_list)
+            
         return render_to_response('achievement/icpc_viewall.html', \
-                {'is_loggedin':logged_in(request), \
-                'username':username, \
-                'icpc_list':icpc_list, \
-                'icpc_participant_list':icpc_participant_list},\
-                RequestContext(request))
+            {'is_loggedin':logged_in(request), \
+            'username':username, \
+            'icpc_list':icpc_list,\
+            'icpc_participants_list':icpc_participants_list}, RequestContext(request))
+
     else:
         return render_to_response('achievement/noview.html', \
                 {'is_loggedin':logged_in(request), \
@@ -529,6 +578,64 @@ def insert_intern(request):
                         'is_loggedin':is_loggedin, \
                         'username':username}, \
                         RequestContext(request))
+    except KeyError:
+        return error_key(request)
+
+
+def insert_icpc(request):
+    """
+    View to add ICPC details.
+    Models used: Achievement, ACM_ICPC_detail
+    """
+    try:
+        is_loggedin, username = get_session_variables(request)
+        # User is not logged in
+        if not logged_in(request):
+            return HttpResponseRedirect('/register/login')
+
+        # User is logged in
+        else:
+            if request.method == 'POST':
+                form = AddIcpcForm(request.POST)
+
+                # Invalid form imput
+                if not form.is_valid():
+                    error = "Invalid inputs/ Information already exists "
+                    return render_to_response('achievement/new_icpc.html', \
+                            {'form': form, \
+                            'error':error, \
+                            'is_loggedin':is_loggedin, \
+                            'username':username}, \
+                            RequestContext(request))
+
+                # Form is valid
+                else:
+                    # Get the new achievement_id
+                    achievement_id = get_achievement_id(request)    
+                    achievement_type = "acm"
+
+                    # Saving inputs
+                    achievement_obj = Achievement(achievement_id, \
+                            achievement_type, \
+                            username)
+                    achievement_obj.save()
+                    icpc_obj = form.save(commit = False)
+                    icpc_obj.achievement_id = achievement_obj
+                    user_obj = get_object_or_404(User_info, username = username)
+                    icpc_obj.username = user_obj
+                    icpc_obj.save()
+                    return render_to_response('achievement/success.html', \
+                            {'achievement_type':achievement_type, \
+                            'is_loggedin':is_loggedin, \
+                            'username':username}, \
+                            RequestContext(request))
+            # Method is not POST
+            else:
+                    return render_to_response('achievement/new_icpc.html', \
+                            {'form': AddIcpcForm, \
+                            'is_loggedin':is_loggedin, \
+                            'username':username}, \
+                            RequestContext(request))
     except KeyError:
         return error_key(request)
 
