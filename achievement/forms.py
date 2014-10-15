@@ -410,21 +410,21 @@ class AddIcpcForm(ModelForm):
          required=True,
          label='Email ID',
          widget=forms.TextInput(
-            attrs={'placeholder': 'Email ID of Participant 1'}
+            attrs={'placeholder': 'Email ID of 1st Team member'}
          )
     )
     participant2_email=forms.EmailField(
          required=True,
          label='Email ID',
          widget=forms.TextInput(
-            attrs={'placeholder': 'Email ID of Participant 2'}
+            attrs={'placeholder': 'Email ID of 2nd Team member'}
          )
     )
     participant3_email=forms.EmailField(
          required=True,
          label='Email ID',
          widget=forms.TextInput(
-            attrs={'placeholder': 'Email ID of Participant 3'}
+            attrs={'placeholder': 'Email ID of 3rd team member'}
          )
     )
     class Meta:

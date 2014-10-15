@@ -52,6 +52,27 @@ Add an ACM ICPC information
                         </span>
                         {{ field|addcss:"form-control" }}
                     </div>
+                    {% elif field.name == "participant1_name" %}
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-user fa-fw"></i>
+                        </span>
+                        {{ field|addcss:"form-control" }}
+                    </div>
+                    {% elif field.name == "participant2_name" %}
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-user fa-fw"></i>
+                        </span>
+                        {{ field|addcss:"form-control" }}
+                    </div>
+                    {% elif field.name == "participant3_name" %}
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-user fa-fw"></i>
+                        </span>
+                        {{ field|addcss:"form-control" }}
+                    </div>
                     {% elif field.name == "participant1_email" %}
                     <div class="input-group">
                         <span class="input-group-addon">
