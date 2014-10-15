@@ -5,6 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.http import Http404
 from django.contrib.auth.hashers import *
 from django.views.csrf import csrf_failure
+from django.db.models import Q
 
 # Application specific functions
 from images.models import ProfileImage, User_info
@@ -199,7 +200,10 @@ def profile(request, user_name):
             .filter(username=user_name)[:3]
     speakers = Speaker.objects.all() \
             .filter(username=user_name)[:3]
-
+    email = user_object.email
+    icpc_achievement = ACM_ICPC_detail.objects.filter(participant1_email=email)| \
+        ACM_ICPC_detail.objects.filter(participant2_email=email)| ACM_ICPC_detail.objects.filter(participant3_email=email)
+    print icpc_achievement
     if profile_image_object:
        	image_name = user_name+".jpg"
     else:
@@ -216,8 +220,9 @@ def profile(request, user_name):
             'interns':interns, \
             'speakers':speakers, \
             'image_name':image_name, \
-            "articles":articles, \
-            'contributions':contributions}, \
+            'articles':articles, \
+            'contributions':contributions, \
+            'icpc_achievement':icpc_achievement}, \
             RequestContext(request))
 
 
