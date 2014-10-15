@@ -129,11 +129,9 @@ class AddArticleForm(ModelForm):
          )
     )
 
-    publication_date=forms.DateField(
+    publication_date=forms.CharField(
         required=True,
-        widget=DateTimePicker(
-            options={"pickTime": False, 
-                "format":"YYYY-MM-DD"},
+        widget=forms.TextInput(
             attrs={'placeholder': 'Published Date (YYYY-MM-DD)'}
         )
     )

@@ -45,6 +45,13 @@ Add an Article information
                         </span>
                         {{ field|addcss:"form-control" }}
                     </div><!--input-group--> 
+                    {% elif field.name == "publication_date" %}
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-calendar fa-fw"></i>
+                        </span>
+                        {{ field|addcss:"form-control" }}
+                    </div><!--input-group--> 
                     {% else %}
                     {{ field|addcss:"form-control" }}
                     {% endif %}
