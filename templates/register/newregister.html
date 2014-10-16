@@ -288,19 +288,7 @@ $(document).ready(function() {
                 {% for hidden in form.hidden_fields %}
                     {{ hidden }}
                 {% endfor %}
-                <div class="form-group">
-                    <script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6LfcYvkSAAAAAAW8UHVHw3oBuF7S5NJZ-jnBUxn1"></script>
-                    <noscript>
-                        <iframe src="http://www.google.com/recaptcha/api/noscript?k=6LfcYvkSAAAAAAW8UHVHw3oBuF7S5NJZ-jnBUxn1" height="300" width="500" frameborder="0"></iframe><br/>
-                        <textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
-                        <input type="hidden" name="recaptcha_response_field" value="manual_challenge"/>
-                    </noscript>
-                    {% ifequal captcha 'false' %}
-                    <div class="alert alert-danger">
-                        Incorrect Captcha
-                    </div><!--error-msg has-error-->
-                    {% endifequal %}
-                </div><!--form-group-->
+                <br>
                 <button type="submit" class="btn btn-primary btn-block">Register</button>
             </div><!--form-signin-2-->
         </form>

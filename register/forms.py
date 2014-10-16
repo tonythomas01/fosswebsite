@@ -218,9 +218,6 @@ class NewRegisterForm(ModelForm):
         ),
     )
 
-    captcha = ReCaptchaField(
-        attrs={'theme':'clean'}
-    )
 
     class Meta:
         model = User_info
