@@ -3,7 +3,9 @@
 {% block script %}
 <script src="{{ STATIC_URL }}js/jquery-2.1.1.min.js"></script>
 <script src="{{ STATIC_URL }}js/bootstrapValidator.min.js"></script>
+
 <script type="text/javascript">
+
 $(document).ready(function() {
     $('#profileForm').bootstrapValidator({
         feedbackIcons: {
@@ -49,6 +51,14 @@ $(document).ready(function() {
         });
 });
 </script>
+                {% if captcha_error %}
+                    <script type="text/javascript">
+                        alert("Give Captcha");
+                        window.location="/#slide-5";
+                    </script>
+                        
+
+                    {% endif %}
 {% endblock script %}
 {% block body %}
 <div class="slide" id="slide-1" data-slide="1">
@@ -125,6 +135,9 @@ $(document).ready(function() {
     </div><!--container-->
 </div><!-- slide-4 --> 
 <div class="slide theme" id="slide-5" data-slide="5">
+    {% if captcha_error %}
+
+    {% endif %}
 {% include 'contact.html' %}
 </div>
 {% endblock body %}

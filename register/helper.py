@@ -31,6 +31,7 @@ def check_captcha(challenge, response, remote_ip):
     recaptcha_request = urllib2.Request(recaptcha_url, recaptcha_encoded_data)
     recaptcha_response = urllib2.urlopen(recaptcha_request)
     recaptcha_response_data = str(recaptcha_response.readline())
+
     recaptcha_response_data = recaptcha_response_data.strip()
     #return recaptcha_response_data
     if recaptcha_response_data == 'true':
