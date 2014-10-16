@@ -51,14 +51,12 @@ $(document).ready(function() {
         });
 });
 </script>
-                {% if captcha_error %}
-                    <script type="text/javascript">
-                        alert("Give Captcha");
-                        window.location="/#slide-5";
-                    </script>
-                        
-
-                    {% endif %}
+    {% if captcha_error %}
+    <script type="text/javascript">
+        alert("Give Captcha");
+        window.location="/#slide-5";
+    </script>
+    {% endif %}
 {% endblock script %}
 {% block body %}
 <div class="slide" id="slide-1" data-slide="1">
