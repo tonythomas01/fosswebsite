@@ -39,6 +39,7 @@ def achieve_viewall(request):
     icpc_participants_regional_list = []
     icpc_participants_final_list = []
 
+    contrib_list_all = Contribution.objects.all()
     contrib_list = Contribution.objects.all()[:5]
     article_list = Article.objects.all()[:5]
     gsoc_list = Gsoc.objects.all()[:5]
@@ -48,8 +49,8 @@ def achieve_viewall(request):
 
     
     contrib_org = {}
-    if contrib_list:
-        for contrib in contrib_list:
+    if contrib_list_all:
+        for contrib in contrib_list_all:
             if contrib.org_name not in contrib_org.keys():
                 contrib_org[contrib.org_name] = 0
 
