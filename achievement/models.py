@@ -51,7 +51,7 @@ class Article(models.Model):
     area = models.CharField(max_length=100, blank=False, null=False)
     magazine_name = models.CharField(max_length=50, \
             blank=False, null=False)
-    title = models.CharField(max_length=100, blank=False, null=False)
+    title = models.CharField(max_length=200, blank=False, null=False)
     publication_date = models.DateField(blank=False)
 
     class Meta:
@@ -66,13 +66,13 @@ class Gsoc(models.Model):
     achievement_id = models.ForeignKey(Achievement, \
             blank=False, null=False)
     username = models.ForeignKey(User_info, blank=False, null=False)
-    organization = models.CharField(max_length=50, \
+    organization = models.CharField(max_length=100, \
             blank=False, null=False)
-    project_title = models.CharField(max_length=50, \
+    project_title = models.CharField(max_length=250, \
             blank=False, null=False)
-    mentor_name = models.CharField(max_length=20, \
+    mentor_name = models.CharField(max_length=50, \
             blank=False, null=False)
-    gsoc_url = models.URLField(max_length=200, \
+    gsoc_url = models.URLField(max_length=400, \
             blank=False, null=False)
 
     class Meta:
@@ -105,9 +105,9 @@ class Speaker(models.Model):
     title = models.CharField(max_length=200, blank=False, null=False)
     speaker_type = models.CharField(max_length=15, \
             choices=SPEAKER_CHOICE, blank=False, null=False)
-    conference_name = models.CharField(max_length=50, \
+    conference_name = models.CharField(max_length=100, \
             blank=False, null=False)
-    speaker_url = models.URLField(max_length=200, \
+    speaker_url = models.URLField(max_length=400, \
             blank=False, null=False)
     year = models.IntegerField(max_length=4, blank=False, null=False)
 
@@ -121,7 +121,7 @@ class ACM_ICPC_detail(models.Model):
     """
     achievement_id = models.ForeignKey(Achievement, \
             blank=False, null=False)
-    team_name = models.CharField(max_length=25, \
+    team_name = models.CharField(max_length=50, \
              blank=False)
     username = models.ForeignKey(User_info, \
             blank=False, null=False)
@@ -131,11 +131,11 @@ class ACM_ICPC_detail(models.Model):
             choices=LEVEL_CHOICE, blank=False, null=False)
     ranking = models.IntegerField(max_length=4, \
             blank=False, null=False)
-    participant1_name = models.CharField(max_length=30, \
+    participant1_name = models.CharField(max_length=50, \
             blank=False, null=False)
-    participant2_name = models.CharField(max_length=30, \
+    participant2_name = models.CharField(max_length=50, \
             blank=False, null=False)
-    participant3_name = models.CharField(max_length=30, \
+    participant3_name = models.CharField(max_length=50, \
             blank=False, null=False)
     participant1_email = models.EmailField(blank=False) 
     participant2_email = models.EmailField(blank=False) 
@@ -155,7 +155,7 @@ class Contest_won(models.Model):
             blank=False, null=False)
     contest_id = models.IntegerField(max_length=100, \
             primary_key=True, blank=False, null=False)
-    contest_name = models.CharField(max_length=50, \
+    contest_name = models.CharField(max_length=100, \
             blank=False, null=False)
     contest_url = models.URLField(max_length=200)
     description = models.CharField(max_length=200)
@@ -164,7 +164,7 @@ class Contest_won(models.Model):
 class Contest_won_participant(models.Model):
     contest_id = models.ForeignKey(Contest_won, \
             blank=False, null=False)
-    name = models.CharField(max_length = 25, \
+    name = models.CharField(max_length = 50, \
             blank=False, null=False)
 
 
